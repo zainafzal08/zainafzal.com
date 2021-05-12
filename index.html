@@ -2,26 +2,212 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Zain Afzal</title>
 		<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 		<link href="index.css" rel="stylesheet">
+		<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 	</head>
 	<body>
-		<div class="background"></div>
-		<div class="card">
-			<img src="zain.svg"></img>
-			<div class="info">
-				<h1>Zain Afzal</h1>
-				<h3>Software Engineer @ Google</h3>
-				<div class="links">
-					<a href="http://github.com/zainafzal08"><ion-icon name="logo-github"></ion-icon></a>
-					<a href="mailto:zain.afz@gmail.com"><ion-icon name="mail"></ion-icon></a>
-					<a href="https://twitter.com/blockzain"><ion-icon name="logo-twitter"></ion-icon></a>
+		<template id="todo_animation">
+			<div>
+				<style>
+					@keyframes bounce {
+						0% {
+							transform: translate(0px, 20px);
+						}
+						50% {
+							transform: translate(0px, -20px);
+						}
+						100% {
+							transform: translate(0px, 20px);
+						}
+					}
+					svg {
+						height: 300px;
+						border-radius: 12px;
+					}
+					svg circle {
+						transform: translate(0px, 20px);
+					}
+					svg circle:nth-of-type(1) {
+						animation: bounce 1.5s infinite ease;
+					}
+					svg circle:nth-of-type(2) {
+						animation: bounce 1.5s infinite ease;
+						animation-delay: .1s;
+					}
+					svg circle:nth-of-type(3) {
+						animation: bounce 1.5s infinite ease;
+						animation-delay: .2s;
+					}
+					svg circle:nth-of-type(4) {
+						animation: bounce 1.5s infinite ease;
+						animation-delay: .3s;
+					}
+					svg circle:nth-of-type(5) {
+						animation: bounce 1.5s infinite ease;
+						animation-delay: .4s;
+					}
+				</style>
+				<svg viewBox="0 0 297 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="297" height="200" fill="white"/>
+					<circle cx="59" cy="100" r="16" fill="#2980B9"/>
+					<circle cx="104" cy="100" r="16" fill="#3B96CA"/>
+					<circle cx="149" cy="100" r="16" fill="#4CABDA"/>
+					<circle cx="194" cy="100" r="16" fill="#5FC3ED"/>
+					<circle cx="239" cy="100" r="16" fill="#6DD5FA"/>
+				</svg>	
+			</div>
+		</template>
+		<main>
+			<div class="background"></div>
+			<div class="section">
+				<div class="card">
+					<img src="zain.svg"></img>
+					<div class="info">
+						<h1>Zain Afzal</h1>
+						<h3>Software Engineer @ Google</h3>
+						<div class="links">
+							<a href="http://github.com/zainafzal08">
+								<ion-icon name="logo-github"></ion-icon>
+							</a>
+							<a href="mailto:zain.afz@gmail.com">
+								<ion-icon name="mail"></ion-icon>
+							</a>
+							<a href="https://twitter.com/blockzain">
+								<ion-icon name="logo-twitter"></ion-icon>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="hint">
+					<ion-icon name="chevron-down-outline"></ion-icon>
 				</div>
 			</div>
-		</div>
+			<div class="section">
+				<div class="card">
+					<div class="header">
+						<div class="icon">
+							<ion-icon name="briefcase"></ion-icon>
+						</div>
+						<h1>Work History</h1>
+						<h3>Where have i been?</h3>
+					</div>
+					<div class="timeline">
+						<div class="icon"><ion-icon name="logo-chrome"></ion-icon></div>
+						<div class="text">
+							<h1>Chrome OS</h1>
+							<p>Full time SWE at google working on the next generation of chrome os apps.</p>
+							<div class="dates">2020 - Present</div>
+						</div>
+
+						<div class="icon"><ion-icon name="school"></ion-icon></div>
+						<div class="text">
+							<h1>UNSW</h1>
+							<p>Guest Lecturer for COMP6080</p>
+							<div class="dates">2020 - 2021</div>
+						</div>
+
+						<div class="icon">
+							<svg width="14" height="46" viewBox="0 0 14 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M7.01594 26.8191C-4.54403 14.1843 0.903187 6.37892 4.86741 1.0689C5.48028 0.247974 7.01594 0.726866 7.01594 1.75133V26.8191C15.7751 36.3926 14.3122 40.805 8.53554 44.9685C7.89333 45.4314 7.01594 44.9577 7.01594 44.1661V26.8191Z" fill="var(--card-theme-primary)"/>
+								</svg>								
+						</div>
+						<div class="text">
+							<h1>Akuna Capital</h1>
+							<p>Junior python developer helping to build fast and useful internal tooling.</p>
+							<div class="dates">2019 - 2020</div>
+						</div>
+
+						<div class="icon"><ion-icon name="school"></ion-icon></div>
+						<div class="text">
+							<h1>UNSW</h1>
+							<p>Course admin, lecturer and tutor helping teach core computer science courses.</p>
+							<div class="dates">2016 - 2019</div>
+						</div>
+
+						<div class="line">
+							<svg width="3" height="369" viewBox="0 0 3 369" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<line x1="1.5" y1="1.5" x2="1.5" y2="390" stroke="var(--card-theme-primary)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 10"/>
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<div class="card">
+					<div class="header">
+						<div class="icon">
+							<ion-icon name="code-slash"></ion-icon>
+						</div>
+						<h1>Programming</h1>
+						<h3>Sometimes i write code!</h3>
+					</div>
+					<div class="highlight">
+						<div class="item">
+							<h1>Flask Core</h1>
+							<p>Scalable infrastructure built around python flask to help rapidly deploy web apps.</p>
+							<div class="links">
+								<a target="_blank" href="https://github.com/secedu/flask-core"><ion-icon name="logo-github"></ion-icon><span>Github</span></a>
+							</div>
+						</div>
+						<div class="item">
+							<h1>Worry Journal</h1>
+							<p>Installed PWA to help with cognative behavior therapy concepts.</p>
+							<div class="links">
+								<a target="_blank" href="https://github.com/zainafzal08/Experiments/tree/master/worry-journal"><ion-icon name="logo-github"></ion-icon><span>Github</span></a>
+								<a target="_blank" href="https://zainafzal08.github.io/Experiments/worry-journal"><ion-icon name="globe"></ion-icon><span>Live Site</span></a>
+							</div>
+						</div>
+						<div class="item">
+							<h1>Intro to Python</h1>
+							<p>Set of resources and excersizes which acts as a crash course to learn python development.</p>
+							<div class="links">
+								<a target="_blank" href="https://github.com/zainafzal08/intro_to_python"><ion-icon name="logo-github"></ion-icon><span>Github</span></a>
+								<a target="_blank" href="https://zainafzal08.github.io/intro_to_python/"><ion-icon name="globe"></ion-icon><span>Live Site</span></a>
+							</div>
+						</div>
+						<div class="item">
+							<h1>BF Machine</h1>
+							<p>A web debugging enviornment/Virtual Machine for the BrainFuck Programming Language</p>
+							<div class="links">
+								<a target="_blank" href="https://github.com/zainafzal08/BF-Machine"><ion-icon name="logo-github"></ion-icon><span>Github</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<div class="card">
+					<div class="header">
+						<div class="icon">
+							<ion-icon name="brush"></ion-icon>
+						</div>
+						<h1>Design</h1>
+						<h3>In my free time i like visual design</h3>
+					</div>
+					<div class="grid">
+							<div data-triggers-gallery="todo" class="vert"></div>
+							<div data-triggers-gallery="adventure_buddy" class="small-top"></div>
+							<div data-triggers-gallery="js" class="small-bottom"></div>
+							<div data-triggers-gallery="stairway" class="large"></div>
+					</div>
+				</div>
+			</div>
+			<div class="gallery">
+				<button class="close"><ion-icon name="close"></ion-icon></button>
+				<div class="container">
+					<div data-gallery-image-reel class="images"></div>
+					<div data-gallery-progress class="progress"></div>
+					<div class="text">
+						<h1 data-gallery-item-title></h1>
+						<p data-gallery-item-description></p>
+					</div>
+				</div>
+			</div>
+		</main>
 		<script src="index.js"></script>
-		<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	</body>
 </html>
