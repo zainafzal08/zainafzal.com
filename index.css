@@ -214,7 +214,7 @@ h3 {
 }
 .hint {
     position: absolute;
-    bottom: 16px;
+    bottom: 52px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -406,12 +406,16 @@ h3 {
     display: grid;
     place-items: center;
     scroll-snap-align: start;
+    box-sizing: border-box;
+    padding: 0 12px;
 }
 .gallery .images .image-container img {
-    height: var(--reel-height);
+    max-width: 100%;
+    max-height: var(--reel-height);
     border-radius: 12px;
     box-shadow: 5px 4px 5px rgba(0, 0, 0, 0.05);
 }
+
 .gallery .images {
     padding: 12px 0;
     scroll-behavior: smooth;
