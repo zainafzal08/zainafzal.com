@@ -10,58 +10,6 @@
 		<script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
 	</head>
 	<body>
-		<template id="todo_animation">
-			<div>
-				<style>
-					@keyframes bounce {
-						0% {
-							transform: translate(0px, 20px);
-						}
-						50% {
-							transform: translate(0px, -20px);
-						}
-						100% {
-							transform: translate(0px, 20px);
-						}
-					}
-					svg {
-						max-height: var(--reel-height);
-						width: 100%;
-						border-radius: 12px;
-					}
-					svg circle {
-						transform: translate(0px, 20px);
-					}
-					svg circle:nth-of-type(1) {
-						animation: bounce 1.5s infinite ease;
-					}
-					svg circle:nth-of-type(2) {
-						animation: bounce 1.5s infinite ease;
-						animation-delay: .1s;
-					}
-					svg circle:nth-of-type(3) {
-						animation: bounce 1.5s infinite ease;
-						animation-delay: .2s;
-					}
-					svg circle:nth-of-type(4) {
-						animation: bounce 1.5s infinite ease;
-						animation-delay: .3s;
-					}
-					svg circle:nth-of-type(5) {
-						animation: bounce 1.5s infinite ease;
-						animation-delay: .4s;
-					}
-				</style>
-				<svg viewBox="0 0 297 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<rect width="297" height="200" fill="white"/>
-					<circle cx="59" cy="100" r="16" fill="#2980B9"/>
-					<circle cx="104" cy="100" r="16" fill="#3B96CA"/>
-					<circle cx="149" cy="100" r="16" fill="#4CABDA"/>
-					<circle cx="194" cy="100" r="16" fill="#5FC3ED"/>
-					<circle cx="239" cy="100" r="16" fill="#6DD5FA"/>
-				</svg>	
-			</div>
-		</template>
 		<main>
 			<div class="background"></div>
 			<div class="section">
@@ -197,7 +145,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="gallery">
+			<div data-gallery-container class="gallery">
 				<button class="close"><ion-icon name="close"></ion-icon></button>
 				<div class="container">
 					<div data-gallery-image-reel class="images"></div>

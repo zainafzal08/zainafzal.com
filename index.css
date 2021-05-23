@@ -1,3 +1,6 @@
+* {
+    user-select: none;
+}
 body {
     margin: 0;
     padding: 0;
@@ -336,7 +339,6 @@ h3 {
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
-    padding: 0 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -419,6 +421,7 @@ h3 {
 .gallery .images {
     padding: 12px 0;
     scroll-behavior: smooth;
+    position: relative;
 }
 .gallery .images::-webkit-scrollbar {
     width: 6px;

@@ -50,8 +50,7 @@ const GALLERY_PROJECTS = {
         images: [
             'img/todo_preview.svg',
             'img/todo_1.svg',
-            'img/todo_2.svg',
-            '#todo_animation'
+            'img/todo_2.svg'            
         ]
     },
     'stairway': {
@@ -195,6 +194,13 @@ function pushGalleryBack() {
     reel.scrollLeft -= sectionWidth;
 }
 
+function onGalleryScrimClick(e) {
+    const source = e.composedPath()[0];
+    if (source.hasAttribute('data-gallery-container')) {
+        closeGallery();
+    }
+}
+
 function initGallery() {
     for (const element of document.querySelectorAll('[data-triggers-gallery]')) {
         const project = element.dataset.triggersGallery;
@@ -211,6 +217,7 @@ function initGallery() {
         });
     }
     document.querySelector('[data-gallery-image-reel]').addEventListener('scroll', onGalleryScroll);
+    document.querySelector('[data-gallery-container').addEventListener('click', onGalleryScrimClick);
     document.querySelector('.gallery .close').addEventListener('click', () => {
         closeGallery();
         window.history.back();
