@@ -440,21 +440,31 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: all;
 }
 
 .gallery .container .progress .dot {
-    width: 6px;
-    height: 6px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    position: relative;
+}
+
+.gallery .container .progress .dot::before {
+    content: '';
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    margin: 0 6px;
     background: rgba(255, 255, 255, .7);
     transition: all .2s;
     transform: scale(1);
+    position: absolute;
+    top: calc(50% - 5px);
+    left: calc(50% - 5px);
 }
 
-.gallery .container .progress .dot.active {
+.gallery .container .progress .dot.active::before {
     transform: scale(1.8);
-    border-radius: 50%;
     background: rgba(255, 255, 255, 1);
 }
 
