@@ -50,7 +50,7 @@ const GALLERY_PROJECTS = {
         images: [
             'img/todo_preview.svg',
             'img/todo_1.svg',
-            'img/todo_2.svg'            
+            'img/todo_2.svg'
         ]
     },
     'stairway': {
@@ -68,36 +68,36 @@ const GALLERY_PROJECTS = {
 
 function rgb(c) {
     return {
-        red: parseInt(c.substr(1,2),16),
-        green: parseInt(c.substr(3,2),16),
-        blue: parseInt(c.substr(5,2),16)
+        red: parseInt(c.substr(1, 2), 16),
+        green: parseInt(c.substr(3, 2), 16),
+        blue: parseInt(c.substr(5, 2), 16)
     }
- }
+}
 
 function rgbStr(hex) {
-    const {red,green,blue} = rgb(hex);
+    const { red, green, blue } = rgb(hex);
     return `${red},${green},${blue}`;
 }
 
-function linearInterp(f,c1,c2) {
+function linearInterp(f, c1, c2) {
     c1 = rgb(c1)
     c2 = rgb(c2)
     let r = {
-        red: c1.red + f*(c2.red - c1.red),
-        green: c1.green + f*(c2.green - c1.green),
-        blue: c1.blue + f*(c2.blue - c1.blue)
+        red: c1.red + f * (c2.red - c1.red),
+        green: c1.green + f * (c2.green - c1.green),
+        blue: c1.blue + f * (c2.blue - c1.blue)
     }
     return `rgb(${r.red},${r.green},${r.blue})`;
 }
 
-function gradient(f,colors) {
-    const [c1,c2,c3,c4] = colors;
+function gradient(f, colors) {
+    const [c1, c2, c3, c4] = colors;
     f = f * 3;
-    if (f <= 1) return linearInterp(f,c1,c2);
-    if (f <= 2) return linearInterp(f-1,c2,c3);
-    if (f <= 3) return linearInterp(f-2,c3,c4);
+    if (f <= 1) return linearInterp(f, c1, c2);
+    if (f <= 2) return linearInterp(f - 1, c2, c3);
+    if (f <= 3) return linearInterp(f - 2, c3, c4);
 }
-  
+
 function disableScroll() {
     document.body.style.overflow = 'hidden';
 }
@@ -106,27 +106,37 @@ function enableScroll() {
     document.body.style.overflow = 'scroll';
 }
 
+// Set up 500 possible rotations the background animates between so we sort of
+// rate limit updates.
+function bucket(v) {
+    const numSteps = 500;
+    const stepSize = 1 / numSteps;
+    const roundedValue = Math.floor(v / stepSize) * stepSize;
+    return roundedValue;
+}
+
 function onScroll() {
     if (sectionHeight < 0) return;
-    
-    const totalHeight = sectionHeight * (NUM_SECTIONS-1);
-    const progress = 1 - ((totalHeight - window.scrollY) / totalHeight);
+    const totalHeight = sectionHeight * (NUM_SECTIONS - 1);
+    const progress = bucket(1 - ((totalHeight - window.scrollY) / totalHeight));
+    const rotation = -45 + 270 * (progress);
     const col = gradient(progress, COLORS);
-    const rotation = 135 + 270*(progress);
-    
-    document.querySelector('.background').style.background = `linear-gradient(${rotation}deg, ${col} 0%, ${col} 50%, #00000000 50%, #00000000 100%)`;
+
+    document.querySelector('.background').style.transform = `rotate(${rotation}deg)`;
+    document.querySelector('.background').style.backgroundColor = col;
 }
 
 function onResize() {
     if (!firstSection) {
         return;
     }
-    
+
     sectionHeight = firstSection.getBoundingClientRect().height;
+    setBackgroundSize();
 }
 
 function openGallery(project) {
-    const {title, description, images} = GALLERY_PROJECTS[project];
+    const { title, description, images } = GALLERY_PROJECTS[project];
     // Populate.
     document.querySelector('[data-gallery-item-title]').innerText = title;
     document.querySelector('[data-gallery-item-description]').innerText = description;
@@ -168,9 +178,9 @@ function closeGallery() {
 }
 
 function onGalleryScroll(event) {
-    const {target} = event;
+    const { target } = event;
     const dots = document.querySelector('[data-gallery-progress]').childNodes;
-    const pos = Math.floor((target.scrollLeft/target.scrollWidth)*(dots.length+1));
+    const pos = Math.floor((target.scrollLeft / target.scrollWidth) * (dots.length + 1));
     if (dots.length < 1) {
         return;
     }
@@ -246,21 +256,36 @@ function onHashChange(event) {
     }
 }
 
+function setBackgroundSize() {
+    const { innerWidth, innerHeight } = window;
+    const diagonal = Math.sqrt(innerWidth ** 2 + innerHeight ** 2);
+    const offsetX = -diagonal / 2 + innerWidth / 2;
+    const offsetY = -1 * ((diagonal / 2) - innerHeight / 2);
+    document.querySelector('.background').style.width = `${diagonal}px`;
+    document.querySelector('.background').style.height = `${diagonal/2}px`;
+    document.querySelector('.background').style.left = `${offsetX}px`;
+    document.querySelector('.background').style.top = `${offsetY}px`;
+}
 
-function init() {    
+function init() {
     const sections = Array.from(document.querySelectorAll('.section'));
     if (sections.length !== COLORS.length) {
         throw new Error('Number of sections and colors mismatch.');
     }
     firstSection = sections[0];
     sectionHeight = firstSection.getBoundingClientRect().height;
-    sections.map((section, index) => section.style.setProperty('--card-theme-primary', COLORS[index]));
-    sections.map((section, index) => section.style.setProperty('--card-theme-primary-rgb', rgbStr(COLORS[index])));
+    sections.map((section, index) =>
+        section.style.setProperty(
+            '--card-theme-primary', COLORS[index]));
+    sections.map(
+        (section, index) => section.style.setProperty(
+            '--card-theme-primary-rgb', rgbStr(COLORS[index])));
     document.addEventListener('scroll', onScroll);
-    document.onresize = onResize;
+    window.onresize = onResize;
+    setBackgroundSize();
     onScroll();
     initGallery();
-}   
+}
 
 window.onload = init;
 window.onpopstate = onHashChange;
