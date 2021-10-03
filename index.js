@@ -3,6 +3,7 @@
 let firstSection = null;
 let sectionHeight = 0;
 let currentWidth = innerWidth;
+let lastScroll = 0;
 
 const NUM_SECTIONS = 4;
 
@@ -118,6 +119,8 @@ function bucket(v) {
 
 function onScroll() {
     if (sectionHeight < 0) return;
+    // Only update transform once every 50ms.
+    if ((Date.now() - lastScroll) < 50) return;
     const totalHeight = sectionHeight * (NUM_SECTIONS - 1);
     const progress = bucket(1 - ((totalHeight - window.scrollY) / totalHeight));
     const rotation = -45 + 270 * (progress);
@@ -125,6 +128,7 @@ function onScroll() {
 
     document.querySelector('.background').style.transform = `rotate(${rotation}deg)`;
     document.querySelector('.background').style.backgroundColor = col;
+    lastScroll = Date.now();
 }
 
 function onResize() {
@@ -270,11 +274,14 @@ function onHashChange(event) {
 
 function setBackgroundSize() {
     const { innerWidth, innerHeight } = window;
+    // We need this value to account for the topbar in mobile which is there
+    // on first launch but disapears after scroll.
+    const fudge = 128;
     const diagonal = Math.sqrt(innerWidth ** 2 + innerHeight ** 2);
     const offsetX = -diagonal / 2 + innerWidth / 2;
-    const offsetY = -1 * ((diagonal / 2) - innerHeight / 2);
+    const offsetY = -1 * ((diagonal / 2 + fudge) - innerHeight / 2);
     document.querySelector('.background').style.width = `${diagonal}px`;
-    document.querySelector('.background').style.height = `${diagonal/2}px`;
+    document.querySelector('.background').style.height = `${diagonal/2 + fudge}px`;
     document.querySelector('.background').style.left = `${offsetX}px`;
     document.querySelector('.background').style.top = `${offsetY}px`;
 }
