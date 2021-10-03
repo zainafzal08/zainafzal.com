@@ -32,6 +32,7 @@ main {
     height: 100vh;
     z-index: 1;
     transform-origin: center bottom;
+    transition: transform .1s linear;
 }
 
 .card {

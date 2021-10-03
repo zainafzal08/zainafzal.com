@@ -2,6 +2,7 @@
 
 let firstSection = null;
 let sectionHeight = 0;
+let currentWidth = innerWidth;
 
 const NUM_SECTIONS = 4;
 
@@ -127,12 +128,17 @@ function onScroll() {
 }
 
 function onResize() {
-    if (!firstSection) {
-        return;
+    if (firstSection) {
+        sectionHeight = firstSection.getBoundingClientRect().height;
     }
-
-    sectionHeight = firstSection.getBoundingClientRect().height;
-    setBackgroundSize();
+    if (currentWidth !== innerWidth) {
+        // Only update background on width changes. Height changes are a bit
+        // unreliable since they happen on mobile everytime you scroll and
+        // hide the chrome top bar so we just cop the slight misalignment there
+        // instead of jankily resizing the backgroun
+        setBackgroundSize();
+        currentWidth = innerWidth;
+    }
 }
 
 function openGallery(project) {
