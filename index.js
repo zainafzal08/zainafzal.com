@@ -1,19 +1,8 @@
 'use strict';
 
-let firstSection = null;
-let sectionHeight = 0;
-let currentWidth = innerWidth;
-let lastScroll = 0;
-
+const STATS = new Stats();
+const PHI = (1 + Math.sqrt(5));
 const NUM_SECTIONS = 4;
-
-const COLORS = [
-    '#4CA2CD',
-    '#67B26F',
-    '#F2B74B',
-    '#FB9C89',
-];
-
 const GALLERY_PROJECTS = {
     'adventure_buddy': {
         previewLink: 'img/adventure_buddy_preview.svg',
@@ -68,81 +57,285 @@ const GALLERY_PROJECTS = {
     }
 };
 
-function rgb(c) {
+function constructMask(maskSelector) {
+    const svgElement = document.querySelector(maskSelector);
+    // Assumes all our masks start at (0,0).
+    const { width, height } = svgElement.viewBox.baseVal;
     return {
-        red: parseInt(c.substr(1, 2), 16),
-        green: parseInt(c.substr(3, 2), 16),
-        blue: parseInt(c.substr(5, 2), 16)
+        width,
+        height,
+        svgElement,
+        polygons: svgElement.querySelectorAll('path')
     }
 }
 
-function rgbStr(hex) {
-    const { red, green, blue } = rgb(hex);
-    return `${red},${green},${blue}`;
-}
-
-function linearInterp(f, c1, c2) {
-    c1 = rgb(c1)
-    c2 = rgb(c2)
-    let r = {
-        red: c1.red + f * (c2.red - c1.red),
-        green: c1.green + f * (c2.green - c1.green),
-        blue: c1.blue + f * (c2.blue - c1.blue)
+class ScrollObserver {
+    constructor() {
+        this.scrollPosition = 0;
+        this.timer = null;
+        this.listeners = [];
+        window.addEventListener('scroll', () => this.onScroll());
+        window.addEventListener('resize', () => this.updateWindowSize());
+        this.updateWindowSize();
+        this.onScroll();
     }
-    return `rgb(${r.red},${r.green},${r.blue})`;
+
+    // Calls `listner` with what section the user has stopped at when the scroll
+    // position of the page stabilises.
+    addScrollListener(listener) {
+        this.listeners.push(listener);
+    }
+
+    updateWindowSize() {
+        this.windowHeight = window.innerHeight;
+    }
+
+    onScroll() {
+        // The 400 is a fudge factor so that we switch to the next section
+        // even if it's only partially on screen.
+        this.scrollPosition = Math.floor((window.scrollY + 400) / this.windowHeight);
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => this.onScrollStable(), 300);
+    }
+
+    onScrollStable() {
+        for (const listener of this.listeners) {
+            listener(this.scrollPosition);
+        }
+    }
 }
 
-function gradient(f, colors) {
-    const [c1, c2, c3, c4] = colors;
-    f = f * 3;
-    if (f <= 1) return linearInterp(f, c1, c2);
-    if (f <= 2) return linearInterp(f - 1, c2, c3);
-    if (f <= 3) return linearInterp(f - 2, c3, c4);
+class BackgroundController {
+    constructor(canvas, masks) {
+        this.canvas = canvas;
+        const { height, width } = this.canvas.getBoundingClientRect();
+        this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        this.renderer.setSize(width, height, false);
+        this.renderer.setClearColor(0x000000, 0);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.masks = masks;
+        this.runningAnimation = null;
+        this.transitionSpeed = 5000;
+
+        this.cameraAngle = 0;
+        this.orbitRadius = 250;
+        this.sphereRadius = 150;
+        this.diskRadius = 125;
+        this.numPoints = 2108;
+        this.orbitSpeed = 0.005; // Degrees per frame.
+        this.currentConfigeration = "sphere";
+        this.KNOWN_CONFIGERATIONS = [
+            "sphere",
+            "chrome",
+            "code"
+        ];
+        this.pointSize = 1;
+        this.pointPositions = [];
+        this.interpSpeed = .1; // units per frame.
+
+        this.buildConfigeration();
+        this.initScene();
+        this.animate();
+    }
+
+    initScene() {
+        this.scene = new THREE.Scene();
+        this.points = [];
+        for (let i = 0; i < this.numPoints; i++) {
+            const geometry = new THREE.SphereGeometry(this.pointSize, 32, 16);
+            const material = new THREE.MeshBasicMaterial({ color: 0xa1cfe8 });
+            const point = new THREE.Mesh(geometry, material);
+            this.points.push(point);
+            this.scene.add(point);
+        }
+    }
+
+    // Exclusion zone code.
+    inMask(point, maskId) {
+        const mask = this.masks[maskId];
+        const { width, height } = mask;
+        // Map point from our model space into the svg's coords.
+        const x = (point[0] + this.diskRadius) / (2 * this.diskRadius) * width;
+        const y = (point[1] + this.diskRadius) / (2 * this.diskRadius) * height;
+        let svgPoint = mask.svgElement.createSVGPoint();
+        svgPoint.x = x;
+        svgPoint.y = y;
+        for (const polygon of mask.polygons) {
+            if (polygon.isPointInFill(svgPoint)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Generates a series of points on a sphere.
+    sphereMap(i) {
+        // This apparently comes from taking the inverse of a cumulative
+        // distribution function representing the density of our sphere...
+        // or something i honestly don't get it.
+        // https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere/44164075#44164075
+        const lat = Math.acos(1 - 2 * (i / this.numPoints));
+        const long = Math.PI * PHI * i;
+        return [
+            this.sphereRadius * Math.cos(long) * Math.sin(lat),
+            this.sphereRadius * Math.sin(long) * Math.sin(lat),
+            this.sphereRadius * Math.cos(lat)
+        ];
+    }
+
+    // Generates a series of points evenly spread through a disk.
+    diskMap(i) {
+        const theta = Math.PI * PHI * (i / this.numPoints * this.diskRadius);
+        const r = Math.sqrt(i / this.numPoints) * this.diskRadius;
+        return [
+            r * Math.cos(theta),
+            r * Math.sin(theta),
+            0
+        ];
+    }
+
+    buildConfigeration() {
+        this.pointPositions = [];
+        for (let i = 0; i < this.numPoints; i++) {
+            let position = null;
+            if (this.currentConfigeration === "sphere") {
+                position = this.sphereMap(i);
+            } else if (this.currentConfigeration === "chrome") {
+                position = this.diskMap(i);
+                if (!this.inMask(position, 'chrome-logo')) {
+                    position = null;
+                }
+            } else if (this.currentConfigeration === "code") {
+                position = this.diskMap(i);
+                if (!this.inMask(position, 'code')) {
+                    position = null;
+                }
+            }
+
+            this.pointPositions.push(
+                position !== null ? new THREE.Vector3(...position) : null);
+        }
+        this.runningAnimation = {
+            startTime: performance.now(),
+            endTime: performance.now() + this.transitionSpeed,
+        };
+    }
+
+    linearInterp(from, to, progress) {
+        let result = [];
+        let a = [from.x, from.y, from.z];
+        let b = [to.x, to.y, to.z];
+
+        for (let i = 0; i < 3; i++) {
+            const dist = Math.abs(a[i] - b[i]);
+            if (b[i] > a[i]) {
+                result[i] = a[i] + (dist * progress);
+            } else {
+                result[i] = a[i] - (dist * progress);
+            }
+        }
+
+        return {
+            x: result[0],
+            y: result[1],
+            z: result[2],
+        }
+    }
+
+    resizeRendererToDisplaySize() {
+        const canvas = this.renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            this.renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
+
+    animatePoints() {
+        let progress;
+        const { startTime, endTime } = this.runningAnimation;
+        if (performance.now() >= endTime) {
+            progress = 1;
+            this.runningAnimation = null;
+        } else {
+            progress = (performance.now() - startTime) / (endTime - startTime);
+        }
+
+        for (let i = 0; i < this.points.length; i++) {
+            const point = this.points[i];
+            const pointPosition = this.pointPositions[i];
+
+            if (pointPosition !== null) {
+                const { x, y, z } = this.linearInterp(point.position, pointPosition, progress);
+                point.position.set(x, y, z);
+            } else {
+                const { x, y, z } = this.linearInterp(
+                    point.position, new THREE.Vector3(0, 0, 0), progress);
+                point.position.set(x, y, z);
+            }
+        }
+    }
+
+    animate() {
+        requestAnimationFrame(() => this.animate());
+
+        STATS.update();
+        const x = Math.sin(this.cameraAngle) * this.orbitRadius;
+        const z = Math.cos(this.cameraAngle) * this.orbitRadius;
+        this.camera.position.set(x, 0, z);
+        this.camera.lookAt(0, 0, 0);
+        this.cameraAngle += this.orbitSpeed;
+
+        if (this.resizeRendererToDisplaySize()) {
+            const canvas = this.renderer.domElement;
+            this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            this.camera.updateProjectionMatrix();
+        }
+
+        if (this.runningAnimation) {
+            this.animatePoints();
+        }
+
+        this.renderer.render(this.scene, this.camera);
+    };
+
+    setConfigeration(configeration) {
+        if (!this.KNOWN_CONFIGERATIONS.includes(configeration)) {
+            throw new Error(
+                `Bro!!!! ${configeration} is not a known cloud configeration.`);
+        }
+        if (configeration === this.currentConfigeration) {
+            return;
+        }
+        this.currentConfigeration = configeration;
+        this.buildConfigeration();
+    }
+
+    setPointSize(pointSize) {
+        this.pointSize = pointSize;
+        this.buildConfigeration();
+        this.initScene();
+    }
+
+    setPointCount(pointCount) {
+        this.numPoints = pointCount;
+        this.buildConfigeration();
+        this.initScene();
+    }
 }
 
+// TODO: Make gallery into a web component.
 function disableScroll() {
     document.body.style.overflow = 'hidden';
 }
 
 function enableScroll() {
     document.body.style.overflow = 'scroll';
-}
-
-// Set up 500 possible rotations the background animates between so we sort of
-// rate limit updates.
-function bucket(v) {
-    const numSteps = 500;
-    const stepSize = 1 / numSteps;
-    const roundedValue = Math.floor(v / stepSize) * stepSize;
-    return roundedValue;
-}
-
-function onScroll() {
-    if (sectionHeight < 0) return;
-    // Only update transform once every 50ms.
-    if ((Date.now() - lastScroll) < 50) return;
-    const totalHeight = sectionHeight * (NUM_SECTIONS - 1);
-    const progress = bucket(1 - ((totalHeight - window.scrollY) / totalHeight));
-    const rotation = -45 + 270 * (progress);
-    const col = gradient(progress, COLORS);
-
-    document.querySelector('.background').style.transform = `rotate(${rotation}deg)`;
-    document.querySelector('.background').style.backgroundColor = col;
-    lastScroll = Date.now();
-}
-
-function onResize() {
-    if (firstSection) {
-        sectionHeight = firstSection.getBoundingClientRect().height;
-    }
-    if (currentWidth !== innerWidth) {
-        // Only update background on width changes. Height changes are a bit
-        // unreliable since they happen on mobile everytime you scroll and
-        // hide the chrome top bar so we just cop the slight misalignment there
-        // instead of jankily resizing the backgroun
-        setBackgroundSize();
-        currentWidth = innerWidth;
-    }
 }
 
 function openGallery(project) {
@@ -264,7 +457,7 @@ function initGallery() {
     });
 }
 
-function onHashChange(event) {
+function onHashChange() {
     if (!location.hash) {
         closeGallery();
     } else {
@@ -272,38 +465,72 @@ function onHashChange(event) {
     }
 }
 
-function setBackgroundSize() {
-    const { innerWidth, innerHeight } = window;
-    // We need this value to account for the topbar in mobile which is there
-    // on first launch but disapears after scroll.
-    const fudge = 128;
-    const diagonal = Math.sqrt(innerWidth ** 2 + innerHeight ** 2);
-    const offsetX = -diagonal / 2 + innerWidth / 2;
-    const offsetY = -1 * ((diagonal / 2 + fudge) - innerHeight / 2);
-    document.querySelector('.background').style.width = `${diagonal}px`;
-    document.querySelector('.background').style.height = `${diagonal/2 + fudge}px`;
-    document.querySelector('.background').style.left = `${offsetX}px`;
-    document.querySelector('.background').style.top = `${offsetY}px`;
-}
-
 function init() {
-    const sections = Array.from(document.querySelectorAll('.section'));
-    if (sections.length !== COLORS.length) {
-        throw new Error('Number of sections and colors mismatch.');
-    }
-    firstSection = sections[0];
-    sectionHeight = firstSection.getBoundingClientRect().height;
-    sections.map((section, index) =>
-        section.style.setProperty(
-            '--card-theme-primary', COLORS[index]));
-    sections.map(
-        (section, index) => section.style.setProperty(
-            '--card-theme-primary-rgb', rgbStr(COLORS[index])));
-    document.addEventListener('scroll', onScroll);
-    window.onresize = onResize;
-    setBackgroundSize();
-    onScroll();
+    const bgController = new BackgroundController(
+        document.querySelector('canvas'), {
+            'chrome-logo': constructMask('#chrome-logo'),
+            'code': constructMask('#code'),
+        }
+    );
+    const scrollObserver = new ScrollObserver();
+    scrollObserver.addScrollListener((position) => {
+        bgController.setConfigeration([
+            'sphere',
+            'chrome',
+            'code',
+            'chrome',
+        ][position]);
+    });
     initGallery();
+
+    document.querySelector('.hint').addEventListener('click', () => {
+        window.scrollTo({
+            top: 200,
+            behavior: 'smooth'
+        });
+    });
+
+    // Debug Tools.
+    const toggleDevTools = () => {
+        const options = document.querySelector('.dev-options');
+        const main = document.querySelector('main');
+        const stats = document.querySelector('#stats-container');
+        if (options.classList.contains('hidden')) {
+            options.classList.remove('hidden');
+            main.classList.add('hidden');
+            stats.classList.remove('hidden');
+        } else {
+            options.classList.add('hidden');
+            main.classList.remove('hidden');
+            stats.classList.add('hidden');
+        }
+    }
+
+    document.querySelector('#stats-container').append(STATS.dom);
+    document.addEventListener('keydown', e => {
+        if (e.key === 'd' && e.ctrlKey) {
+            toggleDevTools();
+        }
+    });
+    document.querySelector('#cloud-configerations').addEventListener('change', (e) => {
+        bgController.setConfigeration(e.target.value);
+    });
+    document.querySelector('#stats-type').addEventListener('change', (e) => {
+        STATS.showPanel(
+            ['fps', 'ms', 'mb'].indexOf(e.target.value)
+        );
+    });
+    document.querySelector('#point-size').addEventListener('change', (e) => {
+        bgController.setPointSize(e.target.value);
+    });
+    document.querySelector('#point-count').addEventListener('change', (e) => {
+        bgController.setPointCount(e.target.value);
+    });
+
+    if (document.location.search === '?dev') {
+        toggleDevTools();
+    }
+    console.log("Hello developer! Use Control + d to show dev options.");
 }
 
 window.onload = init;
