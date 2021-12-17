@@ -348,12 +348,6 @@ class BackgroundController {
         STATS.update();
         let orbitRadius = this.orbitRadius;
 
-        if (this.resizeRendererToDisplaySize()) {
-            const canvas = this.renderer.domElement;
-            this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            this.camera.updateProjectionMatrix();
-        }
-
         if (this.runningAnimation) {
             let progress;
             const { startTime, endTime } = this.runningAnimation;
@@ -376,6 +370,12 @@ class BackgroundController {
         this.camera.position.set(x, 0, z);
         this.camera.lookAt(0, 0, 0);
         this.cameraAngle += this.orbitSpeed;
+        if (this.resizeRendererToDisplaySize()) {
+            const canvas = this.renderer.domElement;
+            this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            this.camera.updateProjectionMatrix();
+        }
+
         this.renderer.render(this.scene, this.camera);
     };
 
