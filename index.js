@@ -3,6 +3,12 @@
 const STATS = new Stats();
 const PHI = (1 + Math.sqrt(5));
 const NUM_SECTIONS = 4;
+const POINT_CLOUD_CONFIGERATIONS = [
+    "sphere",
+    "chrome",
+    "code",
+    "design",
+];
 const GALLERY_PROJECTS = {
     'adventure_buddy': {
         previewLink: 'img/adventure_buddy_preview.svg',
@@ -69,6 +75,27 @@ function constructMask(maskSelector) {
     }
 }
 
+function easeCurve(p) {
+    return Math.pow(p, 1.5);
+}
+
+function linearInterp(from, to, progress) {
+    const dist = Math.abs(from - to);
+    if (to > from) {
+        return from + (dist * progress);
+    }
+    return from - (dist * progress);
+}
+
+function pointLinearInterp(from, to, progress) {
+    return {
+        x: linearInterp(from.x, to.x, progress),
+        y: linearInterp(from.y, to.y, progress),
+        z: linearInterp(from.z, to.z, progress),
+    }
+}
+
+
 class ScrollObserver {
     constructor() {
         this.scrollPosition = 0;
@@ -118,22 +145,20 @@ class BackgroundController {
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.masks = masks;
         this.runningAnimation = null;
-        this.transitionSpeed = 5000;
+        this.transitionSpeed = 600;
 
         this.cameraAngle = 0;
+        this.cameraPitch = 0;
         this.orbitRadius = 250;
         this.sphereRadius = 150;
         this.diskRadius = 125;
         this.numPoints = 2108;
         this.orbitSpeed = 0.005; // Degrees per frame.
         this.currentConfigeration = "sphere";
-        this.KNOWN_CONFIGERATIONS = [
-            "sphere",
-            "chrome",
-            "code"
-        ];
         this.pointSize = 1;
         this.pointPositions = [];
+        this.lines = [];
+        this.lineOpacity = .3;
         this.interpSpeed = .1; // units per frame.
 
         this.buildConfigeration();
@@ -197,52 +222,87 @@ class BackgroundController {
         ];
     }
 
+    randomMap(i) {
+        if (i > Math.floor(this.numPoints * .7)) {
+            return null;
+        }
+        return [
+            Math.random() * this.sphereRadius - this.sphereRadius / 2,
+            Math.random() * this.sphereRadius - this.sphereRadius / 2,
+            Math.random() * this.sphereRadius - this.sphereRadius / 2
+        ];
+    }
+
     buildConfigeration() {
         this.pointPositions = [];
+        const originalCameraOrbitRadius = this.orbitRadius;
+        for (const line of this.lines) {
+            this.scene.remove(line);
+        }
+        this.lines = [];
         for (let i = 0; i < this.numPoints; i++) {
             let position = null;
             if (this.currentConfigeration === "sphere") {
+                this.orbitRadius = 250;
                 position = this.sphereMap(i);
-            } else if (this.currentConfigeration === "chrome") {
-                position = this.diskMap(i);
-                if (!this.inMask(position, 'chrome-logo')) {
-                    position = null;
-                }
             } else if (this.currentConfigeration === "code") {
+                this.orbitRadius = 175;
+                position = this.randomMap(i);
+            } else {
+                this.orbitRadius = 175;
                 position = this.diskMap(i);
-                if (!this.inMask(position, 'code')) {
+                if (!this.inMask(position, this.currentConfigeration)) {
                     position = null;
                 }
             }
-
             this.pointPositions.push(
                 position !== null ? new THREE.Vector3(...position) : null);
+        }
+        if (this.currentConfigeration === "code") {
+            // Pick a random 25% of not null points.
+            const points = this.pointPositions
+                .filter(p => p !== null)
+                .filter(() => Math.random() > .85);
+            for (let i = 0; i < points.length; i++) {
+                const from = points[i];
+                const toIndex = Math.floor(Math.random() * points.length);
+                if (toIndex === i) {
+                    // Wasn't meant to be.
+                    continue;
+                }
+                const to = points[toIndex];
+                this.lines.push(this.drawLine(from, to));
+            }
+
+        }
+
+        let originalPointPositions;
+        if (!this.points) {
+            originalPointPositions = Array(this.numPoints).fill(null);
+        } else {
+            originalPointPositions = this.points.map(p => p !== null ? p.position.clone() : null)
         }
         this.runningAnimation = {
             startTime: performance.now(),
             endTime: performance.now() + this.transitionSpeed,
+            originalPointPositions,
+            originalCameraOrbitRadius,
         };
     }
 
-    linearInterp(from, to, progress) {
-        let result = [];
-        let a = [from.x, from.y, from.z];
-        let b = [to.x, to.y, to.z];
-
-        for (let i = 0; i < 3; i++) {
-            const dist = Math.abs(a[i] - b[i]);
-            if (b[i] > a[i]) {
-                result[i] = a[i] + (dist * progress);
-            } else {
-                result[i] = a[i] - (dist * progress);
-            }
-        }
-
-        return {
-            x: result[0],
-            y: result[1],
-            z: result[2],
-        }
+    drawLine(start, end) {
+        const material = new THREE.LineBasicMaterial({
+            color: 0xa1cfe8,
+            transparent: true,
+            opacity: 0
+        });
+        const geometry = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(...start),
+            new THREE.Vector3(...end)
+        ]);
+        const line = new THREE.Line(geometry, material);
+        this.scene.add(line);
+        return line;
     }
 
     resizeRendererToDisplaySize() {
@@ -256,40 +316,37 @@ class BackgroundController {
         return needResize;
     }
 
-    animatePoints() {
-        let progress;
-        const { startTime, endTime } = this.runningAnimation;
-        if (performance.now() >= endTime) {
-            progress = 1;
-            this.runningAnimation = null;
-        } else {
-            progress = (performance.now() - startTime) / (endTime - startTime);
-        }
-
+    animatePoints(progress) {
         for (let i = 0; i < this.points.length; i++) {
             const point = this.points[i];
-            const pointPosition = this.pointPositions[i];
+            let originalPosition = this.runningAnimation.originalPointPositions[i];
+            let pointPosition = this.pointPositions[i];
 
-            if (pointPosition !== null) {
-                const { x, y, z } = this.linearInterp(point.position, pointPosition, progress);
-                point.position.set(x, y, z);
-            } else {
-                const { x, y, z } = this.linearInterp(
-                    point.position, new THREE.Vector3(0, 0, 0), progress);
-                point.position.set(x, y, z);
+            if (originalPosition === null) {
+                originalPosition = new THREE.Vector3(0, 0, 0)
             }
+            if (pointPosition === null) {
+                pointPosition = new THREE.Vector3(0, 0, 0)
+            }
+
+            const { x, y, z } = pointLinearInterp(originalPosition, pointPosition, progress);
+            point.position.set(x, y, z);
+        }
+    }
+
+    animateLines(progress) {
+        if (this.currentConfigeration !== 'code') {
+            return;
+        }
+        for (const line of this.lines) {
+            line.material.opacity = progress * this.lineOpacity;
         }
     }
 
     animate() {
         requestAnimationFrame(() => this.animate());
-
         STATS.update();
-        const x = Math.sin(this.cameraAngle) * this.orbitRadius;
-        const z = Math.cos(this.cameraAngle) * this.orbitRadius;
-        this.camera.position.set(x, 0, z);
-        this.camera.lookAt(0, 0, 0);
-        this.cameraAngle += this.orbitSpeed;
+        let orbitRadius = this.orbitRadius;
 
         if (this.resizeRendererToDisplaySize()) {
             const canvas = this.renderer.domElement;
@@ -298,14 +355,32 @@ class BackgroundController {
         }
 
         if (this.runningAnimation) {
-            this.animatePoints();
+            let progress;
+            const { startTime, endTime } = this.runningAnimation;
+            if (performance.now() >= endTime) {
+                progress = 1;
+            } else {
+                progress = easeCurve((performance.now() - startTime) / (endTime - startTime));
+            }
+            this.animatePoints(progress);
+            this.animateLines(progress);
+            orbitRadius = linearInterp(this.runningAnimation.originalCameraOrbitRadius, this.orbitRadius, progress);
+
+            if (progress === 1) {
+                this.runningAnimation = null;
+            }
         }
 
+        const x = Math.sin(this.cameraAngle) * orbitRadius;
+        const z = Math.cos(this.cameraAngle) * orbitRadius;
+        this.camera.position.set(x, 0, z);
+        this.camera.lookAt(0, 0, 0);
+        this.cameraAngle += this.orbitSpeed;
         this.renderer.render(this.scene, this.camera);
     };
 
     setConfigeration(configeration) {
-        if (!this.KNOWN_CONFIGERATIONS.includes(configeration)) {
+        if (!POINT_CLOUD_CONFIGERATIONS.includes(configeration)) {
             throw new Error(
                 `Bro!!!! ${configeration} is not a known cloud configeration.`);
         }
@@ -468,18 +543,13 @@ function onHashChange() {
 function init() {
     const bgController = new BackgroundController(
         document.querySelector('canvas'), {
-            'chrome-logo': constructMask('#chrome-logo'),
-            'code': constructMask('#code'),
+            'chrome': constructMask('#chrome'),
+            'design': constructMask('#design'),
         }
     );
     const scrollObserver = new ScrollObserver();
     scrollObserver.addScrollListener((position) => {
-        bgController.setConfigeration([
-            'sphere',
-            'chrome',
-            'code',
-            'chrome',
-        ][position]);
+        bgController.setConfigeration(POINT_CLOUD_CONFIGERATIONS[position]);
     });
     initGallery();
 
@@ -512,6 +582,13 @@ function init() {
             toggleDevTools();
         }
     });
+
+    for (const config of POINT_CLOUD_CONFIGERATIONS) {
+        const option = document.createElement('option');
+        option.value = config;
+        option.innerText = config;
+        document.querySelector('#cloud-configerations').append(option);
+    }
     document.querySelector('#cloud-configerations').addEventListener('change', (e) => {
         bgController.setConfigeration(e.target.value);
     });
