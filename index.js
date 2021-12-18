@@ -146,19 +146,20 @@ class BackgroundController {
         this.masks = masks;
         this.runningAnimation = null;
         this.transitionSpeed = 600;
+        this.animationFrameRequestId = null;
 
         this.cameraAngle = 0;
         this.cameraPitch = 0;
         this.orbitRadius = 250;
         this.sphereRadius = 150;
         this.diskRadius = 125;
-        this.numPoints = 2108;
-        this.orbitSpeed = 0.005; // Degrees per frame.
+        this.numPoints = 1249;
+        this.orbitSpeed = 0.0025; // Degrees per frame.
         this.currentConfigeration = "sphere";
         this.pointSize = 1;
         this.pointPositions = [];
         this.lines = [];
-        this.lineOpacity = .3;
+        this.lineOpacity = .65;
         this.interpSpeed = .1; // units per frame.
 
         this.buildConfigeration();
@@ -223,7 +224,7 @@ class BackgroundController {
     }
 
     randomMap(i) {
-        if (i > Math.floor(this.numPoints * .7)) {
+        if (i > Math.floor(this.numPoints * .25)) {
             return null;
         }
         return [
@@ -237,7 +238,7 @@ class BackgroundController {
         this.pointPositions = [];
         const originalCameraOrbitRadius = this.orbitRadius;
         for (const line of this.lines) {
-            this.scene.remove(line);
+            this.killMesh(line);
         }
         this.lines = [];
         for (let i = 0; i < this.numPoints; i++) {
@@ -246,10 +247,8 @@ class BackgroundController {
                 this.orbitRadius = 250;
                 position = this.sphereMap(i);
             } else if (this.currentConfigeration === "code") {
-                this.orbitRadius = 175;
                 position = this.randomMap(i);
             } else {
-                this.orbitRadius = 175;
                 position = this.diskMap(i);
                 if (!this.inMask(position, this.currentConfigeration)) {
                     position = null;
@@ -259,10 +258,10 @@ class BackgroundController {
                 position !== null ? new THREE.Vector3(...position) : null);
         }
         if (this.currentConfigeration === "code") {
-            // Pick a random 25% of not null points.
+            // Pick a random 10% of not null points.
             const points = this.pointPositions
                 .filter(p => p !== null)
-                .filter(() => Math.random() > .85);
+                .filter(() => Math.random() > .90);
             for (let i = 0; i < points.length; i++) {
                 const from = points[i];
                 const toIndex = Math.floor(Math.random() * points.length);
@@ -274,6 +273,14 @@ class BackgroundController {
                 this.lines.push(this.drawLine(from, to));
             }
 
+        }
+
+        if (this.points) {
+            for (let i = 0; i < this.points.length; i++) {
+                if (this.pointPositions[i] !== null) {
+                    this.points[i].material.visible = true;
+                }
+            }
         }
 
         let originalPointPositions;
@@ -321,12 +328,11 @@ class BackgroundController {
             const point = this.points[i];
             let originalPosition = this.runningAnimation.originalPointPositions[i];
             let pointPosition = this.pointPositions[i];
-
             if (originalPosition === null) {
-                originalPosition = new THREE.Vector3(0, 0, 0)
+                originalPosition = new THREE.Vector3(0, 0, 0);
             }
             if (pointPosition === null) {
-                pointPosition = new THREE.Vector3(0, 0, 0)
+                pointPosition = new THREE.Vector3(0, 0, 0);
             }
 
             const { x, y, z } = pointLinearInterp(originalPosition, pointPosition, progress);
@@ -344,7 +350,7 @@ class BackgroundController {
     }
 
     animate() {
-        requestAnimationFrame(() => this.animate());
+        this.animationFrameRequestId = requestAnimationFrame(() => this.animate());
         STATS.update();
         let orbitRadius = this.orbitRadius;
 
@@ -362,6 +368,11 @@ class BackgroundController {
 
             if (progress === 1) {
                 this.runningAnimation = null;
+                for (let i = 0; i < this.numPoints; i++) {
+                    if (this.pointPositions[i] === null) {
+                        this.points[i].material.visible = false;
+                    }
+                }
             }
         }
 
@@ -397,10 +408,27 @@ class BackgroundController {
         this.initScene();
     }
 
+    killMesh(mesh) {
+        mesh.geometry.dispose();
+        mesh.material.dispose();
+        this.scene.remove(mesh);
+    }
+
     setPointCount(pointCount) {
+        if (this.animationFrameRequestId) {
+            cancelAnimationFrame(this.animationFrameRequestId);
+            this.runningAnimation = null;
+        }
         this.numPoints = pointCount;
+        if (this.points) {
+            for (const point of this.points) {
+                this.killMesh(point);
+            }
+        }
+        this.points = undefined;
         this.buildConfigeration();
         this.initScene();
+        this.animate();
     }
 }
 
@@ -592,16 +620,22 @@ function init() {
     document.querySelector('#cloud-configerations').addEventListener('change', (e) => {
         bgController.setConfigeration(e.target.value);
     });
+
     document.querySelector('#stats-type').addEventListener('change', (e) => {
         STATS.showPanel(
             ['fps', 'ms', 'mb'].indexOf(e.target.value)
         );
     });
+
     document.querySelector('#point-size').addEventListener('change', (e) => {
         bgController.setPointSize(e.target.value);
     });
+    document.querySelector('#point-count').value = bgController.numPoints;
+    document.querySelector('#point-count-val').innerText = bgController.numPoints;
     document.querySelector('#point-count').addEventListener('change', (e) => {
-        bgController.setPointCount(e.target.value);
+        const v = Number(e.target.value);
+        bgController.setPointCount(v);
+        document.querySelector('#point-count-val').innerText = v;
     });
 
     if (document.location.search === '?dev') {

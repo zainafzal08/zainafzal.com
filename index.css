@@ -598,7 +598,7 @@ h3 {
 .hidden-icons {
     opacity: 0;
     position: absolute;
-    right: -110%;
+    left: -110%;
 }
 
 #stats-container.hidden {
