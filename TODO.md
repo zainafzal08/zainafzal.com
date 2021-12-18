@@ -1,0 +1,1 @@
+1. Make gallery into a web component.
