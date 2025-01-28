@@ -1,1 +1,1 @@
-1. Make gallery into a web component.
+- Test out background idea.
