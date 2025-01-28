@@ -1,0 +1,6 @@
+#about-hero svg {
+    width: 150px;
+}
+#about-hero h1 {
+    transform: translateY(-10%);
+}

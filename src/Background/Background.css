@@ -1,0 +1,30 @@
+.container {
+    width: 100vw;
+}
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    mask: radial-gradient(circle at var(--dot-gap) var(--dot-gap), #000000 var(--dot-size), transparent 0);
+    mask-size: calc(2 * var(--dot-gap)) calc(2 * var(--dot-gap));
+    background: var(--color-bg-dot);
+}
+main {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+.mouse-shadow {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    background: radial-gradient(circle at center, var(--color-mouse-shadow), transparent);
+    transition: opacity .5s ease-in-out;
+    transform-origin: center;
+}

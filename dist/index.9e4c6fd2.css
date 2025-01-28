@@ -1,0 +1,79 @@
+body {
+  --color-mouse-shadow: #2eb6fe;
+  --color-primary: #a1cfe8;
+  --color-bg: #fbfeff;
+  --color-bg-dot: #e5ecef;
+  --dot-gap: 8px;
+  --dot-size: 1.5px;
+  --color-text: #102f40;
+  margin: 0;
+  padding: 0;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.center {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.start {
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 64px;
+  display: flex;
+}
+
+.inter-light {
+  font-optical-sizing: auto;
+  font-family: Inter, serif;
+  font-style: normal;
+  font-weight: 100;
+}
+
+.inter {
+  font-optical-sizing: auto;
+  font-family: Inter, serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.inter-bold {
+  font-optical-sizing: auto;
+  font-family: Inter, serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.hero {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.hero img, .hero svg {
+  width: 200px;
+}
+
+.hero h1 {
+  color: var(--color-text);
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 64px;
+  position: absolute;
+  bottom: 0;
+}
+/*# sourceMappingURL=index.9e4c6fd2.css.map */

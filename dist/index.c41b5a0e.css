@@ -1,0 +1,139 @@
+.container {
+  width: 100vw;
+}
+
+.background {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  mask: radial-gradient(circle at var(--dot-gap) var(--dot-gap), #000 var(--dot-size), transparent 0);
+  mask-size: calc(2 * var(--dot-gap)) calc(2 * var(--dot-gap));
+  background: var(--color-bg-dot);
+  position: fixed;
+}
+
+main {
+  z-index: 2;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mouse-shadow {
+  background: radial-gradient(circle at center, var(--color-mouse-shadow), transparent);
+  transform-origin: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  transition: opacity .5s ease-in-out;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+}
+
+#home-hero img {
+  width: 200px;
+}
+
+#home-hero h1 {
+  transform: translateY(12px);
+}
+
+nav {
+  gap: 64px;
+  padding: 64px 0;
+  display: flex;
+}
+
+nav a {
+  color: var(--color-text);
+  font-optical-sizing: auto;
+  cursor: pointer;
+  font-family: Inter, serif;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform .2s ease-in-out;
+  position: relative;
+}
+
+nav a span {
+  border-bottom: 3px dotted var(--color-text);
+  z-index: 2;
+  padding-bottom: 6px;
+  position: relative;
+}
+
+nav a svg {
+  transition: transform .2s ease-in-out;
+}
+
+nav a:hover {
+  transform: scale(1.1);
+}
+
+nav a:hover svg {
+  transform: translateX(5px)rotate(10deg);
+}
+
+nav a svg {
+  z-index: 0;
+  position: absolute;
+}
+
+nav a#about svg {
+  width: 48px;
+  top: -30%;
+  left: -25%;
+}
+
+nav a#blog svg {
+  width: 64px;
+  top: 5%;
+  left: -50%;
+}
+
+nav a#visual-design svg {
+  width: 64px;
+  top: 0%;
+  left: -5%;
+}
+
+nav a#software svg {
+  width: 48px;
+  top: -35%;
+  left: -30%;
+}
+
+nav a#tools svg {
+  width: 40px;
+  top: -15%;
+  left: -30%;
+}
+
+#about-hero svg {
+  width: 150px;
+}
+
+#about-hero h1 {
+  transform: translateY(-10%);
+}
+
+#blog-hero svg {
+  width: 250px;
+}
+
+#blog-hero h1 {
+  bottom: 20px;
+}
+
+#tools-hero svg {
+  width: 150px;
+}
+
+#software-hero h1 {
+  bottom: 25px;
+}
+/*# sourceMappingURL=index.c41b5a0e.css.map */
