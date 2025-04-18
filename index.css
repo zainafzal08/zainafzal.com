@@ -2,12 +2,36 @@ body {
     margin: 0;
     padding: 0;
     --color-mouse-shadow: #2EB6FE;
-    --color-primary: #a1cfe8;
+    --color-primary: #D4E7F1;
     --color-bg: #FBFEFF;
     --color-bg-dot: #E5ECEF;
-    --dot-gap: 8px;
-    --dot-size: 1.5px;
     --color-text: #102F40;
+    --color-text-light: #88A7B8;
+    --card-color: #FFFFFF;
+    --title-height: 150px;
+    --app-rounding: 8px;
+    --app-h-padding: 0;
+    --app-v-padding: 64px;
+}
+@media screen and (min-width: 600px) {
+    body {
+        --app-h-padding: 64px;
+    }
+}
+@media screen and (min-width: 1000px) {
+    body {
+        --app-h-padding: 128px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    body {
+        --app-h-padding: 200px;
+    }
+}
+
+main {
+    min-height: 100vh;
+    height: 100%;
 }
 .fill {
     width: 100%;
@@ -27,7 +51,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    padding: 64px;
+    padding: var(--app-v-padding) var(--app-h-padding);
 }
 .inter-light {
     font-family: "Inter", serif;
@@ -53,9 +77,10 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: var(--title-height);
 }
 .hero img, .hero svg {
-    width: 200px;
+    height: 100%;
 }
 .hero h1 {
     padding: 0;
@@ -67,4 +92,56 @@ body {
     text-align: center;
     font-size: 64px;
     width: 100%;
+}
+a {
+    text-decoration: none;
+}
+a:visited {
+    color: ddd;
+}
+.content {
+    height: calc(100% - var(--title-height));
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+}
+.card {
+    background: var(--card-color);
+    border-radius: var(--app-rounding);
+    border: 1px solid var(--color-primary);
+    box-sizing: border-box;
+    padding: 24px;
+}
+.card h1 {
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    color: var(--color-text);
+    padding: 0;
+    margin: 0;
+    padding-bottom: 16px;
+}
+.card p {
+    padding: 0;
+    margin: 0;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+}
+.card hr {
+    margin: 16px 0;
+    padding: 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    height: 4px;
+    box-sizing: border-box;
+
+    background: radial-gradient(circle at 2px 2px, var(--color-text-light) 1px, transparent 0);
+    background-size: calc(2 * 2px) calc(2 * 2px);
 }

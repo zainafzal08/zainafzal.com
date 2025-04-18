@@ -1,0 +1,29 @@
+.back-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    color: var(--color-text);
+}
+.back-button img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(35%);
+    transition: transform 0.1s ease-in-out;
+}
+.back-button-bg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    transform: translate(100%, 25%);
+    transition: transform 0.1s ease-in-out;
+}
+.back-button:hover .back-button-bg {
+    transform: translate(25%, 25%);
+}
+.back-button:hover img {
+    transform: translateY(10%);
+}

@@ -1,6 +1,5 @@
-
-#home-hero img {
-    width: 200px;
+#home-hero {
+    height: 250px;
 }
 #home-hero h1 {
     transform: translateY(12px);
@@ -11,6 +10,14 @@ nav {
     display: flex;
     gap: 64px;
 }
+
+@media screen and (max-width: 800px) {
+    nav {
+        gap: 40px;
+        flex-direction: column;
+    }
+}
+
 nav a {
     color: var(--color-text); 
     font-size: 1.4rem;
@@ -22,6 +29,7 @@ nav a {
     position: relative;
     transition: transform 0.2s ease-in-out;
     text-decoration: none;
+    width: fit-content;
 }
 nav a span {
     position: relative;

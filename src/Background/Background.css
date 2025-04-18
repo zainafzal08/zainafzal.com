@@ -6,8 +6,12 @@
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    mask: radial-gradient(circle at var(--dot-gap) var(--dot-gap), #000000 var(--dot-size), transparent 0);
+    --dot-gap: 8px;
+    --dot-size: 1.2px;
+    --mask: radial-gradient(circle at var(--dot-gap) var(--dot-gap), #000000 var(--dot-size), transparent 0);
+    mask: var(--mask), var(--mask);
     mask-size: calc(2 * var(--dot-gap)) calc(2 * var(--dot-gap));
+    mask-position: 0 0, var(--dot-gap) var(--dot-gap);
     background: var(--color-bg-dot);
 }
 main {

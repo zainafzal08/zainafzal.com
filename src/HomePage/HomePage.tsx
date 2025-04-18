@@ -4,7 +4,6 @@ import { AboutIcon } from "../Icons/AboutIcon";
 import { VisualDesignIcon } from "../Icons/VisualDesignIcon";
 import { SoftwareIcon } from "../Icons/SoftwareIcon";
 import { ToolsIcon } from "../Icons/ToolsIcon";
-import { BlogIcon } from "../Icons/BlogIcon";
 
 export function HomePage() {
     const src = new URL('../../assets/zain.svg', import.meta.url);
@@ -15,7 +14,6 @@ export function HomePage() {
         </div>
         <nav>
             <a href="/about" id="about"><AboutIcon/> <span>About</span></a>
-            <a href="/blog" id="blog"><BlogIcon/><span>Blog</span></a>
             <a href="/visual-design" id="visual-design"><VisualDesignIcon/><span>Visual Design</span></a>
             <a href="/software" id="software"><SoftwareIcon/><span>Software</span></a>
             <a href="/tools" id="tools"><ToolsIcon/><span>Tools</span></a>

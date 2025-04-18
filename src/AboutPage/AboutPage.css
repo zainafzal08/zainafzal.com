@@ -1,6 +1,84 @@
-#about-hero svg {
-    width: 150px;
-}
 #about-hero h1 {
     transform: translateY(-10%);
+}
+.image-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    --rotation: 15deg;
+    --translate: 30px;
+    --img-size: 250px;
+}
+@media screen and (max-width: 900px) {
+    .image-grid {
+        --img-size: 200px;
+    }
+}
+@media screen and (max-width: 800px) {
+    .image-grid {
+        --img-size: 180px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .image-grid {
+        --img-size: 160px;
+    }
+}
+.image-grid img {
+    border-radius: var(--app-rounding);
+    height: var(--img-size);
+    width: var(--img-size);
+    object-fit: cover;
+    border: 1px solid var(--color-primary);
+    transition: transform 0.2s ease-out;
+}
+.image-grid img:nth-child(1) {
+    transform: rotate(calc( -1 * var(--rotation))) translate(var(--translate), var(--translate));
+}
+.image-grid img:nth-child(1):hover {
+    transform: rotate(calc( -1 * var(--rotation))) translate(0, 0);
+}
+
+.image-grid img:nth-child(2) {
+    z-index: 2;
+    transform: translate(0, 0);
+}
+.image-grid img:nth-child(2):hover {
+    transform: translateY(calc(-1 * var(--translate)));
+}
+
+.image-grid img:nth-child(3) {
+    transform: rotate(var(--rotation)) translate(calc(-1 * var(--translate)), var(--translate));
+}
+.image-grid img:nth-child(3):hover {
+    transform: rotate(var(--rotation)) translate(0, 0);
+}
+
+.detail-card {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+}
+.push-right {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
+.link {
+    padding: 6px 14px 6px 6px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: color-mix(in srgb, var(--color-text), transparent 40%);
+    width: fit-content;
+    border-radius: 3rem;
+    background: var(--color-primary);
+}
+.link svg {
+    height: 1rem;
+}
+.link span {
+    font-size: .8rem;
 }
