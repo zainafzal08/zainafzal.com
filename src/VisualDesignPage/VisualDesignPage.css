@@ -1,0 +1,49 @@
+.project-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 400px;
+    --image-label-padding: 8px;
+}
+.project-description h2 {
+    font-size: .8rem;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+    color: var(--color-text-secondary);
+}
+.project-description.card p {
+    font-size: 0.7rem;
+}
+.project-images {
+    width: 100%;
+    aspect-ratio: 1.2/1;
+    position: relative;
+}
+.project-description {
+    width: 100%;
+}
+.project-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--app-rounding);
+    border: 1px solid var(--color-primary);
+}
+.project-image p {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.project-image p {
+    position: absolute;
+    bottom: var(--image-label-padding);
+    right: var(--image-label-padding);
+    background: var(--color-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    color: var(--color-text-secondary);
+}

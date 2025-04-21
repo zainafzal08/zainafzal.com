@@ -227,6 +227,60 @@ nav a#tools svg {
   bottom: 25px;
 }
 
+.project-container {
+  --image-label-padding: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 400px;
+  display: flex;
+}
+
+.project-description h2 {
+  color: var(--color-text-secondary);
+  margin: 0 0 8px;
+  font-size: .8rem;
+  font-weight: normal;
+}
+
+.project-description.card p {
+  font-size: .7rem;
+}
+
+.project-images {
+  aspect-ratio: 1.2;
+  width: 100%;
+  position: relative;
+}
+
+.project-description {
+  width: 100%;
+}
+
+.project-image {
+  border-radius: var(--app-rounding);
+  border: 1px solid var(--color-primary);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.project-image p {
+  bottom: var(--image-label-padding);
+  right: var(--image-label-padding);
+  background: var(--color-primary);
+  color: var(--color-text-secondary);
+  border-radius: 4px;
+  margin: 0;
+  padding: 4px 8px;
+  font-family: Space Grotesk, sans-serif;
+  font-size: .6rem;
+  position: absolute;
+}
+
 .back-button {
   z-index: 2;
   cursor: pointer;

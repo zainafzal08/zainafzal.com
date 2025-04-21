@@ -4437,7 +4437,7 @@ $RefreshReg$(_c1, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Background/Background":"ese56","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./HomePage/HomePage":"1Jnzh","./AboutPage/AboutPage":"tJ8pp","./ToolsPage/ToolsPage":"1yrCw","./SoftwarePage/SoftwarePage":"cTRs4","./VisualDesignPage/VisualDesignPage":"k5MbX","7a4ced883b384221":"8xKOX","./App.css":"6n0o6"}],"ese56":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Background/Background":"ese56","./HomePage/HomePage":"1Jnzh","./AboutPage/AboutPage":"tJ8pp","./ToolsPage/ToolsPage":"1yrCw","./SoftwarePage/SoftwarePage":"cTRs4","./VisualDesignPage/VisualDesignPage":"k5MbX","./App.css":"6n0o6","7a4ced883b384221":"8xKOX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"ese56":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9701 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -4871,45 +4871,7 @@ $RefreshReg$(_c, "HomePage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react/jsx-dev-runtime":"iTorj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","./HomePage.css":"gZgxo","e574981b8556326d":"80r2Y","../Icons/AboutIcon":"cuUTs","../Icons/VisualDesignIcon":"302eM","../Icons/SoftwareIcon":"bTAp5","../Icons/ToolsIcon":"g0e27"}],"gZgxo":[function() {},{}],"80r2Y":[function(require,module,exports,__globalThis) {
-module.exports = require("4ce9ef44822711f3").getBundleURL('6EXJA') + "zain.38b384ba.svg" + "?" + Date.now();
-
-},{"4ce9ef44822711f3":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"cuUTs":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./HomePage.css":"gZgxo","../Icons/AboutIcon":"cuUTs","../Icons/VisualDesignIcon":"302eM","../Icons/SoftwareIcon":"bTAp5","../Icons/ToolsIcon":"g0e27","e574981b8556326d":"80r2Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gZgxo":[function() {},{}],"cuUTs":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$8c9c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5081,7 +5043,45 @@ $RefreshReg$(_c, "ToolsIcon");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"tJ8pp":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"80r2Y":[function(require,module,exports,__globalThis) {
+module.exports = require("4ce9ef44822711f3").getBundleURL('6EXJA') + "zain.38b384ba.svg" + "?" + Date.now();
+
+},{"4ce9ef44822711f3":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"tJ8pp":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$2cf5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5265,7 +5265,7 @@ $RefreshReg$(_c, "AboutPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa"}],"hU1YY":[function() {},{}],"lhyWa":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hU1YY":[function() {},{}],"lhyWa":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b183 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5499,50 +5499,172 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _visualDesignPageCss = require("./VisualDesignPage.css");
 var _visualDesignIcon = require("../Icons/VisualDesignIcon");
-function VisualDesignPage() {
+var _projects = require("./Projects");
+var _helpers = require("../helpers");
+function ProjectImage({ src, index, count }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill start",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "hero",
+        className: "project-image",
+        style: {
+            backgroundImage: `url(${src})`
+        },
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+            className: "inter-light",
             children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignIcon.VisualDesignIcon), {}, void 0, false, {
-                    fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                    lineNumber: 8,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "inter-bold",
-                    children: " Visual Design "
-                }, void 0, false, {
-                    fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                    lineNumber: 9,
-                    columnNumber: 13
-                }, this)
+                index + 1,
+                " / ",
+                count
             ]
         }, void 0, true, {
             fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-            lineNumber: 7,
+            lineNumber: 9,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-        lineNumber: 6,
+        lineNumber: 8,
         columnNumber: 12
     }, this);
 }
-_c = VisualDesignPage;
-var _c;
-$RefreshReg$(_c, "VisualDesignPage");
+_c = ProjectImage;
+function Project({ project }) {
+    const images = Array.from({
+        length: project.imageCount
+    }, (_, index)=>(0, _helpers.toUrl)(`../../assets/${project.imagePrefix}${index + 1}.png`));
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "project-container",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "project-images",
+                children: images.map((image, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(ProjectImage, {
+                        src: image,
+                        index: index,
+                        count: project.imageCount
+                    }, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 18,
+                        columnNumber: 17
+                    }, this))
+            }, void 0, false, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 16,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "project-description card",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                        className: "inter-bold",
+                        children: project.name
+                    }, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 22,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "inter-light",
+                        children: project.description
+                    }, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 23,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 21,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+        lineNumber: 15,
+        columnNumber: 12
+    }, this);
+}
+_c1 = Project;
+function VisualDesignPage() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "fill start",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "hero",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignIcon.VisualDesignIcon), {}, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 31,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "inter-bold",
+                        children: " Visual Design "
+                    }, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 32,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 30,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "content",
+                children: (0, _projects.projects).map((project)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Project, {
+                        project: project
+                    }, void 0, false, {
+                        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                        lineNumber: 35,
+                        columnNumber: 40
+                    }, this))
+            }, void 0, false, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 34,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+        lineNumber: 29,
+        columnNumber: 12
+    }, this);
+}
+_c2 = VisualDesignPage;
+var _c, _c1, _c2;
+$RefreshReg$(_c, "ProjectImage");
+$RefreshReg$(_c1, "Project");
+$RefreshReg$(_c2, "VisualDesignPage");
 
   $parcel$ReactRefreshHelpers$f6eb.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./VisualDesignPage.css":"bMFRx","../Icons/VisualDesignIcon":"302eM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bMFRx":[function() {},{}],"8xKOX":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./VisualDesignPage.css":"bMFRx","../Icons/VisualDesignIcon":"302eM","./Projects":"2ml4q","../helpers":"adjmJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bMFRx":[function() {},{}],"2ml4q":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "projects", ()=>projects);
+const projects = [
+    {
+        name: "Adventure Buddy",
+        description: "An app that helps users play DnD by handling the paperwork",
+        imagePrefix: "adventure_buddy_",
+        imageCount: 9
+    }
+];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"adjmJ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "toUrl", ()=>toUrl);
+function toUrl(path) {
+    return new URL(path, "file:///src/helpers.ts").href;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6n0o6":[function() {},{}],"8xKOX":[function(require,module,exports,__globalThis) {
 module.exports = require("8395205f634aac26").getBundleURL('6EXJA') + "face.3688187d.svg" + "?" + Date.now();
 
-},{"8395205f634aac26":"lgJ39"}],"6n0o6":[function() {},{}],"lOjBx":[function(require,module,exports,__globalThis) {
+},{"8395205f634aac26":"lgJ39"}],"lOjBx":[function(require,module,exports,__globalThis) {
 'use strict';
 function checkDCE() {
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function') return;
