@@ -4319,52 +4319,8 @@ parcelHelpers.export(exports, "App", ()=>App);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _background = require("./Background/Background");
-var _homePage = require("./HomePage/HomePage");
-var _aboutPage = require("./AboutPage/AboutPage");
-var _toolsPage = require("./ToolsPage/ToolsPage");
-var _softwarePage = require("./SoftwarePage/SoftwarePage");
-var _visualDesignPage = require("./VisualDesignPage/VisualDesignPage");
 var _appCss = require("./App.css");
-const validPages = [
-    'about',
-    'tools',
-    'software',
-    'visual-design',
-    'home'
-];
-function pathToPage(path) {
-    if (path === '/') return 'home';
-    const index = validPages.indexOf(path.substring(1));
-    if (index === -1) return 'home';
-    return validPages[index];
-}
-function getPage(currentPage) {
-    if (currentPage === 'about') return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutPage.AboutPage), {}, void 0, false, {
-        fileName: "src/App.tsx",
-        lineNumber: 22,
-        columnNumber: 41
-    }, this);
-    else if (currentPage === 'tools') return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsPage.ToolsPage), {}, void 0, false, {
-        fileName: "src/App.tsx",
-        lineNumber: 23,
-        columnNumber: 46
-    }, this);
-    else if (currentPage === 'software') return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwarePage.SoftwarePage), {}, void 0, false, {
-        fileName: "src/App.tsx",
-        lineNumber: 24,
-        columnNumber: 49
-    }, this);
-    else if (currentPage === 'visual-design') return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignPage.VisualDesignPage), {}, void 0, false, {
-        fileName: "src/App.tsx",
-        lineNumber: 25,
-        columnNumber: 54
-    }, this);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homePage.HomePage), {}, void 0, false, {
-        fileName: "src/App.tsx",
-        lineNumber: 26,
-        columnNumber: 12
-    }, this);
-}
+var _pages = require("./Pages");
 function BackButton() {
     const src = new URL(require("7a4ced883b384221"));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -4379,50 +4335,50 @@ function BackButton() {
                         children: " Home "
                     }, void 0, false, {
                         fileName: "src/App.tsx",
-                        lineNumber: 34,
+                        lineNumber: 11,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "src/App.tsx",
-                    lineNumber: 33,
+                    lineNumber: 10,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                     src: src.href
                 }, void 0, false, {
                     fileName: "src/App.tsx",
-                    lineNumber: 36,
+                    lineNumber: 13,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/App.tsx",
-            lineNumber: 32,
+            lineNumber: 9,
             columnNumber: 5
         }, this)
     }, void 0, false, {
         fileName: "src/App.tsx",
-        lineNumber: 31,
+        lineNumber: 8,
         columnNumber: 10
     }, this);
 }
 _c = BackButton;
 function App() {
     const path = location.pathname;
-    let currentPage = pathToPage(path);
+    let currentPage = (0, _pages.ALL_PAGES)[path.substring(1)] ? path.substring(1) : 'home';
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _background.Background), {
             children: [
-                getPage(currentPage),
+                (0, _pages.ALL_PAGES)[currentPage].page,
                 currentPage !== 'home' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(BackButton, {}, void 0, false, {
                     fileName: "src/App.tsx",
-                    lineNumber: 47,
+                    lineNumber: 24,
                     columnNumber: 40
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/App.tsx",
-            lineNumber: 45,
+            lineNumber: 22,
             columnNumber: 9
         }, this)
     }, void 0, false);
@@ -4437,7 +4393,7 @@ $RefreshReg$(_c1, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Background/Background":"ese56","./HomePage/HomePage":"1Jnzh","./AboutPage/AboutPage":"tJ8pp","./ToolsPage/ToolsPage":"1yrCw","./SoftwarePage/SoftwarePage":"cTRs4","./VisualDesignPage/VisualDesignPage":"k5MbX","./App.css":"6n0o6","7a4ced883b384221":"8xKOX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"ese56":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Background/Background":"ese56","./App.css":"6n0o6","7a4ced883b384221":"8xKOX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Pages":"93tfy"}],"ese56":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9701 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -4711,167 +4667,346 @@ function registerExportsForReactRefresh(module1) {
 },{"7422ead32dcc1e6b":"786KC","630b62916b1ae0e7":"4SQxb"}],"4SQxb":[function(require,module,exports,__globalThis) {
 module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{}],"1Jnzh":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$8457 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"6n0o6":[function() {},{}],"8xKOX":[function(require,module,exports,__globalThis) {
+module.exports = require("8395205f634aac26").getBundleURL('6EXJA') + "face.3688187d.svg" + "?" + Date.now();
+
+},{"8395205f634aac26":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"93tfy":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$7eda = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$8457.prelude(module);
+$parcel$ReactRefreshHelpers$7eda.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "HomePage", ()=>HomePage);
+parcelHelpers.export(exports, "ALL_PAGES", ()=>ALL_PAGES);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-var _homePageCss = require("./HomePage.css");
-var _aboutIcon = require("../Icons/AboutIcon");
-var _visualDesignIcon = require("../Icons/VisualDesignIcon");
-var _softwareIcon = require("../Icons/SoftwareIcon");
-var _toolsIcon = require("../Icons/ToolsIcon");
-function HomePage() {
-    const src = new URL(require("e574981b8556326d"));
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill center",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: "home-hero",
-                className: "hero",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                        src: src.href
-                    }, void 0, false, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 12,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                        className: "inter-bold",
-                        children: " Zain "
-                    }, void 0, false, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 13,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/HomePage/HomePage.tsx",
-                lineNumber: 11,
-                columnNumber: 9
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                        href: "/about",
-                        id: "about",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutIcon.AboutIcon), {}, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 16,
-                                columnNumber: 41
-                            }, this),
-                            " ",
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                children: "About"
-                            }, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 16,
-                                columnNumber: 54
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 16,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                        href: "/visual-design",
-                        id: "visual-design",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignIcon.VisualDesignIcon), {}, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 17,
-                                columnNumber: 57
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                children: "Visual Design"
-                            }, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 17,
-                                columnNumber: 76
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 17,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                        href: "/software",
-                        id: "software",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 18,
-                                columnNumber: 47
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                children: "Software"
-                            }, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 18,
-                                columnNumber: 62
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 18,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                        href: "/tools",
-                        id: "tools",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 19,
-                                columnNumber: 41
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                children: "Tools"
-                            }, void 0, false, {
-                                fileName: "src/HomePage/HomePage.tsx",
-                                lineNumber: 19,
-                                columnNumber: 53
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/HomePage/HomePage.tsx",
-                        lineNumber: 19,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/HomePage/HomePage.tsx",
-                lineNumber: 15,
-                columnNumber: 9
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/HomePage/HomePage.tsx",
-        lineNumber: 10,
-        columnNumber: 12
-    }, this);
-}
-_c = HomePage;
-var _c;
-$RefreshReg$(_c, "HomePage");
+var _aboutPage = require("./AboutPage/AboutPage");
+var _careerPage = require("./CareerPage/CareerPage");
+var _homePage = require("./HomePage/HomePage");
+var _softwarePage = require("./SoftwarePage/SoftwarePage");
+var _visualDesignPage = require("./VisualDesignPage/VisualDesignPage");
+var _aboutIcon = require("./Icons/AboutIcon");
+var _toolsIcon = require("./Icons/ToolsIcon");
+var _softwareIcon = require("./Icons/SoftwareIcon");
+var _visualDesignIcon = require("./Icons/VisualDesignIcon");
+const ALL_PAGES = {
+    'about': {
+        inNav: true,
+        title: 'About',
+        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutIcon.AboutIcon), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 23,
+            columnNumber: 15
+        }, undefined),
+        page: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutPage.AboutPage), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 24,
+            columnNumber: 15
+        }, undefined)
+    },
+    'career': {
+        inNav: true,
+        title: 'Career',
+        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 29,
+            columnNumber: 15
+        }, undefined),
+        page: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _careerPage.CareerPage), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 30,
+            columnNumber: 15
+        }, undefined)
+    },
+    'software': {
+        inNav: true,
+        title: 'Software',
+        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 35,
+            columnNumber: 15
+        }, undefined),
+        page: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwarePage.SoftwarePage), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 36,
+            columnNumber: 15
+        }, undefined)
+    },
+    'visual-design': {
+        inNav: true,
+        title: 'Visual Design',
+        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignIcon.VisualDesignIcon), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 41,
+            columnNumber: 15
+        }, undefined),
+        page: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignPage.VisualDesignPage), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 42,
+            columnNumber: 15
+        }, undefined)
+    },
+    'home': {
+        inNav: false,
+        page: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homePage.HomePage), {}, void 0, false, {
+            fileName: "src/Pages.tsx",
+            lineNumber: 46,
+            columnNumber: 15
+        }, undefined)
+    }
+};
 
-  $parcel$ReactRefreshHelpers$8457.postlude(module);
+  $parcel$ReactRefreshHelpers$7eda.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./HomePage.css":"gZgxo","../Icons/AboutIcon":"cuUTs","../Icons/VisualDesignIcon":"302eM","../Icons/SoftwareIcon":"bTAp5","../Icons/ToolsIcon":"g0e27","e574981b8556326d":"80r2Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gZgxo":[function() {},{}],"cuUTs":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage/AboutPage":"tJ8pp","./HomePage/HomePage":"1Jnzh","./SoftwarePage/SoftwarePage":"cTRs4","./VisualDesignPage/VisualDesignPage":"k5MbX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./CareerPage/CareerPage":"70Lru","./Icons/AboutIcon":"cuUTs","./Icons/ToolsIcon":"g0e27","./Icons/SoftwareIcon":"bTAp5","./Icons/VisualDesignIcon":"302eM"}],"tJ8pp":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$2cf5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2cf5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AboutPage", ()=>AboutPage);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _aboutPageCss = require("./AboutPage.css");
+var _aboutIcon = require("../Icons/AboutIcon");
+var _githubIcon = require("../Icons/GithubIcon");
+var _mailIcon = require("../Icons/MailIcon");
+var _jobIcon = require("../Icons/JobIcon");
+function AboutPage() {
+    const image1 = new URL(require("82f397718ef6c19b"));
+    const image2 = new URL(require("1571fd9c6796777c"));
+    const image3 = new URL(require("65ad8f6d6c6e12e3"));
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "fill start",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "hero",
+                id: "about-hero",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutIcon.AboutIcon), {}, void 0, false, {
+                        fileName: "src/AboutPage/AboutPage.tsx",
+                        lineNumber: 14,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "inter-bold bump-up",
+                        children: " About "
+                    }, void 0, false, {
+                        fileName: "src/AboutPage/AboutPage.tsx",
+                        lineNumber: 15,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/AboutPage/AboutPage.tsx",
+                lineNumber: 13,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "content center",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "image-grid",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                src: image1.href
+                            }, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 19,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                src: image2.href
+                            }, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 20,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                src: image3.href
+                            }, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 21,
+                                columnNumber: 17
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/AboutPage/AboutPage.tsx",
+                        lineNumber: 18,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "detail-card card",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                                children: " Who's Zain "
+                            }, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 24,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: "I am a software engineer based out of Sydney Australia, specialising in frontend web development but generally interested in all things computing with a smattering of interest in cell biology :) I\u2019m currently at Qwilr but i\u2019ve worked at Google, Akuna Capital & UNSW."
+                            }, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 25,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 26,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "push-right",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        className: "link",
+                                        href: "/career",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jobIcon.JobIcon), {}, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 29,
+                                                columnNumber: 25
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "inter",
+                                                children: "Career"
+                                            }, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 30,
+                                                columnNumber: 25
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/AboutPage/AboutPage.tsx",
+                                        lineNumber: 28,
+                                        columnNumber: 20
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        className: "link",
+                                        href: "https://github.com/zainafzal08",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _githubIcon.GithubIcon), {}, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 33,
+                                                columnNumber: 25
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "inter",
+                                                children: "Github"
+                                            }, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 34,
+                                                columnNumber: 25
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/AboutPage/AboutPage.tsx",
+                                        lineNumber: 32,
+                                        columnNumber: 20
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        className: "link",
+                                        href: "mailto:zain.afz@gmail.com",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 37,
+                                                columnNumber: 25
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                className: "inter",
+                                                children: "Email"
+                                            }, void 0, false, {
+                                                fileName: "src/AboutPage/AboutPage.tsx",
+                                                lineNumber: 38,
+                                                columnNumber: 25
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/AboutPage/AboutPage.tsx",
+                                        lineNumber: 36,
+                                        columnNumber: 20
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/AboutPage/AboutPage.tsx",
+                                lineNumber: 27,
+                                columnNumber: 17
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/AboutPage/AboutPage.tsx",
+                        lineNumber: 23,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/AboutPage/AboutPage.tsx",
+                lineNumber: 17,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/AboutPage/AboutPage.tsx",
+        lineNumber: 12,
+        columnNumber: 12
+    }, this);
+}
+_c = AboutPage;
+var _c;
+$RefreshReg$(_c, "AboutPage");
+
+  $parcel$ReactRefreshHelpers$2cf5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","../Icons/JobIcon":"3fgBJ","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hU1YY":[function() {},{}],"cuUTs":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$8c9c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -4913,359 +5048,7 @@ $RefreshReg$(_c, "AboutIcon");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"302eM":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$59f9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$59f9.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "VisualDesignIcon", ()=>VisualDesignIcon);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-function VisualDesignIcon() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
-        viewBox: "0 0 73 45",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("rect", {
-            x: "6.26245",
-            y: "48.0686",
-            width: "26.2904",
-            height: "75.1154",
-            rx: "13.1452",
-            transform: "rotate(-110.629 6.26245 48.0686)",
-            fill: "#D4E7F1"
-        }, void 0, false, {
-            fileName: "src/Icons/VisualDesignIcon.tsx",
-            lineNumber: 5,
-            columnNumber: 1
-        }, this)
-    }, void 0, false, {
-        fileName: "src/Icons/VisualDesignIcon.tsx",
-        lineNumber: 4,
-        columnNumber: 8
-    }, this);
-}
-_c = VisualDesignIcon;
-var _c;
-$RefreshReg$(_c, "VisualDesignIcon");
-
-  $parcel$ReactRefreshHelpers$59f9.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bTAp5":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$b88f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$b88f.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SoftwareIcon", ()=>SoftwareIcon);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-function SoftwareIcon() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
-        viewBox: "0 0 43 48",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
-            d: "M27.9813 2.59948C33.8641 -1.54623 41.9921 2.54744 42.1632 9.74224L42.8526 38.7324C43.0142 45.5263 35.8762 50.0413 29.8068 46.9844L5.41361 34.6987C-0.655863 31.6418 -1.27743 23.2186 4.27759 19.3039L27.9813 2.59948Z",
-            fill: "#D4E7F1"
-        }, void 0, false, {
-            fileName: "src/Icons/SoftwareIcon.tsx",
-            lineNumber: 5,
-            columnNumber: 1
-        }, this)
-    }, void 0, false, {
-        fileName: "src/Icons/SoftwareIcon.tsx",
-        lineNumber: 4,
-        columnNumber: 8
-    }, this);
-}
-_c = SoftwareIcon;
-var _c;
-$RefreshReg$(_c, "SoftwareIcon");
-
-  $parcel$ReactRefreshHelpers$b88f.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"g0e27":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$06b5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$06b5.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ToolsIcon", ()=>ToolsIcon);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-function ToolsIcon() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
-        viewBox: "0 0 40 40",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("rect", {
-            x: "10.1948",
-            y: "40.9521",
-            width: "32.7314",
-            height: "32.7314",
-            rx: "5",
-            transform: "rotate(-110 10.1948 40.9521)",
-            fill: "#D4E7F1"
-        }, void 0, false, {
-            fileName: "src/Icons/ToolsIcon.tsx",
-            lineNumber: 5,
-            columnNumber: 1
-        }, this)
-    }, void 0, false, {
-        fileName: "src/Icons/ToolsIcon.tsx",
-        lineNumber: 4,
-        columnNumber: 8
-    }, this);
-}
-_c = ToolsIcon;
-var _c;
-$RefreshReg$(_c, "ToolsIcon");
-
-  $parcel$ReactRefreshHelpers$06b5.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"80r2Y":[function(require,module,exports,__globalThis) {
-module.exports = require("4ce9ef44822711f3").getBundleURL('6EXJA') + "zain.38b384ba.svg" + "?" + Date.now();
-
-},{"4ce9ef44822711f3":"lgJ39"}],"lgJ39":[function(require,module,exports,__globalThis) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"tJ8pp":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$2cf5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$2cf5.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "AboutPage", ()=>AboutPage);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _aboutPageCss = require("./AboutPage.css");
-var _aboutIcon = require("../Icons/AboutIcon");
-var _githubIcon = require("../Icons/GithubIcon");
-var _mailIcon = require("../Icons/MailIcon");
-function AboutPage() {
-    const image1 = new URL(require("82f397718ef6c19b"));
-    const image2 = new URL(require("1571fd9c6796777c"));
-    const image3 = new URL(require("65ad8f6d6c6e12e3"));
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill start",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "hero",
-                id: "about-hero",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutIcon.AboutIcon), {}, void 0, false, {
-                        fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 13,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                        className: "inter-bold bump-up",
-                        children: " About "
-                    }, void 0, false, {
-                        fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 14,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/AboutPage/AboutPage.tsx",
-                lineNumber: 12,
-                columnNumber: 9
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "content center",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "image-grid",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                src: image1.href
-                            }, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 18,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                src: image2.href
-                            }, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 19,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                src: image3.href
-                            }, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 20,
-                                columnNumber: 17
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 17,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "detail-card card",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                                children: " Who\u2019s Zain "
-                            }, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 23,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                children: "I am a software engineer based out of Sydney Australia, specialising in frontend web development but generally interested in all things computing :) I\u2019m currently at Qwilr but i\u2019ve worked at Google, Akuna Capital & UNSW."
-                            }, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 24,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 25,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "push-right",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                                        className: "link",
-                                        href: "https://github.com/zainafzal08",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _githubIcon.GithubIcon), {}, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 28,
-                                                columnNumber: 25
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                className: "inter",
-                                                children: "Github"
-                                            }, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 29,
-                                                columnNumber: 25
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/AboutPage/AboutPage.tsx",
-                                        lineNumber: 27,
-                                        columnNumber: 20
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                                        className: "link",
-                                        href: "mailto:zain.afz@gmail.com",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 32,
-                                                columnNumber: 25
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                className: "inter",
-                                                children: "Email"
-                                            }, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 33,
-                                                columnNumber: 25
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/AboutPage/AboutPage.tsx",
-                                        lineNumber: 31,
-                                        columnNumber: 20
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 26,
-                                columnNumber: 17
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 22,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/AboutPage/AboutPage.tsx",
-                lineNumber: 16,
-                columnNumber: 9
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/AboutPage/AboutPage.tsx",
-        lineNumber: 11,
-        columnNumber: 12
-    }, this);
-}
-_c = AboutPage;
-var _c;
-$RefreshReg$(_c, "AboutPage");
-
-  $parcel$ReactRefreshHelpers$2cf5.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hU1YY":[function() {},{}],"lhyWa":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lhyWa":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b183 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5320,38 +5103,15 @@ function MailIcon() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 512 512",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("rect", {
-                x: "48",
-                y: "96",
-                width: "416",
-                height: "320",
-                rx: "40",
-                ry: "40",
-                fill: "none",
-                stroke: "currentColor",
-                "stroke-linecap": "round",
-                "stroke-linejoin": "round",
-                "stroke-width": "32"
-            }, void 0, false, {
-                fileName: "src/Icons/MailIcon.tsx",
-                lineNumber: 4,
-                columnNumber: 74
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
-                fill: "none",
-                stroke: "currentColor",
-                "stroke-linecap": "round",
-                "stroke-linejoin": "round",
-                "stroke-width": "32",
-                d: "M112 160l144 112 144-112"
-            }, void 0, false, {
-                fileName: "src/Icons/MailIcon.tsx",
-                lineNumber: 4,
-                columnNumber: 235
-            }, this)
-        ]
-    }, void 0, true, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+            fill: "currentcolor",
+            d: "M424 80H88a56.06 56.06 0 00-56 56v240a56.06 56.06 0 0056 56h336a56.06 56.06 0 0056-56V136a56.06 56.06 0 00-56-56zm-14.18 92.63l-144 112a16 16 0 01-19.64 0l-144-112a16 16 0 1119.64-25.26L256 251.73l134.18-104.36a16 16 0 0119.64 25.26z"
+        }, void 0, false, {
+            fileName: "src/Icons/MailIcon.tsx",
+            lineNumber: 4,
+            columnNumber: 74
+        }, this)
+    }, void 0, false, {
         fileName: "src/Icons/MailIcon.tsx",
         lineNumber: 4,
         columnNumber: 12
@@ -5366,6 +5126,55 @@ $RefreshReg$(_c, "MailIcon");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3fgBJ":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$2815 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2815.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "JobIcon", ()=>JobIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function JobIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 512 512",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                d: "M336 80H176a16 16 0 00-16 16v16h192V96a16 16 0 00-16-16z",
+                fill: "none"
+            }, void 0, false, {
+                fileName: "src/Icons/JobIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 74
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                fill: "currentcolor",
+                d: "M496 176a64.07 64.07 0 00-64-64h-48V96a48.05 48.05 0 00-48-48H176a48.05 48.05 0 00-48 48v16H80a64.07 64.07 0 00-64 64v48h480zm-144-64H160V96a16 16 0 0116-16h160a16 16 0 0116 16zM336 264a24 24 0 01-24 24H200a24 24 0 01-24-24v-4a4 4 0 00-4-4H16v144a64 64 0 0064 64h352a64 64 0 0064-64V256H340a4 4 0 00-4 4z"
+            }, void 0, false, {
+                fileName: "src/Icons/JobIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 154
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/Icons/JobIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 12
+    }, this);
+}
+_c = JobIcon;
+var _c;
+$RefreshReg$(_c, "JobIcon");
+
+  $parcel$ReactRefreshHelpers$2815.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3cxJt":[function(require,module,exports,__globalThis) {
 module.exports = require("549398a8abfb53a2").getBundleURL('6EXJA') + "about_1.59c955eb.jpg" + "?" + Date.now();
 
@@ -5375,62 +5184,99 @@ module.exports = require("1563c35c08dffb9b").getBundleURL('6EXJA') + "about_2.b9
 },{"1563c35c08dffb9b":"lgJ39"}],"j8RHa":[function(require,module,exports,__globalThis) {
 module.exports = require("32f587ba3f243ade").getBundleURL('6EXJA') + "about_3.a8a2fc08.jpg" + "?" + Date.now();
 
-},{"32f587ba3f243ade":"lgJ39"}],"1yrCw":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$aa2a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"32f587ba3f243ade":"lgJ39"}],"1Jnzh":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$8457 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$aa2a.prelude(module);
+$parcel$ReactRefreshHelpers$8457.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ToolsPage", ()=>ToolsPage);
+parcelHelpers.export(exports, "HomePage", ()=>HomePage);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-var _toolsPageCss = require("./ToolsPage.css");
-var _toolsIcon = require("../Icons/ToolsIcon");
-function ToolsPage() {
+var _homePageCss = require("./HomePage.css");
+var _pages = require("../Pages");
+function HomePage() {
+    const src = new URL(require("e574981b8556326d"));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill start",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            id: "tools-hero",
-            className: "hero",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
-                    fileName: "src/ToolsPage/ToolsPage.tsx",
-                    lineNumber: 8,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "inter-bold",
-                    children: " Tools "
-                }, void 0, false, {
-                    fileName: "src/ToolsPage/ToolsPage.tsx",
-                    lineNumber: 9,
-                    columnNumber: 13
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/ToolsPage/ToolsPage.tsx",
-            lineNumber: 7,
-            columnNumber: 9
-        }, this)
-    }, void 0, false, {
-        fileName: "src/ToolsPage/ToolsPage.tsx",
-        lineNumber: 6,
+        className: "fill center",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "home-hero",
+                className: "hero",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                        src: src.href
+                    }, void 0, false, {
+                        fileName: "src/HomePage/HomePage.tsx",
+                        lineNumber: 13,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "inter-bold",
+                        children: " Zain "
+                    }, void 0, false, {
+                        fileName: "src/HomePage/HomePage.tsx",
+                        lineNumber: 14,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/HomePage/HomePage.tsx",
+                lineNumber: 12,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("nav", {
+                children: Object.entries((0, _pages.ALL_PAGES)).map(([id, page])=>{
+                    if (!page.inNav) return null;
+                    const { icon, title } = page;
+                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                        href: `/${id}`,
+                        id: id,
+                        children: [
+                            icon,
+                            " ",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: title
+                            }, void 0, false, {
+                                fileName: "src/HomePage/HomePage.tsx",
+                                lineNumber: 20,
+                                columnNumber: 58
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/HomePage/HomePage.tsx",
+                        lineNumber: 20,
+                        columnNumber: 24
+                    }, this);
+                })
+            }, void 0, false, {
+                fileName: "src/HomePage/HomePage.tsx",
+                lineNumber: 16,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/HomePage/HomePage.tsx",
+        lineNumber: 11,
         columnNumber: 12
     }, this);
 }
-_c = ToolsPage;
+_c = HomePage;
 var _c;
-$RefreshReg$(_c, "ToolsPage");
+$RefreshReg$(_c, "HomePage");
 
-  $parcel$ReactRefreshHelpers$aa2a.postlude(module);
+  $parcel$ReactRefreshHelpers$8457.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./ToolsPage.css":"7ijo7","../Icons/ToolsIcon":"g0e27","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"7ijo7":[function() {},{}],"cTRs4":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./HomePage.css":"gZgxo","e574981b8556326d":"80r2Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Pages":"93tfy"}],"gZgxo":[function() {},{}],"80r2Y":[function(require,module,exports,__globalThis) {
+module.exports = require("4ce9ef44822711f3").getBundleURL('6EXJA') + "zain.38b384ba.svg" + "?" + Date.now();
+
+},{"4ce9ef44822711f3":"lgJ39"}],"cTRs4":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$1901 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5439,6 +5285,12 @@ $parcel$ReactRefreshHelpers$1901.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// Ideas
+//   worry jornal
+//   idle game
+//   sortify
+//   paper todo
+//   Pull out just the 3d part from old website. 
 parcelHelpers.export(exports, "SoftwarePage", ()=>SoftwarePage);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
@@ -5453,7 +5305,7 @@ function SoftwarePage() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 8,
+                    lineNumber: 14,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -5461,18 +5313,18 @@ function SoftwarePage() {
                     children: " Software "
                 }, void 0, false, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 9,
+                    lineNumber: 15,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 7,
+            lineNumber: 13,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 6,
+        lineNumber: 12,
         columnNumber: 12
     }, this);
 }
@@ -5485,7 +5337,47 @@ $RefreshReg$(_c, "SoftwarePage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6W1vg":[function() {},{}],"k5MbX":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$b88f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b88f.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SoftwareIcon", ()=>SoftwareIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function SoftwareIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        viewBox: "0 0 43 48",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+            d: "M27.9813 2.59948C33.8641 -1.54623 41.9921 2.54744 42.1632 9.74224L42.8526 38.7324C43.0142 45.5263 35.8762 50.0413 29.8068 46.9844L5.41361 34.6987C-0.655863 31.6418 -1.27743 23.2186 4.27759 19.3039L27.9813 2.59948Z",
+            fill: "#D4E7F1"
+        }, void 0, false, {
+            fileName: "src/Icons/SoftwareIcon.tsx",
+            lineNumber: 5,
+            columnNumber: 1
+        }, this)
+    }, void 0, false, {
+        fileName: "src/Icons/SoftwareIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 8
+    }, this);
+}
+_c = SoftwareIcon;
+var _c;
+$RefreshReg$(_c, "SoftwareIcon");
+
+  $parcel$ReactRefreshHelpers$b88f.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"k5MbX":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$f6eb = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5500,26 +5392,36 @@ var _react = require("react");
 var _visualDesignPageCss = require("./VisualDesignPage.css");
 var _visualDesignIcon = require("../Icons/VisualDesignIcon");
 var _projects = require("./Projects");
-var _helpers = require("../helpers");
-function ProjectImage({ src, index, count }) {
+var _s = $RefreshSig$();
+function ProjectImage({ src, index, count, selected }) {
+    const spread = 3;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "project-image",
         style: {
-            backgroundImage: `url(${src})`
+            zIndex: selected ? 1 : 0
         },
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-            className: "inter-light",
-            children: [
-                index + 1,
-                " / ",
-                count
-            ]
-        }, void 0, true, {
-            fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-            lineNumber: 9,
-            columnNumber: 9
-        }, this)
-    }, void 0, false, {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                src: src
+            }, void 0, false, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 9,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                className: "inter-light",
+                children: [
+                    index + 1,
+                    " / ",
+                    count
+                ]
+            }, void 0, true, {
+                fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
+                lineNumber: 10,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
         lineNumber: 8,
         columnNumber: 12
@@ -5527,26 +5429,28 @@ function ProjectImage({ src, index, count }) {
 }
 _c = ProjectImage;
 function Project({ project }) {
-    const images = Array.from({
-        length: project.imageCount
-    }, (_, index)=>(0, _helpers.toUrl)(`../../assets/${project.imagePrefix}${index + 1}.png`));
+    _s();
+    const [selectedIndex, setSelectedIndex] = _react.useState(0);
+    const imageCount = project.images.length;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "project-container",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "project-images",
-                children: images.map((image, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(ProjectImage, {
+                onClick: ()=>setSelectedIndex((selectedIndex + 1) % imageCount),
+                children: project.images.map((image, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(ProjectImage, {
                         src: image,
                         index: index,
-                        count: project.imageCount
-                    }, void 0, false, {
+                        count: imageCount,
+                        selected: index === selectedIndex
+                    }, index, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 18,
+                        lineNumber: 20,
                         columnNumber: 17
                     }, this))
             }, void 0, false, {
                 fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                lineNumber: 16,
+                lineNumber: 18,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5557,7 +5461,7 @@ function Project({ project }) {
                         children: project.name
                     }, void 0, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 22,
+                        lineNumber: 24,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -5565,33 +5469,34 @@ function Project({ project }) {
                         children: project.description
                     }, void 0, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 23,
+                        lineNumber: 25,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                lineNumber: 21,
+                lineNumber: 23,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-        lineNumber: 15,
+        lineNumber: 17,
         columnNumber: 12
     }, this);
 }
+_s(Project, "G8fEPHHi9+P2oI7WxiQDc3s4+J4=");
 _c1 = Project;
 function VisualDesignPage() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill start",
+        className: "fill start wider",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "hero",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _visualDesignIcon.VisualDesignIcon), {}, void 0, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 31,
+                        lineNumber: 33,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -5599,33 +5504,33 @@ function VisualDesignPage() {
                         children: " Visual Design "
                     }, void 0, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 32,
+                        lineNumber: 34,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                lineNumber: 30,
+                lineNumber: 32,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "content",
+                className: "content card-list",
                 children: (0, _projects.projects).map((project)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Project, {
                         project: project
-                    }, void 0, false, {
+                    }, project.name, false, {
                         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                        lineNumber: 35,
+                        lineNumber: 37,
                         columnNumber: 40
                     }, this))
             }, void 0, false, {
                 fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-                lineNumber: 34,
+                lineNumber: 36,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/VisualDesignPage/VisualDesignPage.tsx",
-        lineNumber: 29,
+        lineNumber: 31,
         columnNumber: 12
     }, this);
 }
@@ -5640,31 +5545,825 @@ $RefreshReg$(_c2, "VisualDesignPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./VisualDesignPage.css":"bMFRx","../Icons/VisualDesignIcon":"302eM","./Projects":"2ml4q","../helpers":"adjmJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bMFRx":[function() {},{}],"2ml4q":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./VisualDesignPage.css":"bMFRx","../Icons/VisualDesignIcon":"302eM","./Projects":"2ml4q","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bMFRx":[function() {},{}],"302eM":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$59f9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$59f9.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "VisualDesignIcon", ()=>VisualDesignIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function VisualDesignIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        viewBox: "0 0 73 45",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("rect", {
+            x: "6.26245",
+            y: "48.0686",
+            width: "26.2904",
+            height: "75.1154",
+            rx: "13.1452",
+            transform: "rotate(-110.629 6.26245 48.0686)",
+            fill: "#D4E7F1"
+        }, void 0, false, {
+            fileName: "src/Icons/VisualDesignIcon.tsx",
+            lineNumber: 5,
+            columnNumber: 1
+        }, this)
+    }, void 0, false, {
+        fileName: "src/Icons/VisualDesignIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 8
+    }, this);
+}
+_c = VisualDesignIcon;
+var _c;
+$RefreshReg$(_c, "VisualDesignIcon");
+
+  $parcel$ReactRefreshHelpers$59f9.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2ml4q":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "projects", ()=>projects);
+var _adventureBuddy1Svg = require("url:../../assets/adventure_buddy_1.svg");
+var _adventureBuddy1SvgDefault = parcelHelpers.interopDefault(_adventureBuddy1Svg);
+var _adventureBuddy2Svg = require("url:../../assets/adventure_buddy_2.svg");
+var _adventureBuddy2SvgDefault = parcelHelpers.interopDefault(_adventureBuddy2Svg);
+var _adventureBuddy3Svg = require("url:../../assets/adventure_buddy_3.svg");
+var _adventureBuddy3SvgDefault = parcelHelpers.interopDefault(_adventureBuddy3Svg);
+var _adventureBuddy4Svg = require("url:../../assets/adventure_buddy_4.svg");
+var _adventureBuddy4SvgDefault = parcelHelpers.interopDefault(_adventureBuddy4Svg);
+var _adventureBuddy5Svg = require("url:../../assets/adventure_buddy_5.svg");
+var _adventureBuddy5SvgDefault = parcelHelpers.interopDefault(_adventureBuddy5Svg);
+var _adventureBuddy6Svg = require("url:../../assets/adventure_buddy_6.svg");
+var _adventureBuddy6SvgDefault = parcelHelpers.interopDefault(_adventureBuddy6Svg);
+var _adventureBuddy7Svg = require("url:../../assets/adventure_buddy_7.svg");
+var _adventureBuddy7SvgDefault = parcelHelpers.interopDefault(_adventureBuddy7Svg);
+var _js1Svg = require("url:../../assets/js_1.svg");
+var _js1SvgDefault = parcelHelpers.interopDefault(_js1Svg);
+var _js2Svg = require("url:../../assets/js_2.svg");
+var _js2SvgDefault = parcelHelpers.interopDefault(_js2Svg);
+var _js3Svg = require("url:../../assets/js_3.svg");
+var _js3SvgDefault = parcelHelpers.interopDefault(_js3Svg);
+var _js4Svg = require("url:../../assets/js_4.svg");
+var _js4SvgDefault = parcelHelpers.interopDefault(_js4Svg);
+var _js5Svg = require("url:../../assets/js_5.svg");
+var _js5SvgDefault = parcelHelpers.interopDefault(_js5Svg);
+var _js6Svg = require("url:../../assets/js_6.svg");
+var _js6SvgDefault = parcelHelpers.interopDefault(_js6Svg);
+var _politico1Svg = require("url:../../assets/politico_1.svg");
+var _politico1SvgDefault = parcelHelpers.interopDefault(_politico1Svg);
+var _politico2Svg = require("url:../../assets/politico_2.svg");
+var _politico2SvgDefault = parcelHelpers.interopDefault(_politico2Svg);
+var _politico3Svg = require("url:../../assets/politico_3.svg");
+var _politico3SvgDefault = parcelHelpers.interopDefault(_politico3Svg);
+var _politico4Svg = require("url:../../assets/politico_4.svg");
+var _politico4SvgDefault = parcelHelpers.interopDefault(_politico4Svg);
+var _politico5Svg = require("url:../../assets/politico_5.svg");
+var _politico5SvgDefault = parcelHelpers.interopDefault(_politico5Svg);
+var _stickers1Svg = require("url:../../assets/stickers_1.svg");
+var _stickers1SvgDefault = parcelHelpers.interopDefault(_stickers1Svg);
+var _stickers2Svg = require("url:../../assets/stickers_2.svg");
+var _stickers2SvgDefault = parcelHelpers.interopDefault(_stickers2Svg);
+var _stickers3Svg = require("url:../../assets/stickers_3.svg");
+var _stickers3SvgDefault = parcelHelpers.interopDefault(_stickers3Svg);
+var _stickers4Svg = require("url:../../assets/stickers_4.svg");
+var _stickers4SvgDefault = parcelHelpers.interopDefault(_stickers4Svg);
+var _stickers5Svg = require("url:../../assets/stickers_5.svg");
+var _stickers5SvgDefault = parcelHelpers.interopDefault(_stickers5Svg);
+var _stickers6Svg = require("url:../../assets/stickers_6.svg");
+var _stickers6SvgDefault = parcelHelpers.interopDefault(_stickers6Svg);
+var _stickers7Svg = require("url:../../assets/stickers_7.svg");
+var _stickers7SvgDefault = parcelHelpers.interopDefault(_stickers7Svg);
+var _stickers8Svg = require("url:../../assets/stickers_8.svg");
+var _stickers8SvgDefault = parcelHelpers.interopDefault(_stickers8Svg);
+var _stickers9Svg = require("url:../../assets/stickers_9.svg");
+var _stickers9SvgDefault = parcelHelpers.interopDefault(_stickers9Svg);
+var _wallpaper1Svg = require("url:../../assets/wallpaper_1.svg");
+var _wallpaper1SvgDefault = parcelHelpers.interopDefault(_wallpaper1Svg);
+var _wallpaper2Svg = require("url:../../assets/wallpaper_2.svg");
+var _wallpaper2SvgDefault = parcelHelpers.interopDefault(_wallpaper2Svg);
+var _wallpaper3Svg = require("url:../../assets/wallpaper_3.svg");
+var _wallpaper3SvgDefault = parcelHelpers.interopDefault(_wallpaper3Svg);
+var _wallpaper4Svg = require("url:../../assets/wallpaper_4.svg");
+var _wallpaper4SvgDefault = parcelHelpers.interopDefault(_wallpaper4Svg);
 const projects = [
     {
         name: "Adventure Buddy",
         description: "An app that helps users play DnD by handling the paperwork",
-        imagePrefix: "adventure_buddy_",
-        imageCount: 9
+        images: [
+            (0, _adventureBuddy1SvgDefault.default),
+            (0, _adventureBuddy2SvgDefault.default),
+            (0, _adventureBuddy3SvgDefault.default),
+            (0, _adventureBuddy4SvgDefault.default),
+            (0, _adventureBuddy5SvgDefault.default),
+            (0, _adventureBuddy6SvgDefault.default),
+            (0, _adventureBuddy7SvgDefault.default)
+        ]
+    },
+    {
+        name: 'JS Lecturing Slides',
+        description: "Slide deck used to teach javascript fundamentals at UNSW",
+        images: [
+            (0, _js1SvgDefault.default),
+            (0, _js2SvgDefault.default),
+            (0, _js3SvgDefault.default),
+            (0, _js4SvgDefault.default),
+            (0, _js5SvgDefault.default),
+            (0, _js6SvgDefault.default)
+        ]
+    },
+    {
+        name: 'Politico',
+        description: "Web app which provides compariative information on australian political parties",
+        images: [
+            (0, _politico1SvgDefault.default),
+            (0, _politico2SvgDefault.default),
+            (0, _politico3SvgDefault.default),
+            (0, _politico4SvgDefault.default),
+            (0, _politico5SvgDefault.default)
+        ]
+    },
+    {
+        name: 'Stickers',
+        description: "Some designs for fun stickers to put on your laptop",
+        images: [
+            (0, _stickers1SvgDefault.default),
+            (0, _stickers2SvgDefault.default),
+            (0, _stickers3SvgDefault.default),
+            (0, _stickers4SvgDefault.default),
+            (0, _stickers5SvgDefault.default),
+            (0, _stickers6SvgDefault.default),
+            (0, _stickers7SvgDefault.default),
+            (0, _stickers8SvgDefault.default),
+            (0, _stickers9SvgDefault.default)
+        ]
+    },
+    {
+        name: 'Wallpapers',
+        description: "Desktop Wallpapers! For the wallpaper...on your desktop!",
+        images: [
+            (0, _wallpaper1SvgDefault.default),
+            (0, _wallpaper2SvgDefault.default),
+            (0, _wallpaper3SvgDefault.default),
+            (0, _wallpaper4SvgDefault.default)
+        ]
     }
 ];
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"adjmJ":[function(require,module,exports,__globalThis) {
+},{"url:../../assets/adventure_buddy_1.svg":"9iPnk","url:../../assets/adventure_buddy_2.svg":"fcyQu","url:../../assets/adventure_buddy_3.svg":"2A9az","url:../../assets/adventure_buddy_4.svg":"kIW98","url:../../assets/adventure_buddy_5.svg":"cyrvN","url:../../assets/adventure_buddy_6.svg":"cVz1i","url:../../assets/adventure_buddy_7.svg":"8d1Uv","url:../../assets/js_1.svg":"aKlPY","url:../../assets/js_2.svg":"ge5H5","url:../../assets/js_3.svg":"9AuOH","url:../../assets/js_4.svg":"20bST","url:../../assets/js_5.svg":"9AP83","url:../../assets/js_6.svg":"g2pwb","url:../../assets/politico_1.svg":"2l4Rd","url:../../assets/politico_2.svg":"hSFPM","url:../../assets/politico_3.svg":"kStDE","url:../../assets/politico_4.svg":"ldo5j","url:../../assets/politico_5.svg":"7Q4P9","url:../../assets/stickers_1.svg":"7UVnh","url:../../assets/stickers_2.svg":"7umqY","url:../../assets/stickers_3.svg":"eewOM","url:../../assets/stickers_4.svg":"8NQ5g","url:../../assets/stickers_5.svg":"2AFhh","url:../../assets/stickers_6.svg":"6ukJZ","url:../../assets/stickers_7.svg":"3ayql","url:../../assets/stickers_8.svg":"7VYam","url:../../assets/stickers_9.svg":"73ovT","url:../../assets/wallpaper_1.svg":"d4n62","url:../../assets/wallpaper_2.svg":"8uKn2","url:../../assets/wallpaper_3.svg":"kghVj","url:../../assets/wallpaper_4.svg":"dvq1J","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9iPnk":[function(require,module,exports,__globalThis) {
+module.exports = require("500bdc9b79565019").getBundleURL('6EXJA') + "adventure_buddy_1.2acd0736.svg" + "?" + Date.now();
+
+},{"500bdc9b79565019":"lgJ39"}],"fcyQu":[function(require,module,exports,__globalThis) {
+module.exports = require("67d93770a9964a2c").getBundleURL('6EXJA') + "adventure_buddy_2.55135cdf.svg" + "?" + Date.now();
+
+},{"67d93770a9964a2c":"lgJ39"}],"2A9az":[function(require,module,exports,__globalThis) {
+module.exports = require("4782c20bc90cb8af").getBundleURL('6EXJA') + "adventure_buddy_3.6771c3fe.svg" + "?" + Date.now();
+
+},{"4782c20bc90cb8af":"lgJ39"}],"kIW98":[function(require,module,exports,__globalThis) {
+module.exports = require("2b5c8d4d4c52fa10").getBundleURL('6EXJA') + "adventure_buddy_4.104a24ec.svg" + "?" + Date.now();
+
+},{"2b5c8d4d4c52fa10":"lgJ39"}],"cyrvN":[function(require,module,exports,__globalThis) {
+module.exports = require("ea3dc1a1f01b13c").getBundleURL('6EXJA') + "adventure_buddy_5.9356ed45.svg" + "?" + Date.now();
+
+},{"ea3dc1a1f01b13c":"lgJ39"}],"cVz1i":[function(require,module,exports,__globalThis) {
+module.exports = require("e63cc17ff3711afd").getBundleURL('6EXJA') + "adventure_buddy_6.251efcfa.svg" + "?" + Date.now();
+
+},{"e63cc17ff3711afd":"lgJ39"}],"8d1Uv":[function(require,module,exports,__globalThis) {
+module.exports = require("5703e8ef7e4553b5").getBundleURL('6EXJA') + "adventure_buddy_7.f01d2925.svg" + "?" + Date.now();
+
+},{"5703e8ef7e4553b5":"lgJ39"}],"aKlPY":[function(require,module,exports,__globalThis) {
+module.exports = require("561317591f75aca2").getBundleURL('6EXJA') + "js_1.fe2fe77e.svg" + "?" + Date.now();
+
+},{"561317591f75aca2":"lgJ39"}],"ge5H5":[function(require,module,exports,__globalThis) {
+module.exports = require("300baa39975e4598").getBundleURL('6EXJA') + "js_2.f1f3508e.svg" + "?" + Date.now();
+
+},{"300baa39975e4598":"lgJ39"}],"9AuOH":[function(require,module,exports,__globalThis) {
+module.exports = require("4dcfbc8063717dab").getBundleURL('6EXJA') + "js_3.c27289b4.svg" + "?" + Date.now();
+
+},{"4dcfbc8063717dab":"lgJ39"}],"20bST":[function(require,module,exports,__globalThis) {
+module.exports = require("785c69e7d3ee2980").getBundleURL('6EXJA') + "js_4.98904cdb.svg" + "?" + Date.now();
+
+},{"785c69e7d3ee2980":"lgJ39"}],"9AP83":[function(require,module,exports,__globalThis) {
+module.exports = require("adec31527420feed").getBundleURL('6EXJA') + "js_5.bd5a12ed.svg" + "?" + Date.now();
+
+},{"adec31527420feed":"lgJ39"}],"g2pwb":[function(require,module,exports,__globalThis) {
+module.exports = require("fd2040b0fb2d42a1").getBundleURL('6EXJA') + "js_6.b3b3610e.svg" + "?" + Date.now();
+
+},{"fd2040b0fb2d42a1":"lgJ39"}],"2l4Rd":[function(require,module,exports,__globalThis) {
+module.exports = require("abecacbaebc6ae3a").getBundleURL('6EXJA') + "politico_1.269f77f5.svg" + "?" + Date.now();
+
+},{"abecacbaebc6ae3a":"lgJ39"}],"hSFPM":[function(require,module,exports,__globalThis) {
+module.exports = require("7842838809d5a2d2").getBundleURL('6EXJA') + "politico_2.c3f6d543.svg" + "?" + Date.now();
+
+},{"7842838809d5a2d2":"lgJ39"}],"kStDE":[function(require,module,exports,__globalThis) {
+module.exports = require("aaf77f9a76e6b87f").getBundleURL('6EXJA') + "politico_3.c4ba1510.svg" + "?" + Date.now();
+
+},{"aaf77f9a76e6b87f":"lgJ39"}],"ldo5j":[function(require,module,exports,__globalThis) {
+module.exports = require("b9358cd137a771c9").getBundleURL('6EXJA') + "politico_4.4c69ffd4.svg" + "?" + Date.now();
+
+},{"b9358cd137a771c9":"lgJ39"}],"7Q4P9":[function(require,module,exports,__globalThis) {
+module.exports = require("96a02f197db3f511").getBundleURL('6EXJA') + "politico_5.e25ee9ad.svg" + "?" + Date.now();
+
+},{"96a02f197db3f511":"lgJ39"}],"7UVnh":[function(require,module,exports,__globalThis) {
+module.exports = require("78840dd04ebf3832").getBundleURL('6EXJA') + "stickers_1.1a55a6fa.svg" + "?" + Date.now();
+
+},{"78840dd04ebf3832":"lgJ39"}],"7umqY":[function(require,module,exports,__globalThis) {
+module.exports = require("e93e40c7e43804dd").getBundleURL('6EXJA') + "stickers_2.252ee9b0.svg" + "?" + Date.now();
+
+},{"e93e40c7e43804dd":"lgJ39"}],"eewOM":[function(require,module,exports,__globalThis) {
+module.exports = require("f14637a369c82d70").getBundleURL('6EXJA') + "stickers_3.abc4d971.svg" + "?" + Date.now();
+
+},{"f14637a369c82d70":"lgJ39"}],"8NQ5g":[function(require,module,exports,__globalThis) {
+module.exports = require("e6c8d692b685ce03").getBundleURL('6EXJA') + "stickers_4.0e87908a.svg" + "?" + Date.now();
+
+},{"e6c8d692b685ce03":"lgJ39"}],"2AFhh":[function(require,module,exports,__globalThis) {
+module.exports = require("7e764194709d4df2").getBundleURL('6EXJA') + "stickers_5.be9c17e7.svg" + "?" + Date.now();
+
+},{"7e764194709d4df2":"lgJ39"}],"6ukJZ":[function(require,module,exports,__globalThis) {
+module.exports = require("343e6bc66ed9f4e4").getBundleURL('6EXJA') + "stickers_6.043d9da7.svg" + "?" + Date.now();
+
+},{"343e6bc66ed9f4e4":"lgJ39"}],"3ayql":[function(require,module,exports,__globalThis) {
+module.exports = require("94b5b0c0768a724a").getBundleURL('6EXJA') + "stickers_7.b2e88adb.svg" + "?" + Date.now();
+
+},{"94b5b0c0768a724a":"lgJ39"}],"7VYam":[function(require,module,exports,__globalThis) {
+module.exports = require("7fd0811419452e88").getBundleURL('6EXJA') + "stickers_8.f7c69a0d.svg" + "?" + Date.now();
+
+},{"7fd0811419452e88":"lgJ39"}],"73ovT":[function(require,module,exports,__globalThis) {
+module.exports = require("e4f45cc0829092c7").getBundleURL('6EXJA') + "stickers_9.384919d5.svg" + "?" + Date.now();
+
+},{"e4f45cc0829092c7":"lgJ39"}],"d4n62":[function(require,module,exports,__globalThis) {
+module.exports = require("e4fe6af5d9f96cc9").getBundleURL('6EXJA') + "wallpaper_1.cf52e57d.svg" + "?" + Date.now();
+
+},{"e4fe6af5d9f96cc9":"lgJ39"}],"8uKn2":[function(require,module,exports,__globalThis) {
+module.exports = require("a6376cf0fcb23c7d").getBundleURL('6EXJA') + "wallpaper_2.cc7da326.svg" + "?" + Date.now();
+
+},{"a6376cf0fcb23c7d":"lgJ39"}],"kghVj":[function(require,module,exports,__globalThis) {
+module.exports = require("4a2b4e0262cc5caa").getBundleURL('6EXJA') + "wallpaper_3.2ba30318.svg" + "?" + Date.now();
+
+},{"4a2b4e0262cc5caa":"lgJ39"}],"dvq1J":[function(require,module,exports,__globalThis) {
+module.exports = require("21f4fa1da4a15ac1").getBundleURL('6EXJA') + "wallpaper_4.c9fb3bcf.svg" + "?" + Date.now();
+
+},{"21f4fa1da4a15ac1":"lgJ39"}],"70Lru":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$7f34 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7f34.prelude(module);
+
+try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "toUrl", ()=>toUrl);
-function toUrl(path) {
-    return new URL(path, "file:///src/helpers.ts").href;
+parcelHelpers.export(exports, "CareerPage", ()=>CareerPage);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _careerPageCss = require("./CareerPage.css");
+var _toolsIcon = require("../Icons/ToolsIcon");
+var _mailIcon = require("../Icons/MailIcon");
+var _career = require("./Career");
+function Link({ icon, text, url }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+        href: url,
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "card-link",
+            children: [
+                icon,
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                    children: text
+                }, void 0, false, {
+                    fileName: "src/CareerPage/CareerPage.tsx",
+                    lineNumber: 11,
+                    columnNumber: 13
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/CareerPage/CareerPage.tsx",
+            lineNumber: 9,
+            columnNumber: 9
+        }, this)
+    }, void 0, false, {
+        fileName: "src/CareerPage/CareerPage.tsx",
+        lineNumber: 8,
+        columnNumber: 12
+    }, this);
 }
+_c = Link;
+function CareerCard({ e }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "career-card",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "card image-container",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: e.image
+                }, void 0, false, {
+                    fileName: "src/CareerPage/CareerPage.tsx",
+                    lineNumber: 19,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 18,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "card",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        children: e.title
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 22,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "subtitle",
+                        children: e.subtitle
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 23,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "content",
+                        children: e.description
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 24,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "links",
+                        children: e.links.map((l)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Link, {
+                                ...l
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 26,
+                                columnNumber: 35
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 25,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 21,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/CareerPage/CareerPage.tsx",
+        lineNumber: 17,
+        columnNumber: 12
+    }, this);
+}
+_c1 = CareerCard;
+function CareerPage() {
+    const jobs = (0, _career.career).filter((e)=>!!e.yearsSpent);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "fill start",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "career-hero",
+                className: "hero",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 37,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "inter-bold",
+                        children: " Career "
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 38,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 36,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                href: "mailto:zain.afz@gmail.com",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "resume-hint",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
+                            fileName: "src/CareerPage/CareerPage.tsx",
+                            lineNumber: 42,
+                            columnNumber: 17
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                            children: "Want a full Resum\xe8? Get in touch!"
+                        }, void 0, false, {
+                            fileName: "src/CareerPage/CareerPage.tsx",
+                            lineNumber: 43,
+                            columnNumber: 17
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/CareerPage/CareerPage.tsx",
+                    lineNumber: 41,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 40,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "summary",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bar-container",
+                        children: jobs.map((j)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bar",
+                                style: {
+                                    flexGrow: j.yearsSpent
+                                },
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                    src: j.image
+                                }, void 0, false, {
+                                    fileName: "src/CareerPage/CareerPage.tsx",
+                                    lineNumber: 49,
+                                    columnNumber: 21
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 48,
+                                columnNumber: 32
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 47,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "labels",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: "2016"
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 53,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: "Today"
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 54,
+                                columnNumber: 17
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 52,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 46,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "career-cards",
+                children: (0, _career.career).toReversed().map((e)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(CareerCard, {
+                        e: e
+                    }, void 0, false, {
+                        fileName: "src/CareerPage/CareerPage.tsx",
+                        lineNumber: 58,
+                        columnNumber: 43
+                    }, this))
+            }, void 0, false, {
+                fileName: "src/CareerPage/CareerPage.tsx",
+                lineNumber: 57,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/CareerPage/CareerPage.tsx",
+        lineNumber: 35,
+        columnNumber: 12
+    }, this);
+}
+_c2 = CareerPage;
+var _c, _c1, _c2;
+$RefreshReg$(_c, "Link");
+$RefreshReg$(_c1, "CareerCard");
+$RefreshReg$(_c2, "CareerPage");
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6n0o6":[function() {},{}],"8xKOX":[function(require,module,exports,__globalThis) {
-module.exports = require("8395205f634aac26").getBundleURL('6EXJA') + "face.3688187d.svg" + "?" + Date.now();
+  $parcel$ReactRefreshHelpers$7f34.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./CareerPage.css":"ioxfy","../Icons/ToolsIcon":"g0e27","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Icons/MailIcon":"6j5TI","./Career":"g7rUS"}],"ioxfy":[function() {},{}],"g0e27":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$06b5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$06b5.prelude(module);
 
-},{"8395205f634aac26":"lgJ39"}],"lOjBx":[function(require,module,exports,__globalThis) {
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ToolsIcon", ()=>ToolsIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function ToolsIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        viewBox: "0 0 40 40",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("rect", {
+            x: "10.1948",
+            y: "40.9521",
+            width: "32.7314",
+            height: "32.7314",
+            rx: "5",
+            transform: "rotate(-110 10.1948 40.9521)",
+            fill: "#D4E7F1"
+        }, void 0, false, {
+            fileName: "src/Icons/ToolsIcon.tsx",
+            lineNumber: 5,
+            columnNumber: 1
+        }, this)
+    }, void 0, false, {
+        fileName: "src/Icons/ToolsIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 8
+    }, this);
+}
+_c = ToolsIcon;
+var _c;
+$RefreshReg$(_c, "ToolsIcon");
+
+  $parcel$ReactRefreshHelpers$06b5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"g7rUS":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$ef00 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$ef00.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "career", ()=>career);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _pythonIcon = require("../Icons/PythonIcon");
+var _newsIcon = require("../Icons/NewsIcon");
+var _unswPng = require("url:../../assets/unsw.png");
+var _unswPngDefault = parcelHelpers.interopDefault(_unswPng);
+var _akunaSvg = require("url:../../assets/akuna.svg");
+var _akunaSvgDefault = parcelHelpers.interopDefault(_akunaSvg);
+var _relumePng = require("url:../../assets/relume.png");
+var _relumePngDefault = parcelHelpers.interopDefault(_relumePng);
+var _qwilrPng = require("url:../../assets/qwilr.png");
+var _qwilrPngDefault = parcelHelpers.interopDefault(_qwilrPng);
+var _googlePng = require("url:../../assets/google.png");
+var _googlePngDefault = parcelHelpers.interopDefault(_googlePng);
+const career = [
+    {
+        title: 'Education',
+        subtitle: 'Bachelors in Computer Science & Molecular and Cell Biology',
+        description: `
+            Double degree at UNSW in Computer Science and Molecular and Cell Biology.
+            Graduated on the Dean's honor list, was the wellbeing head for the
+            computer security society and particpated in a summer research
+            project at the School of Biomedical Sciences on HIV-1 capsid binding.
+        `,
+        image: (0, _unswPngDefault.default),
+        links: []
+    },
+    {
+        title: 'UNSW',
+        subtitle: 'Course Admin & Tutor',
+        description: `
+            Taught computing topics such as compiler design, data structures, web security, algorithms and web development.
+            Helped write lectures, assignments and course content for basic to advanced computer science courses and helped run a course on web security called COMP6443.
+        `,
+        yearsSpent: 3,
+        image: (0, _unswPngDefault.default),
+        links: [
+            {
+                text: "Pycon Talk",
+                url: "https://www.youtube.com/watch?v=l0Sazyzs1IY",
+                icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pythonIcon.PythonIcon), {}, void 0, false, {
+                    fileName: "src/CareerPage/Career.tsx",
+                    lineNumber: 44,
+                    columnNumber: 92
+                }, undefined)
+            }
+        ]
+    },
+    {
+        title: 'UNSW',
+        subtitle: 'Lecturer',
+        description: `
+            Repeat guest lecturer for UNSW COMP6080, focusing on lectures on
+            javascript debugging with dev tools & asynchronous programming.
+        `,
+        yearsSpent: 1,
+        image: (0, _unswPngDefault.default),
+        links: []
+    },
+    {
+        title: 'Akuna Capital',
+        subtitle: 'Intern & Python Developer',
+        description: `
+            Completed an internship and then began fulltime designing and
+            developing internal tooling to parse terabytes of logs.
+        `,
+        yearsSpent: 1,
+        image: (0, _akunaSvgDefault.default),
+        links: []
+    },
+    {
+        title: 'Google',
+        subtitle: 'Senior Software Engineer',
+        description: `
+          Worked on the chromeOS team to launch light/dark mode, material you,
+          as well as several other high impact features.
+        `,
+        yearsSpent: 5,
+        image: (0, _googlePngDefault.default),
+        links: [
+            {
+                text: "ChromeOS Material You",
+                url: "https://www.androidpolice.com/chromebooks-chrome-os-117-material-you-more-like-android/",
+                icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _newsIcon.NewsIcon), {}, void 0, false, {
+                    fileName: "src/CareerPage/Career.tsx",
+                    lineNumber: 79,
+                    columnNumber: 147
+                }, undefined)
+            },
+            {
+                text: "ChromeOS Light/Dark Mode",
+                url: "https://chromeunboxed.com/chrome-os-radiance-wallpaper-collection",
+                icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _newsIcon.NewsIcon), {}, void 0, false, {
+                    fileName: "src/CareerPage/Career.tsx",
+                    lineNumber: 80,
+                    columnNumber: 128
+                }, undefined)
+            }
+        ]
+    },
+    {
+        title: 'Relume',
+        subtitle: 'Senior Software Engineer',
+        description: `Senior software engineer working on the development of the Relume Site Builder, working with font management, dynamic coloring and performance optimization.`,
+        yearsSpent: 1,
+        image: (0, _relumePngDefault.default),
+        links: []
+    },
+    {
+        title: 'Qwilr',
+        subtitle: 'Senior Software Engineer',
+        description: `Senior software engineer working on the Qwilr editor, working on development of new features and performance optimization.`,
+        yearsSpent: 1,
+        image: (0, _qwilrPngDefault.default),
+        links: []
+    }
+];
+
+  $parcel$ReactRefreshHelpers$ef00.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Icons/PythonIcon":"snjej","../Icons/NewsIcon":"lw0Vc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","url:../../assets/unsw.png":"j46Hb","url:../../assets/relume.png":"6jt5I","url:../../assets/qwilr.png":"lFiNd","url:../../assets/google.png":"g0PVd","url:../../assets/akuna.svg":"2a2Qj"}],"snjej":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$18a2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$18a2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PythonIcon", ()=>PythonIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function PythonIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 512 512",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                fill: "currentcolor",
+                d: "M314 36.38c-18.59-3.06-45.8-4.47-64.27-4.38a311.09 311.09 0 00-51.66 4.38c-45.74 8-54.07 24.7-54.07 55.54V128h112v16H107.62C66.06 144 32.33 193.67 32 255.12v.88a162.91 162.91 0 003.13 32c9.29 46.28 38.23 80 72.49 80H128v-54c0-31.3 20.84-59.95 55-66.1l9.87-1.23H314a56.05 56.05 0 0015.06-2A52.48 52.48 0 00368 193.68V91.92c0-28.92-24.68-50.73-54-55.54zM194.93 105.5a20.37 20.37 0 1120.3-20.3 20.29 20.29 0 01-20.3 20.3z"
+            }, void 0, false, {
+                fileName: "src/Icons/PythonIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 74
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                fill: "currentcolor",
+                d: "M475.28 217c-10.7-42.61-38.41-73-70.9-73h-17.71v47.45c0 39.57-26 68.22-57.74 73.13a63.54 63.54 0 01-9.69.75H198.08a60 60 0 00-15.23 1.95C160.54 273.14 144 291.7 144 315.77v101.77c0 29 29.14 46 57.73 54.31 34.21 9.95 71.48 11.75 112.42 0 27.19-7.77 53.85-23.48 53.85-54.31V384H256v-16h148.38c29.44 0 54.95-24.93 67.45-61.31A156.83 156.83 0 00480 256a160.64 160.64 0 00-4.72-39zM316.51 404a20.37 20.37 0 11-20.3 20.3 20.29 20.29 0 0120.3-20.3z"
+            }, void 0, false, {
+                fileName: "src/Icons/PythonIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 524
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/Icons/PythonIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 12
+    }, this);
+}
+_c = PythonIcon;
+var _c;
+$RefreshReg$(_c, "PythonIcon");
+
+  $parcel$ReactRefreshHelpers$18a2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lw0Vc":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$d340 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d340.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NewsIcon", ()=>NewsIcon);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+function NewsIcon() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 512 512",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                fill: "currentcolor",
+                d: "M439.91 112h-23.82a.09.09 0 00-.09.09V416a32 32 0 0032 32 32 32 0 0032-32V152.09A40.09 40.09 0 00439.91 112z"
+            }, void 0, false, {
+                fileName: "src/Icons/NewsIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 74
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                fill: "currentcolor",
+                d: "M384 416V72a40 40 0 00-40-40H72a40 40 0 00-40 40v352a56 56 0 0056 56h342.85a1.14 1.14 0 001.15-1.15 1.14 1.14 0 00-.85-1.1A64.11 64.11 0 01384 416zM96 128a16 16 0 0116-16h64a16 16 0 0116 16v64a16 16 0 01-16 16h-64a16 16 0 01-16-16zm208 272H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 368h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 400zm0-64H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 304h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 336zm0-64H112.45c-8.61 0-16-6.62-16.43-15.23A16 16 0 01112 240h191.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 272zm0-64h-63.55c-8.61 0-16-6.62-16.43-15.23A16 16 0 01240 176h63.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 208zm0-64h-63.55c-8.61 0-16-6.62-16.43-15.23A16 16 0 01240 112h63.55c8.61 0 16 6.62 16.43 15.23A16 16 0 01304 144z"
+            }, void 0, false, {
+                fileName: "src/Icons/NewsIcon.tsx",
+                lineNumber: 4,
+                columnNumber: 214
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/Icons/NewsIcon.tsx",
+        lineNumber: 4,
+        columnNumber: 12
+    }, this);
+}
+_c = NewsIcon;
+var _c;
+$RefreshReg$(_c, "NewsIcon");
+
+  $parcel$ReactRefreshHelpers$d340.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"j46Hb":[function(require,module,exports,__globalThis) {
+module.exports = require("28757326d1474794").getBundleURL('6EXJA') + "unsw.c7f8d6ab.png" + "?" + Date.now();
+
+},{"28757326d1474794":"lgJ39"}],"6jt5I":[function(require,module,exports,__globalThis) {
+module.exports = require("2c0a4fc61f4ff9ed").getBundleURL('6EXJA') + "relume.8c696157.png" + "?" + Date.now();
+
+},{"2c0a4fc61f4ff9ed":"lgJ39"}],"lFiNd":[function(require,module,exports,__globalThis) {
+module.exports = require("913c447d9106dd6b").getBundleURL('6EXJA') + "qwilr.a962915f.png" + "?" + Date.now();
+
+},{"913c447d9106dd6b":"lgJ39"}],"g0PVd":[function(require,module,exports,__globalThis) {
+module.exports = require("e03d1edc1fe9c428").getBundleURL('6EXJA') + "google.9200cf1b.png" + "?" + Date.now();
+
+},{"e03d1edc1fe9c428":"lgJ39"}],"2a2Qj":[function(require,module,exports,__globalThis) {
+module.exports = require("d6d12f7620550818").getBundleURL('6EXJA') + "akuna.4c71f077.svg" + "?" + Date.now();
+
+},{"d6d12f7620550818":"lgJ39"}],"lOjBx":[function(require,module,exports,__globalThis) {
 'use strict';
 function checkDCE() {
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function') return;

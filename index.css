@@ -8,6 +8,7 @@ body {
     --color-text: #102F40;
     --color-text-light: #88A7B8;
     --color-text-secondary: #4686A8;
+    --color-subtle: #EDF6FA ;
     --card-color: #FFFFFF;
     --title-height: 150px;
     --app-rounding: 8px;
@@ -54,6 +55,10 @@ main {
     flex-direction: column;
     padding: var(--app-v-padding) var(--app-h-padding);
 }
+.start.wider {
+    padding: var(--app-v-padding) calc(var(--app-h-padding) - 64px);
+}
+
 .inter-light {
     font-family: "Inter", serif;
     font-optical-sizing: auto;
@@ -106,6 +111,14 @@ a:visited {
     box-sizing: border-box;
     padding: 16px;
 }
+.content.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 64px 0 0 0;
+}
 .card {
     background: var(--card-color);
     border-radius: var(--app-rounding);
@@ -133,6 +146,7 @@ a:visited {
     font-style: normal;
     color: var(--color-text-light);
     font-size: 0.85rem;
+    height: auto;
 }
 .card hr {
     margin: 16px 0;

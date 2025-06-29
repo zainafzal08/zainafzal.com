@@ -6,6 +6,7 @@ body {
   --color-text: #102f40;
   --color-text-light: #88a7b8;
   --color-text-secondary: #4686a8;
+  --color-subtle: #edf6fa;
   --card-color: #fff;
   --title-height: 150px;
   --app-rounding: 8px;
@@ -59,6 +60,10 @@ main {
   justify-content: flex-start;
   align-items: center;
   display: flex;
+}
+
+.start.wider {
+  padding: var(--app-v-padding) calc(var(--app-h-padding)  - 64px);
 }
 
 .inter-light {
@@ -121,6 +126,15 @@ a:visited {
   padding: 16px;
 }
 
+.content.card-list {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  padding: 64px 0 0;
+  display: flex;
+}
+
 .card {
   background: var(--card-color);
   border-radius: var(--app-rounding);
@@ -143,6 +157,7 @@ a:visited {
 .card p {
   font-optical-sizing: auto;
   color: var(--color-text-light);
+  height: auto;
   margin: 0;
   padding: 0;
   font-family: Inter, serif;

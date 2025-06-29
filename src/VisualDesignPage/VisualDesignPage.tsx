@@ -2,22 +2,22 @@ import * as React from "react";
 import "./VisualDesignPage.css";
 import { VisualDesignIcon } from "../Icons/VisualDesignIcon";
 import { Project, projects } from "./Projects";
-import { toUrl } from "../helpers";
-import Rand from "rand-seed";
 
-function ProjectImage({src, index, count}: {src: string, index: number, count: number}) {
-    const rotation = (new Rand(index)).rand() * 10; 
-    return <div className="project-image" style={{backgroundImage: `url(${src})`, transform: `rotate(${rotation}deg)`}}>
+function ProjectImage({src, index, count, selected}: {src: string, index: number, count: number, selected: boolean}) {
+    const spread = 3;
+    return <div className="project-image" style={{zIndex: selected ? 1 : 0}}>
+        <img src={src} />
         <p className="inter-light">{index + 1} / {count}</p>
     </div>
 }
 
 function Project({project}: {project: Project}) {
-    const images = Array.from({length: project.imageCount}, (_, index) => toUrl(`../../assets/${project.imagePrefix}${index + 1}.png`));
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const imageCount = project.images.length;
     return <div className="project-container">
-        <div className="project-images">
-            {images.map((image, index) => (
-                <ProjectImage src={image} index={index} count={project.imageCount} />
+        <div className="project-images" onClick={() => setSelectedIndex(((selectedIndex + 1) % imageCount))}>
+            {project.images.map((image, index) => (
+                <ProjectImage key={index} src={image} index={index} count={imageCount} selected={index === selectedIndex} />
             ))}
         </div>
         <div className="project-description card">
@@ -28,13 +28,13 @@ function Project({project}: {project: Project}) {
 }
 
 export function VisualDesignPage() {
-    return <div className="fill start">
+    return <div className="fill start wider">
         <div className="hero">
             <VisualDesignIcon/>
             <h1 className="inter-bold"> Visual Design </h1>
         </div>
-        <div className="content">
-            {projects.map((project) => <Project project={project}/>)}
+        <div className="content card-list">
+            {projects.map((project) => <Project key={project.name} project={project}/>)}
         </div>
     </div>
 }

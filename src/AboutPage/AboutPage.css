@@ -2,28 +2,16 @@
     transform: translateY(-10%);
 }
 .image-grid {
+    --img-size: min(30vw, 320px); 
+    --rotation: 15deg;
+    --translate: 30px;
     width: 100%;
     display: flex;
     justify-content: center;
-    --rotation: 15deg;
-    --translate: 30px;
-    --img-size: 250px;
+    position: relative;
+    height: var(--img-size);
 }
-@media screen and (max-width: 900px) {
-    .image-grid {
-        --img-size: 200px;
-    }
-}
-@media screen and (max-width: 800px) {
-    .image-grid {
-        --img-size: 180px;
-    }
-}
-@media screen and (max-width: 700px) {
-    .image-grid {
-        --img-size: 160px;
-    }
-}
+
 .image-grid img {
     border-radius: var(--app-rounding);
     height: var(--img-size);
@@ -31,12 +19,13 @@
     object-fit: cover;
     border: 1px solid var(--color-primary);
     transition: transform 0.2s ease-out;
+    position: absolute;
 }
-.image-grid img:nth-child(1) {
-    transform: rotate(calc( -1 * var(--rotation))) translate(var(--translate), var(--translate));
+.image-grid img:nth-child(1) { 
+    transform: translateX(calc(-1  * var(--img-size))) translateY(calc(.03 * var(--img-size))) rotate(calc( -1 * var(--rotation))) translate(var(--translate), var(--translate));
 }
 .image-grid img:nth-child(1):hover {
-    transform: rotate(calc( -1 * var(--rotation))) translate(0, 0);
+    transform: translateX(calc(-1  * var(--img-size) * 1.08)) rotate(calc( -1 * var(--rotation))) translate(var(--translate), var(--translate));
 }
 
 .image-grid img:nth-child(2) {
@@ -44,14 +33,14 @@
     transform: translate(0, 0);
 }
 .image-grid img:nth-child(2):hover {
-    transform: translateY(calc(-1 * var(--translate)));
+    transform: translateY(calc(var(--img-size) * .05 * -1));
 }
 
 .image-grid img:nth-child(3) {
-    transform: rotate(var(--rotation)) translate(calc(-1 * var(--translate)), var(--translate));
+    transform: translateX(var(--img-size)) translateY(calc(.03 * var(--img-size))) rotate(var(--rotation)) translate(calc(-1 * var(--translate)), var(--translate));
 }
 .image-grid img:nth-child(3):hover {
-    transform: rotate(var(--rotation)) translate(0, 0);
+    transform: translateX(calc(var(--img-size) * 1.08)) rotate(var(--rotation)) translate(calc(-1 * var(--translate)), var(--translate));
 }
 
 .detail-card {
@@ -75,6 +64,9 @@
     width: fit-content;
     border-radius: 3rem;
     background: var(--color-primary);
+}
+.link a span {
+    color: color-mix(in srgb, var(--color-text), transparent 40%);
 }
 .link svg {
     height: 1rem;
