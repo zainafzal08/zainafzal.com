@@ -17,7 +17,7 @@ export function HomePage() {
             {Object.entries(ALL_PAGES).map(([id, page]) => {
                 if (!page.inNav) return null;
                 const {icon, title} = page;
-                return <a href={`/${id}`} id={id}>{icon} <span>{title}</span></a>
+                return <a key={id} href={`/${id}`} id={id}>{icon} <span>{title}</span></a>
             })}
         </nav>
     </div>

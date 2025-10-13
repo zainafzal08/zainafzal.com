@@ -3,15 +3,7 @@ import "./CareerPage.css";
 import { ToolsIcon } from "../Icons/ToolsIcon";
 import { MailIcon } from "../Icons/MailIcon";
 import { career, Entry } from "./Career";
-
-function Link({icon, text, url}: Entry["links"][number]) {
-    return <a href={url}>
-        <div className="card-link">
-            {icon}
-            <span>{text}</span>
-        </div>
-    </a>    
-}
+import { Link } from "../Link";
 
 function CareerCard({e}: {e: Entry}) {
     return <div className="career-card">
@@ -19,11 +11,18 @@ function CareerCard({e}: {e: Entry}) {
             <img src={e.image}></img>
         </div>
         <div className="card">
-            <h1>{e.title}</h1>
-            <p className="subtitle">{e.subtitle}</p>
+            <div className="career-card-title">
+                <div className="title-image">
+                    <img src={e.image}></img>
+                </div>
+                <div className="title-text">
+                    <h1>{e.title}</h1>
+                    <p className="subtitle">{e.subtitle}</p>
+                </div>
+            </div>
             <p className="content">{e.description}</p>
             <div className="links">
-                {e.links.map(l => <Link {...l}></Link>)}
+                {e.links.map((l,i) => <Link key={i} {...l}></Link>)}
             </div>
         </div>
     </div>
@@ -45,7 +44,7 @@ export function CareerPage() {
         </a>
         <div className="summary">
             <div className="bar-container">
-                {jobs.map(j => <div className="bar" style={{flexGrow: j.yearsSpent}}>
+                {jobs.map((j,i) => <div key={i} className="bar" style={{flexGrow: j.yearsSpent}}>
                     <img src={j.image}/>
                 </div>)}
             </div>
@@ -55,7 +54,7 @@ export function CareerPage() {
             </div>
         </div>
         <div className="career-cards">
-            {career.toReversed().map(e => <CareerCard e={e}/> )}
+            {career.toReversed().map((e,i) => <CareerCard key={i} e={e}/> )}
         </div>
     </div>
 }

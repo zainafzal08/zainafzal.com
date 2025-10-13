@@ -2,7 +2,7 @@
     transform: translateY(-10%);
 }
 .image-grid {
-    --img-size: min(30vw, 320px); 
+    --img-size: min(40vw, 320px); 
     --rotation: 15deg;
     --translate: 30px;
     width: 100%;
@@ -53,24 +53,4 @@
     display: flex;
     gap: 16px;
     justify-content: flex-end;
-}
-.link {
-    padding: 6px 14px 6px 6px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: color-mix(in srgb, var(--color-text), transparent 40%);
-    width: fit-content;
-    border-radius: 3rem;
-    background: var(--color-primary);
-}
-.link a span {
-    color: color-mix(in srgb, var(--color-text), transparent 40%);
-}
-.link svg {
-    height: 1rem;
-}
-.link span {
-    font-size: .8rem;
 }

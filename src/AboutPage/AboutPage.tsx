@@ -4,6 +4,7 @@ import { AboutIcon } from "../Icons/AboutIcon";
 import { GithubIcon } from "../Icons/GithubIcon";
 import { MailIcon } from "../Icons/MailIcon";
 import { JobIcon } from "../Icons/JobIcon";
+import { Link } from "../Link";
 
 export function AboutPage() {
     const image1 = new URL('../../assets/about_1.jpg', import.meta.url);
@@ -25,18 +26,9 @@ export function AboutPage() {
                 <p>I am a software engineer based out of Sydney Australia, specialising in frontend web development but generally interested in all things computing with a smattering of interest in cell biology :) I’m currently at Qwilr but i’ve worked at Google, Akuna Capital & UNSW.</p>
                 <hr/>
                 <div className="push-right">
-                   <a className="link" href="/career">
-                        <JobIcon/>
-                        <span className="inter">Career</span>
-                   </a> 
-                   <a className="link" href="https://github.com/zainafzal08">
-                        <GithubIcon/>
-                        <span className="inter">Github</span>
-                   </a> 
-                   <a className="link" href="mailto:zain.afz@gmail.com">
-                        <MailIcon/>
-                        <span className="inter">Email</span>
-                   </a>
+                    <Link url="/career" icon={<JobIcon/>} text={"Career"}/>
+                    <Link url="https://github.com/zainafzal08" icon={<GithubIcon/>} text={"Github"}/>
+                    <Link url="mailto:zain.afz@gmail.com" icon={<MailIcon/>} text={"Email"}/>
                 </div>
             </div>
         </div>

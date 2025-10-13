@@ -27,3 +27,12 @@
 .back-button:hover img {
     transform: translateY(10%);
 }
+@media screen and (max-width: 600px) {
+    .back-button img {
+        transform: translateY(10%);
+    }
+
+    .back-button .back-button-bg {
+        transform: translate(25%, 25%);
+    }
+}

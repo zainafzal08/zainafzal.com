@@ -4406,8 +4406,8 @@ parcelHelpers.export(exports, "Background", ()=>Background);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _backgroundCss = require("./Background.css");
-var _s = $RefreshSig$();
-function Background(props) {
+var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$();
+function MouseShadow() {
     _s();
     const [{ x, y, width, height }, setShadow] = (0, _react.useState)({
         x: 0,
@@ -4451,41 +4451,96 @@ function Background(props) {
         opacity: visible ? '1' : '0'
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "mouse-shadow",
+        style: mouseShadowStyle
+    }, void 0, false, {
+        fileName: "src/Background/Background.tsx",
+        lineNumber: 36,
+        columnNumber: 12
+    }, this);
+}
+_s(MouseShadow, "vE5EdvZv80VRVYFaT1WLuf4C3vo=");
+_c = MouseShadow;
+function PulsateShadow() {
+    _s1();
+    const [lastPulse, setLastPulse] = (0, _react.useState)(0);
+    const shadowRef = (0, _react.useRef)(null);
+    (0, _react.useEffect)(()=>{
+        const handler = ()=>{
+            if (Date.now() - lastPulse < 4000) return;
+            shadowRef.current.classList.remove("pulse");
+            window.requestAnimationFrame(()=>{
+                shadowRef.current.classList.add("pulse");
+            });
+            setLastPulse(Date.now());
+        };
+        document.addEventListener("click", handler);
+        return ()=>document.removeEventListener("click", handler);
+    }, [
+        lastPulse,
+        setLastPulse
+    ]);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        ref: shadowRef,
+        className: "big-shadow"
+    }, void 0, false, {
+        fileName: "src/Background/Background.tsx",
+        lineNumber: 57,
+        columnNumber: 12
+    }, this);
+}
+_s1(PulsateShadow, "kYwAYs6Goys/lqSv07GfZFw9lWc=");
+_c1 = PulsateShadow;
+function Background(props) {
+    _s2();
+    const [mode, setMode] = (0, _react.useState)("follow-mouse");
+    (0, _react.useEffect)(()=>{
+        const mql = window.matchMedia("(width <= 600px)");
+        mql.addEventListener("change", (e)=>{
+            setMode(e.matches ? "pulsate" : "follow-mouse");
+        });
+        setMode(mql.matches ? "pulsate" : "follow-mouse");
+    });
+    console.log("bg rerendering");
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "container",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "background",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "mouse-shadow",
-                    style: mouseShadowStyle
-                }, void 0, false, {
+                children: mode === "follow-mouse" ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MouseShadow, {}, void 0, false, {
                     fileName: "src/Background/Background.tsx",
-                    lineNumber: 38,
-                    columnNumber: 13
+                    lineNumber: 72,
+                    columnNumber: 40
+                }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(PulsateShadow, {}, void 0, false, {
+                    fileName: "src/Background/Background.tsx",
+                    lineNumber: 72,
+                    columnNumber: 57
                 }, this)
             }, void 0, false, {
                 fileName: "src/Background/Background.tsx",
-                lineNumber: 37,
+                lineNumber: 71,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
                 children: props.children
             }, void 0, false, {
                 fileName: "src/Background/Background.tsx",
-                lineNumber: 40,
+                lineNumber: 74,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/Background/Background.tsx",
-        lineNumber: 36,
+        lineNumber: 70,
         columnNumber: 12
     }, this);
 }
-_s(Background, "vE5EdvZv80VRVYFaT1WLuf4C3vo=");
-_c = Background;
-var _c;
-$RefreshReg$(_c, "Background");
+_s2(Background, "106dZHgQ2MxFxk9xBTfY2cZL9jQ=");
+_c2 = Background;
+var _c, _c1, _c2;
+$RefreshReg$(_c, "MouseShadow");
+$RefreshReg$(_c1, "PulsateShadow");
+$RefreshReg$(_c2, "Background");
 
   $parcel$ReactRefreshHelpers$9701.postlude(module);
 } finally {
@@ -4815,6 +4870,7 @@ var _aboutIcon = require("../Icons/AboutIcon");
 var _githubIcon = require("../Icons/GithubIcon");
 var _mailIcon = require("../Icons/MailIcon");
 var _jobIcon = require("../Icons/JobIcon");
+var _link = require("../Link");
 function AboutPage() {
     const image1 = new URL(require("82f397718ef6c19b"));
     const image2 = new URL(require("1571fd9c6796777c"));
@@ -4828,7 +4884,7 @@ function AboutPage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutIcon.AboutIcon), {}, void 0, false, {
                         fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 14,
+                        lineNumber: 15,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -4836,13 +4892,13 @@ function AboutPage() {
                         children: " About "
                     }, void 0, false, {
                         fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 15,
+                        lineNumber: 16,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/AboutPage/AboutPage.tsx",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -4855,27 +4911,27 @@ function AboutPage() {
                                 src: image1.href
                             }, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 19,
+                                lineNumber: 20,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                 src: image2.href
                             }, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 20,
+                                lineNumber: 21,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                 src: image3.href
                             }, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 21,
+                                lineNumber: 22,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 18,
+                        lineNumber: 19,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -4885,115 +4941,85 @@ function AboutPage() {
                                 children: " Who's Zain "
                             }, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 24,
+                                lineNumber: 25,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 children: "I am a software engineer based out of Sydney Australia, specialising in frontend web development but generally interested in all things computing with a smattering of interest in cell biology :) I\u2019m currently at Qwilr but i\u2019ve worked at Google, Akuna Capital & UNSW."
                             }, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 25,
+                                lineNumber: 26,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 26,
+                                lineNumber: 27,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "push-right",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                                        className: "link",
-                                        href: "/career",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jobIcon.JobIcon), {}, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 29,
-                                                columnNumber: 25
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                className: "inter",
-                                                children: "Career"
-                                            }, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 30,
-                                                columnNumber: 25
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _link.Link), {
+                                        url: "/career",
+                                        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jobIcon.JobIcon), {}, void 0, false, {
+                                            fileName: "src/AboutPage/AboutPage.tsx",
+                                            lineNumber: 29,
+                                            columnNumber: 47
+                                        }, void 0),
+                                        text: "Career"
+                                    }, void 0, false, {
                                         fileName: "src/AboutPage/AboutPage.tsx",
-                                        lineNumber: 28,
-                                        columnNumber: 20
+                                        lineNumber: 29,
+                                        columnNumber: 21
                                     }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                                        className: "link",
-                                        href: "https://github.com/zainafzal08",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _githubIcon.GithubIcon), {}, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 33,
-                                                columnNumber: 25
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                className: "inter",
-                                                children: "Github"
-                                            }, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 34,
-                                                columnNumber: 25
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _link.Link), {
+                                        url: "https://github.com/zainafzal08",
+                                        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _githubIcon.GithubIcon), {}, void 0, false, {
+                                            fileName: "src/AboutPage/AboutPage.tsx",
+                                            lineNumber: 30,
+                                            columnNumber: 70
+                                        }, void 0),
+                                        text: "Github"
+                                    }, void 0, false, {
                                         fileName: "src/AboutPage/AboutPage.tsx",
-                                        lineNumber: 32,
-                                        columnNumber: 20
+                                        lineNumber: 30,
+                                        columnNumber: 21
                                     }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-                                        className: "link",
-                                        href: "mailto:zain.afz@gmail.com",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 37,
-                                                columnNumber: 25
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                className: "inter",
-                                                children: "Email"
-                                            }, void 0, false, {
-                                                fileName: "src/AboutPage/AboutPage.tsx",
-                                                lineNumber: 38,
-                                                columnNumber: 25
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _link.Link), {
+                                        url: "mailto:zain.afz@gmail.com",
+                                        icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
+                                            fileName: "src/AboutPage/AboutPage.tsx",
+                                            lineNumber: 31,
+                                            columnNumber: 65
+                                        }, void 0),
+                                        text: "Email"
+                                    }, void 0, false, {
                                         fileName: "src/AboutPage/AboutPage.tsx",
-                                        lineNumber: 36,
-                                        columnNumber: 20
+                                        lineNumber: 31,
+                                        columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/AboutPage/AboutPage.tsx",
-                                lineNumber: 27,
+                                lineNumber: 28,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/AboutPage/AboutPage.tsx",
-                        lineNumber: 23,
+                        lineNumber: 24,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/AboutPage/AboutPage.tsx",
-                lineNumber: 17,
+                lineNumber: 18,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/AboutPage/AboutPage.tsx",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 12
     }, this);
 }
@@ -5006,7 +5032,7 @@ $RefreshReg$(_c, "AboutPage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","../Icons/JobIcon":"3fgBJ","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hU1YY":[function() {},{}],"cuUTs":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./AboutPage.css":"hU1YY","../Icons/AboutIcon":"cuUTs","../Icons/GithubIcon":"lhyWa","../Icons/MailIcon":"6j5TI","../Icons/JobIcon":"3fgBJ","82f397718ef6c19b":"3cxJt","1571fd9c6796777c":"eSxFo","65ad8f6d6c6e12e3":"j8RHa","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Link":"545bX"}],"hU1YY":[function() {},{}],"cuUTs":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$8c9c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5184,7 +5210,63 @@ module.exports = require("1563c35c08dffb9b").getBundleURL('6EXJA') + "about_2.b9
 },{"1563c35c08dffb9b":"lgJ39"}],"j8RHa":[function(require,module,exports,__globalThis) {
 module.exports = require("32f587ba3f243ade").getBundleURL('6EXJA') + "about_3.a8a2fc08.jpg" + "?" + Date.now();
 
-},{"32f587ba3f243ade":"lgJ39"}],"1Jnzh":[function(require,module,exports,__globalThis) {
+},{"32f587ba3f243ade":"lgJ39"}],"545bX":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$bfda = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$bfda.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Link", ()=>Link);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _linkCss = require("./Link.css");
+function Link({ icon, text, url }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+        className: "link",
+        href: url,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "highlight"
+            }, void 0, false, {
+                fileName: "src/Link.tsx",
+                lineNumber: 12,
+                columnNumber: 9
+            }, this),
+            icon,
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                children: text
+            }, void 0, false, {
+                fileName: "src/Link.tsx",
+                lineNumber: 14,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "underline"
+            }, void 0, false, {
+                fileName: "src/Link.tsx",
+                lineNumber: 15,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/Link.tsx",
+        lineNumber: 11,
+        columnNumber: 12
+    }, this);
+}
+_c = Link;
+var _c;
+$RefreshReg$(_c, "Link");
+
+  $parcel$ReactRefreshHelpers$bfda.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Link.css":"2Fmje","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2Fmje":[function() {},{}],"1Jnzh":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$8457 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5243,10 +5325,10 @@ function HomePage() {
                             }, void 0, false, {
                                 fileName: "src/HomePage/HomePage.tsx",
                                 lineNumber: 20,
-                                columnNumber: 58
+                                columnNumber: 67
                             }, this)
                         ]
-                    }, void 0, true, {
+                    }, id, true, {
                         fileName: "src/HomePage/HomePage.tsx",
                         lineNumber: 20,
                         columnNumber: 24
@@ -5285,59 +5367,111 @@ $parcel$ReactRefreshHelpers$1901.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// Ideas
-//   worry jornal
-//   idle game
-//   sortify
-//   paper todo
-//   Pull out just the 3d part from old website. 
 parcelHelpers.export(exports, "SoftwarePage", ()=>SoftwarePage);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _softwarePageCss = require("./SoftwarePage.css");
 var _softwareIcon = require("../Icons/SoftwareIcon");
-function SoftwarePage() {
+var _projects = require("./Projects");
+function Project({ data }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fill start",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            id: "software-hero",
-            className: "hero",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
-                    fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 14,
-                    columnNumber: 13
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "inter-bold",
-                    children: " Software "
+        className: "software-project card",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: data.name
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 8,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: data.description
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 9,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "links",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                    className: "link"
                 }, void 0, false, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 15,
+                    lineNumber: 11,
                     columnNumber: 13
                 }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 13,
-            columnNumber: 9
-        }, this)
-    }, void 0, false, {
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 10,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 12,
+        lineNumber: 7,
         columnNumber: 12
     }, this);
 }
-_c = SoftwarePage;
-var _c;
-$RefreshReg$(_c, "SoftwarePage");
+_c = Project;
+function SoftwarePage() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "fill start",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "software-hero",
+                className: "hero",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
+                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                        lineNumber: 19,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "inter-bold",
+                        children: " Software "
+                    }, void 0, false, {
+                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                        lineNumber: 20,
+                        columnNumber: 13
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 18,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "software-projects",
+                children: (0, _projects.projects).map((p, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Project, {
+                        data: p
+                    }, i, false, {
+                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                        lineNumber: 23,
+                        columnNumber: 37
+                    }, this))
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 22,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+        lineNumber: 17,
+        columnNumber: 12
+    }, this);
+}
+_c1 = SoftwarePage;
+var _c, _c1;
+$RefreshReg$(_c, "Project");
+$RefreshReg$(_c1, "SoftwarePage");
 
   $parcel$ReactRefreshHelpers$1901.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Projects":"kldFp"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b88f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5377,7 +5511,19 @@ $RefreshReg$(_c, "SoftwareIcon");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"k5MbX":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kldFp":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "projects", ()=>projects);
+const projects = [
+    {
+        name: 'Worry Journal',
+        description: 'PWA that allow you to jot down worries and refute them. Only stores to local storage and encrypts the data at rest.',
+        links: []
+    }
+];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5MbX":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$f6eb = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5829,33 +5975,7 @@ var _careerPageCss = require("./CareerPage.css");
 var _toolsIcon = require("../Icons/ToolsIcon");
 var _mailIcon = require("../Icons/MailIcon");
 var _career = require("./Career");
-function Link({ icon, text, url }) {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
-        href: url,
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "card-link",
-            children: [
-                icon,
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                    children: text
-                }, void 0, false, {
-                    fileName: "src/CareerPage/CareerPage.tsx",
-                    lineNumber: 11,
-                    columnNumber: 13
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/CareerPage/CareerPage.tsx",
-            lineNumber: 9,
-            columnNumber: 9
-        }, this)
-    }, void 0, false, {
-        fileName: "src/CareerPage/CareerPage.tsx",
-        lineNumber: 8,
-        columnNumber: 12
-    }, this);
-}
-_c = Link;
+var _link = require("../Link");
 function CareerCard({ e }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "career-card",
@@ -5866,30 +5986,62 @@ function CareerCard({ e }) {
                     src: e.image
                 }, void 0, false, {
                     fileName: "src/CareerPage/CareerPage.tsx",
-                    lineNumber: 19,
+                    lineNumber: 11,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 18,
+                lineNumber: 10,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "card",
                 children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                        children: e.title
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "career-card-title",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "title-image",
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                    src: e.image
+                                }, void 0, false, {
+                                    fileName: "src/CareerPage/CareerPage.tsx",
+                                    lineNumber: 16,
+                                    columnNumber: 21
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 15,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "title-text",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                                        children: e.title
+                                    }, void 0, false, {
+                                        fileName: "src/CareerPage/CareerPage.tsx",
+                                        lineNumber: 19,
+                                        columnNumber: 21
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "subtitle",
+                                        children: e.subtitle
+                                    }, void 0, false, {
+                                        fileName: "src/CareerPage/CareerPage.tsx",
+                                        lineNumber: 20,
+                                        columnNumber: 21
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 18,
+                                columnNumber: 17
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 22,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "subtitle",
-                        children: e.subtitle
-                    }, void 0, false, {
-                        fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 23,
+                        lineNumber: 14,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -5897,37 +6049,37 @@ function CareerCard({ e }) {
                         children: e.description
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 24,
+                        lineNumber: 23,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "links",
-                        children: e.links.map((l)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Link, {
+                        children: e.links.map((l, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _link.Link), {
                                 ...l
-                            }, void 0, false, {
+                            }, i, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 26,
-                                columnNumber: 35
+                                lineNumber: 25,
+                                columnNumber: 39
                             }, this))
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 25,
+                        lineNumber: 24,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 21,
+                lineNumber: 13,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/CareerPage/CareerPage.tsx",
-        lineNumber: 17,
+        lineNumber: 9,
         columnNumber: 12
     }, this);
 }
-_c1 = CareerCard;
+_c = CareerCard;
 function CareerPage() {
     const jobs = (0, _career.career).filter((e)=>!!e.yearsSpent);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5939,7 +6091,7 @@ function CareerPage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 37,
+                        lineNumber: 36,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -5947,13 +6099,13 @@ function CareerPage() {
                         children: " Career "
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 38,
+                        lineNumber: 37,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 36,
+                lineNumber: 35,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -5963,25 +6115,25 @@ function CareerPage() {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
                             fileName: "src/CareerPage/CareerPage.tsx",
-                            lineNumber: 42,
+                            lineNumber: 41,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                             children: "Want a full Resum\xe8? Get in touch!"
                         }, void 0, false, {
                             fileName: "src/CareerPage/CareerPage.tsx",
-                            lineNumber: 43,
+                            lineNumber: 42,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/CareerPage/CareerPage.tsx",
-                    lineNumber: 41,
+                    lineNumber: 40,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 40,
+                lineNumber: 39,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5989,7 +6141,7 @@ function CareerPage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "bar-container",
-                        children: jobs.map((j)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        children: jobs.map((j, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "bar",
                                 style: {
                                     flexGrow: j.yearsSpent
@@ -5998,17 +6150,17 @@ function CareerPage() {
                                     src: j.image
                                 }, void 0, false, {
                                     fileName: "src/CareerPage/CareerPage.tsx",
-                                    lineNumber: 49,
+                                    lineNumber: 48,
                                     columnNumber: 21
                                 }, this)
-                            }, void 0, false, {
+                            }, i, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 48,
-                                columnNumber: 32
+                                lineNumber: 47,
+                                columnNumber: 36
                             }, this))
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 47,
+                        lineNumber: 46,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6018,61 +6170,60 @@ function CareerPage() {
                                 children: "2016"
                             }, void 0, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 53,
+                                lineNumber: 52,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                 children: "Today"
                             }, void 0, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 54,
+                                lineNumber: 53,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 52,
+                        lineNumber: 51,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 46,
+                lineNumber: 45,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "career-cards",
-                children: (0, _career.career).toReversed().map((e)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(CareerCard, {
+                children: (0, _career.career).toReversed().map((e, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(CareerCard, {
                         e: e
-                    }, void 0, false, {
+                    }, i, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 58,
-                        columnNumber: 43
+                        lineNumber: 57,
+                        columnNumber: 47
                     }, this))
             }, void 0, false, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 57,
+                lineNumber: 56,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/CareerPage/CareerPage.tsx",
-        lineNumber: 35,
+        lineNumber: 34,
         columnNumber: 12
     }, this);
 }
-_c2 = CareerPage;
-var _c, _c1, _c2;
-$RefreshReg$(_c, "Link");
-$RefreshReg$(_c1, "CareerCard");
-$RefreshReg$(_c2, "CareerPage");
+_c1 = CareerPage;
+var _c, _c1;
+$RefreshReg$(_c, "CareerCard");
+$RefreshReg$(_c1, "CareerPage");
 
   $parcel$ReactRefreshHelpers$7f34.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./CareerPage.css":"ioxfy","../Icons/ToolsIcon":"g0e27","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Icons/MailIcon":"6j5TI","./Career":"g7rUS"}],"ioxfy":[function() {},{}],"g0e27":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./CareerPage.css":"ioxfy","../Icons/ToolsIcon":"g0e27","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Icons/MailIcon":"6j5TI","./Career":"g7rUS","../Link":"545bX"}],"ioxfy":[function() {},{}],"g0e27":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$06b5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -6158,8 +6309,9 @@ const career = [
         title: 'UNSW',
         subtitle: 'Course Admin & Tutor',
         description: `
-            Taught computing topics such as compiler design, data structures, web security, algorithms and web development.
-            Helped write lectures, assignments and course content for basic to advanced computer science courses and helped run a course on web security called COMP6443.
+            Taught compiler design, data structures, web security, algorithms and web development.
+            Write lectures, assignments and course content.
+            Helped run a course on web security called COMP6443.
         `,
         yearsSpent: 3,
         image: (0, _unswPngDefault.default),
@@ -6169,7 +6321,7 @@ const career = [
                 url: "https://www.youtube.com/watch?v=l0Sazyzs1IY",
                 icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pythonIcon.PythonIcon), {}, void 0, false, {
                     fileName: "src/CareerPage/Career.tsx",
-                    lineNumber: 44,
+                    lineNumber: 45,
                     columnNumber: 92
                 }, undefined)
             }
@@ -6208,21 +6360,21 @@ const career = [
         image: (0, _googlePngDefault.default),
         links: [
             {
-                text: "ChromeOS Material You",
+                text: "Material You",
                 url: "https://www.androidpolice.com/chromebooks-chrome-os-117-material-you-more-like-android/",
                 icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _newsIcon.NewsIcon), {}, void 0, false, {
                     fileName: "src/CareerPage/Career.tsx",
-                    lineNumber: 79,
-                    columnNumber: 147
+                    lineNumber: 80,
+                    columnNumber: 138
                 }, undefined)
             },
             {
-                text: "ChromeOS Light/Dark Mode",
+                text: "Dark Mode",
                 url: "https://chromeunboxed.com/chrome-os-radiance-wallpaper-collection",
                 icon: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _newsIcon.NewsIcon), {}, void 0, false, {
                     fileName: "src/CareerPage/Career.tsx",
-                    lineNumber: 80,
-                    columnNumber: 128
+                    lineNumber: 81,
+                    columnNumber: 113
                 }, undefined)
             }
         ]

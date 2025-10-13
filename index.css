@@ -54,9 +54,10 @@ main {
     justify-content: flex-start;
     flex-direction: column;
     padding: var(--app-v-padding) var(--app-h-padding);
+    overflow-x: hidden;
 }
 .start.wider {
-    padding: var(--app-v-padding) calc(var(--app-h-padding) - 64px);
+    padding: var(--app-v-padding) 0;
 }
 
 .inter-light {
@@ -96,7 +97,7 @@ main {
     bottom: 0;
     width: 100%;
     text-align: center;
-    font-size: 64px;
+    font-size: min(13vw, 64px);
     width: 100%;
 }
 a {
@@ -117,21 +118,25 @@ a:visited {
     align-items: center;
     justify-content: center;
     gap: 48px;
-    padding: 64px 0 0 0;
+    width: 100%;
+    height: fit-content;
+    padding: 64px 32px 16px 32px;
 }
 .card {
     background: var(--card-color);
     border-radius: var(--app-rounding);
     border: 1px solid var(--color-primary);
+    --card-padding: 24px;
     box-sizing: border-box;
-    padding: 24px;
+    padding: var(--card-padding);
+    position: relative;
 }
 .card h1 {
     font-family: "Inter", serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--color-text);
     padding: 0;
     margin: 0;
@@ -156,7 +161,21 @@ a:visited {
     border: none;
     height: 4px;
     box-sizing: border-box;
-
     background: radial-gradient(circle at 2px 2px, var(--color-text-light) 1px, transparent 0);
     background-size: calc(2 * 2px) calc(2 * 2px);
 }
+
+.card .links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: var(--card-padding); 
+    padding-top: 0;
+}
+

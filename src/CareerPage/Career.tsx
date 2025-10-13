@@ -35,8 +35,9 @@ export const career: Entry[] = [
         title: 'UNSW',
         subtitle: 'Course Admin & Tutor',
         description: `
-            Taught computing topics such as compiler design, data structures, web security, algorithms and web development.
-            Helped write lectures, assignments and course content for basic to advanced computer science courses and helped run a course on web security called COMP6443.
+            Taught compiler design, data structures, web security, algorithms and web development.
+            Write lectures, assignments and course content.
+            Helped run a course on web security called COMP6443.
         `,
         yearsSpent: 3,
         image: unsw,
@@ -76,8 +77,8 @@ export const career: Entry[] = [
         yearsSpent: 5,
         image: google,
         links: [
-            {text: "ChromeOS Material You", url: "https://www.androidpolice.com/chromebooks-chrome-os-117-material-you-more-like-android/", icon: <NewsIcon/>},
-            {text: "ChromeOS Light/Dark Mode", url: "https://chromeunboxed.com/chrome-os-radiance-wallpaper-collection", icon: <NewsIcon/>}
+            {text: "Material You", url: "https://www.androidpolice.com/chromebooks-chrome-os-117-material-you-more-like-android/", icon: <NewsIcon/>},
+            {text: "Dark Mode", url: "https://chromeunboxed.com/chrome-os-radiance-wallpaper-collection", icon: <NewsIcon/>}
         ]
     },
     {

@@ -1,1 +1,9 @@
-- Test out background idea.
+- [X] Mobilize Home Page
+- [X] Mobilize About Page
+- [X] Mobilize Career Page
+- [X] Mobilize Visual Design Page
+- [ ] Do software page
+- [ ] Mobilize Software Page
+- [ ] Stress test on actual mobile device / large desktop
+- [ ] Check bg pulse on mobile
+- [ ] Launch
