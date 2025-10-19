@@ -3,11 +3,11 @@ import { ReactElement } from "react";
 import { PythonIcon } from "../Icons/PythonIcon";
 import { NewsIcon } from "../Icons/NewsIcon";
 
-import unsw from "url:../../assets/unsw.png";
-import akuna from "url:../../assets/akuna.svg";
-import relume from "url:../../assets/relume.png";
-import qwilr from "url:../../assets/qwilr.png";
-import google from "url:../../assets/google.png";
+import unsw from "../../assets/unsw.png";
+import akuna from "../../assets/akuna.svg";
+import relume from "../../assets/relume.png";
+import qwilr from "../../assets/qwilr.png";
+import google from "../../assets/google.png";
 
 export interface Entry {
     title: string;

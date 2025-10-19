@@ -5,5 +5,7 @@
 - [ ] Do software page
 - [ ] Mobilize Software Page
 - [ ] Stress test on actual mobile device / large desktop
-- [ ] Check bg pulse on mobile
+- [ ] Add more software projects
+- [ ] Add more visual design projects (aided / ali / hazel branding)
+- [ ] Check bg pulse on mobile (maybe kill it?)
 - [ ] Launch

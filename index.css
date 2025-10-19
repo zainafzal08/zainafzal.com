@@ -1,3 +1,7 @@
+@font-face {
+    font-family: "Depature Mono";
+    src: url("./assets/DepartureMono-Regular.otf") format("opentype");
+}
 body {
     margin: 0;
     padding: 0;

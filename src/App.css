@@ -6,6 +6,34 @@
     cursor: pointer;
     color: var(--color-text);
 }
+.compact-back-button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    color: var(--color-text);
+    background: var(--color-primary);
+    width: 100px;
+    height: 100px;
+    transform: translate(50%, 50%);
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    transition: transform 0.1s ease-in-out;
+}
+.compact-back-button svg {
+    width: 24px;
+    height: 24px;
+    transform: translate(-75%, -75%);
+    transition: transform 0.1s ease-in-out;
+}
+.compact-back-button:hover {
+    transform: translate(25%, 25%);
+}
+.compact-back-button:hover svg {
+    transform: translate(-25%, -25%);
+}
 .back-button img {
     position: absolute;
     bottom: 0;

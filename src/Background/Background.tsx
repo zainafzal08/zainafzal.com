@@ -66,7 +66,6 @@ export function Background(props: React.PropsWithChildren) {
         });
         setMode(mql.matches ? "pulsate" : "follow-mouse");
     });
-    console.log("bg rerendering");
     return <div className="container">
         <div className="background">
             {mode === "follow-mouse" ? <MouseShadow/> : <PulsateShadow/>}

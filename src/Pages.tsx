@@ -13,7 +13,8 @@ type PageMetadata = {
     inNav: true,
     title: string,
     icon: React.ReactElement,
-    page: React.ReactElement
+    page: React.ReactElement,
+    homeButtonVariant: 'normal' | 'compact',
 } | {inNav: false, page: React.ReactElement};
 
 export const ALL_PAGES:Record<string, PageMetadata> = {
@@ -22,24 +23,28 @@ export const ALL_PAGES:Record<string, PageMetadata> = {
         title: 'About',
         icon: <AboutIcon/>,
         page: <AboutPage/>,
+        homeButtonVariant: 'normal',
     },
     'career': {
         inNav: true, 
         title: 'Career',
         icon: <ToolsIcon/>,
         page: <CareerPage />,
+        homeButtonVariant: 'normal',
     },
     'software': {
         inNav: true,
         title: 'Software',
         icon: <SoftwareIcon/>,
         page: <SoftwarePage/>,
+        homeButtonVariant: 'compact',
     },
     'visual-design': {
         inNav: true, 
         title: 'Visual Design',
         icon: <VisualDesignIcon/>,
         page: <VisualDesignPage/>,        
+        homeButtonVariant: 'normal',
     },
     'home': {
         inNav: false, 

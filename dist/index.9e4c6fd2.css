@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Depature Mono;
+  src: url("DepartureMono-Regular.33023d28.otf") format("opentype");
+}
+
 body {
   --color-mouse-shadow: #2eb6fe;
   --color-primary: #d4e7f1;
