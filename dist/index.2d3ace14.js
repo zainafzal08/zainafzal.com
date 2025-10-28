@@ -5732,7 +5732,7 @@ const career = [
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Icons/PythonIcon":"snjej","../Icons/NewsIcon":"lw0Vc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../assets/unsw.png":"7pjSn","../../assets/akuna.svg":"654Sz","../../assets/relume.png":"kYPml","../../assets/qwilr.png":"4bqMJ","../../assets/google.png":"5o99U"}],"snjej":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Icons/PythonIcon":"snjej","../Icons/NewsIcon":"lw0Vc","../../assets/unsw.png":"7pjSn","../../assets/akuna.svg":"654Sz","../../assets/relume.png":"kYPml","../../assets/qwilr.png":"4bqMJ","../../assets/google.png":"5o99U","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"snjej":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$18a2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -5952,6 +5952,7 @@ var _react = require("react");
 var _softwarePageCss = require("./SoftwarePage.css");
 var _softwareIcon = require("../Icons/SoftwareIcon");
 var _projects = require("./Projects");
+var _helpers = require("../helpers");
 var _s = $RefreshSig$(), _s1 = $RefreshSig$();
 const HELP_OUTPUT = {
     lines: [
@@ -6050,7 +6051,7 @@ function renderLine(line, numCols) {
         const cell = line[i];
         if (cell.type === 'empty') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, i, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 60,
+            lineNumber: 61,
             columnNumber: 25
         }, this));
         else if (cell.type === 'link') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -6059,7 +6060,7 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 62,
+            lineNumber: 63,
             columnNumber: 25
         }, this));
         else if (cell.type === 'long') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
@@ -6067,7 +6068,7 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 64,
+            lineNumber: 65,
             columnNumber: 25
         }, this));
         else markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
@@ -6075,7 +6076,7 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 66,
+            lineNumber: 67,
             columnNumber: 25
         }, this));
     }
@@ -6105,14 +6106,14 @@ function constructOutput(lastLocation, lastCommand, output) {
                         ]
                     }, void 0, true, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 88,
+                        lineNumber: 89,
                         columnNumber: 14
                     }, this),
                     lastCommand
                 ]
             }, void 0, true, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 88,
+                lineNumber: 89,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6123,7 +6124,7 @@ function constructOutput(lastLocation, lastCommand, output) {
                 children: output.lines.map((line)=>renderLine(line, output.numCols))
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 89,
+                lineNumber: 90,
                 columnNumber: 9
             }, this)
         ]
@@ -6142,13 +6143,14 @@ function constructErrorOutput(message) {
         numCols: 1
     };
 }
-function Terminal({ setCurrentProject, setLastCommand }) {
+function Terminal({ nextProject, prevProject, setCurrentProject, setLastCommand }) {
     _s();
     // At some point it might be cute to let people actually navigate around the filesystem.
     // But for now, i ceebs so this will always be projects.
     const [location, setLocation] = (0, _react.useState)("projects");
     const [query, setQuery] = (0, _react.useState)("");
     const [output, setOutput] = (0, _react.useState)(constructOutput(location, "ls", constructProjectListOutput()));
+    const isMobile = (0, _helpers.useIsMobile)();
     const processQuery = _react.useMemo(()=>(query)=>{
             const [command, arg] = query.split(" ").map((word)=>word.trim().toLowerCase());
             setLastCommand(command);
@@ -6177,48 +6179,102 @@ function Terminal({ setCurrentProject, setLastCommand }) {
         }, [
         query
     ]);
+    _react.useEffect(()=>{
+        if (isMobile) processQuery("describe " + (0, _projects.projects)[0].name);
+    }, [
+        isMobile
+    ]);
+    let footer;
+    if (!isMobile) footer = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "terminal-footer",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                children: [
+                    "~/",
+                    location,
+                    "$"
+                ]
+            }, void 0, true, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 148,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                type: "text",
+                onChange: handleChange,
+                onKeyDown: handleKeyDown,
+                value: query,
+                placeholder: "Try the 'help' command"
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 149,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+        lineNumber: 147,
+        columnNumber: 18
+    }, this);
+    else footer = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "terminal-footer mobile",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                className: "mobile-terminal-button",
+                onClick: ()=>processQuery("describe " + prevProject.name),
+                children: " Prev "
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 153,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                className: "mobile-terminal-button",
+                onClick: ()=>processQuery("describe " + nextProject.name),
+                children: " Next "
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 154,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+        lineNumber: 152,
+        columnNumber: 18
+    }, this);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "terminal",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "terminal-header",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "window-buttons",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
-                                fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                lineNumber: 140,
-                                columnNumber: 45
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
-                                fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                lineNumber: 140,
-                                columnNumber: 56
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
-                                fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                lineNumber: 140,
-                                columnNumber: 67
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 140,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                        className: "terminal-header-button",
-                        children: " Simple View "
-                    }, void 0, false, {
-                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 141,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "window-buttons",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
+                            fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                            lineNumber: 159,
+                            columnNumber: 45
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
+                            fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                            lineNumber: 159,
+                            columnNumber: 56
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
+                            fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                            lineNumber: 159,
+                            columnNumber: 67
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                    lineNumber: 159,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 139,
+                lineNumber: 158,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6226,48 +6282,22 @@ function Terminal({ setCurrentProject, setLastCommand }) {
                 children: output
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 143,
+                lineNumber: 161,
                 columnNumber: 9
             }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "terminal-footer",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: [
-                            "~/",
-                            location,
-                            "$"
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 147,
-                        columnNumber: 13
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                        type: "text",
-                        onChange: handleChange,
-                        onKeyDown: handleKeyDown,
-                        value: query,
-                        placeholder: "Try the 'help' command"
-                    }, void 0, false, {
-                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 148,
-                        columnNumber: 13
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 146,
-                columnNumber: 9
-            }, this)
+            footer
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 138,
+        lineNumber: 157,
         columnNumber: 12
     }, this);
 }
-_s(Terminal, "QaTCu5++lgbMJiB3V1yWURyPvBw=");
+_s(Terminal, "aTazUw7D445CPzLgx8fqyQSKN1Q=", false, function() {
+    return [
+        (0, _helpers.useIsMobile)
+    ];
+});
 _c = Terminal;
 function SoftwarePage() {
     _s1();
@@ -6281,8 +6311,12 @@ function SoftwarePage() {
         currentProject,
         lastCommand
     ]);
+    const projectIndex = (0, _projects.projects).findIndex((project)=>project.name === currentProject?.name);
+    const nextProject = (0, _projects.projects)[(projectIndex + 1) % (0, _projects.projects).length];
+    const prevProject = (0, _projects.projects)[(projectIndex - 1 + (0, _projects.projects).length) % (0, _projects.projects).length];
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "fill start",
+        id: "extra-padding",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: "software-hero",
@@ -6290,7 +6324,7 @@ function SoftwarePage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 167,
+                        lineNumber: 184,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -6298,13 +6332,13 @@ function SoftwarePage() {
                         children: " Software "
                     }, void 0, false, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 168,
+                        lineNumber: 185,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 166,
+                lineNumber: 183,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6327,42 +6361,44 @@ function SoftwarePage() {
                                         src: image
                                     }, void 0, false, {
                                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                        lineNumber: 175,
+                                        lineNumber: 192,
                                         columnNumber: 25
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 191,
                                     columnNumber: 21
                                 }, this))
                         }, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 172,
+                            lineNumber: 189,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Terminal, {
+                            nextProject: nextProject,
+                            prevProject: prevProject,
                             setCurrentProject: setCurrentProject,
                             setLastCommand: setLastCommand
                         }, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 179,
+                            lineNumber: 196,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 171,
+                    lineNumber: 188,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 170,
+                lineNumber: 187,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 165,
+        lineNumber: 182,
         columnNumber: 12
     }, this);
 }
@@ -6377,7 +6413,7 @@ $RefreshReg$(_c1, "SoftwarePage");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","./Projects":"kldFp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","./Projects":"kldFp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../helpers":"adjmJ"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b88f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -6487,7 +6523,7 @@ const projects = [
     }
 ];
 
-},{"../quickLinks":"bUOqc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../assets/worry_journal_1.png":"3u80O","../../assets/worry_journal_2.png":"lCiMe","../../assets/worry_journal_3.png":"4gAYw"}],"bUOqc":[function(require,module,exports,__globalThis) {
+},{"../quickLinks":"bUOqc","../../assets/worry_journal_1.png":"3u80O","../../assets/worry_journal_2.png":"lCiMe","../../assets/worry_journal_3.png":"4gAYw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bUOqc":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "QUICK_LINKS", ()=>QUICK_LINKS);
@@ -6509,7 +6545,38 @@ module.exports = require("a1c59d14fce16193").getBundleURL('6EXJA') + "worry_jour
 },{"a1c59d14fce16193":"lgJ39"}],"4gAYw":[function(require,module,exports,__globalThis) {
 module.exports = require("81655c4ec8453c0c").getBundleURL('6EXJA') + "worry_journal_3.e58e4356.png" + "?" + Date.now();
 
-},{"81655c4ec8453c0c":"lgJ39"}],"k5MbX":[function(require,module,exports,__globalThis) {
+},{"81655c4ec8453c0c":"lgJ39"}],"adjmJ":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$b53d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b53d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useIsMobile", ()=>useIsMobile);
+var _react = require("react");
+function useIsMobile() {
+    const mql = window.matchMedia("(width <= 600px)");
+    const [isMobile, setIsMobile] = (0, _react.useState)(mql.matches);
+    (0, _react.useEffect)(()=>{
+        const mql = window.matchMedia("(width <= 600px)");
+        mql.addEventListener("change", (e)=>{
+            setIsMobile(e.matches);
+        });
+        setIsMobile(mql.matches);
+    }, [
+        mql
+    ]);
+    return isMobile;
+}
+
+  $parcel$ReactRefreshHelpers$b53d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"k5MbX":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$f6eb = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -6852,7 +6919,7 @@ const projects = [
     }
 ];
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../assets/adventure_buddy_1.svg":"8Bzk3","../../assets/adventure_buddy_2.svg":"j0T4L","../../assets/adventure_buddy_3.svg":"insD1","../../assets/adventure_buddy_4.svg":"jpJen","../../assets/adventure_buddy_5.svg":"2lh6Y","../../assets/adventure_buddy_6.svg":"5W6TG","../../assets/adventure_buddy_7.svg":"cfqpd","../../assets/js_1.svg":"fNYPJ","../../assets/js_2.svg":"7I2is","../../assets/js_3.svg":"lqwnR","../../assets/js_4.svg":"4mbLq","../../assets/js_5.svg":"kWDlt","../../assets/js_6.svg":"dycAb","../../assets/politico_1.svg":"h4JmJ","../../assets/politico_2.svg":"eLJV3","../../assets/politico_3.svg":"1mYbK","../../assets/politico_4.svg":"4Qxli","../../assets/politico_5.svg":"97HNc","../../assets/stickers_1.svg":"3Lr6m","../../assets/stickers_2.svg":"97fo1","../../assets/stickers_3.svg":"fnZj8","../../assets/stickers_4.svg":"asfgE","../../assets/stickers_5.svg":"2K291","../../assets/stickers_6.svg":"4wg9E","../../assets/stickers_7.svg":"32q9a","../../assets/stickers_8.svg":"9DWgQ","../../assets/stickers_9.svg":"6rDH7","../../assets/wallpaper_1.svg":"c3wsJ","../../assets/wallpaper_2.svg":"k6ZLj","../../assets/wallpaper_3.svg":"2fjcd","../../assets/wallpaper_4.svg":"j2bvw"}],"8Bzk3":[function(require,module,exports,__globalThis) {
+},{"../../assets/adventure_buddy_1.svg":"8Bzk3","../../assets/adventure_buddy_2.svg":"j0T4L","../../assets/adventure_buddy_3.svg":"insD1","../../assets/adventure_buddy_4.svg":"jpJen","../../assets/adventure_buddy_5.svg":"2lh6Y","../../assets/adventure_buddy_6.svg":"5W6TG","../../assets/adventure_buddy_7.svg":"cfqpd","../../assets/js_1.svg":"fNYPJ","../../assets/js_2.svg":"7I2is","../../assets/js_3.svg":"lqwnR","../../assets/js_4.svg":"4mbLq","../../assets/js_5.svg":"kWDlt","../../assets/js_6.svg":"dycAb","../../assets/politico_1.svg":"h4JmJ","../../assets/politico_2.svg":"eLJV3","../../assets/politico_3.svg":"1mYbK","../../assets/politico_4.svg":"4Qxli","../../assets/politico_5.svg":"97HNc","../../assets/stickers_1.svg":"3Lr6m","../../assets/stickers_2.svg":"97fo1","../../assets/stickers_3.svg":"fnZj8","../../assets/stickers_4.svg":"asfgE","../../assets/stickers_5.svg":"2K291","../../assets/stickers_6.svg":"4wg9E","../../assets/stickers_7.svg":"32q9a","../../assets/stickers_8.svg":"9DWgQ","../../assets/stickers_9.svg":"6rDH7","../../assets/wallpaper_1.svg":"c3wsJ","../../assets/wallpaper_2.svg":"k6ZLj","../../assets/wallpaper_3.svg":"2fjcd","../../assets/wallpaper_4.svg":"j2bvw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Bzk3":[function(require,module,exports,__globalThis) {
 module.exports = require("2129422606a4df33").getBundleURL('6EXJA') + "adventure_buddy_1.8cfddacf.svg" + "?" + Date.now();
 
 },{"2129422606a4df33":"lgJ39"}],"j0T4L":[function(require,module,exports,__globalThis) {

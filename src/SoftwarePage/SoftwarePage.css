@@ -4,6 +4,10 @@
 #software-hero {
     z-index: -1;
 }
+#extra-padding {
+    padding-top: calc(var(--app-v-padding) - 16px);
+    padding-bottom: calc(var(--app-v-padding) + 16px);
+}
 .software-projects {
     display: flex;
     flex-direction: column;
@@ -123,6 +127,22 @@
     display: flex;
     align-items: center;
     font-size: .7rem;
+}
+.terminal-footer.mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.terminal-footer .mobile-terminal-button {
+    background: none;
+    font-size: .7rem;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: "Depature Mono", monospace;
+    text-transform: uppercase;
+    text-decoration: underline;
 }
 .terminal-footer span {
     color: #9A9B9C;

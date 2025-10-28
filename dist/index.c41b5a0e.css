@@ -527,6 +527,11 @@ nav a#career svg {
   z-index: -1;
 }
 
+#extra-padding {
+  padding-top: calc(var(--app-v-padding)  - 16px);
+  padding-bottom: calc(var(--app-v-padding)  + 16px);
+}
+
 .software-projects {
   box-sizing: border-box;
   flex-direction: column;
@@ -659,6 +664,24 @@ nav a#career svg {
   padding: 0 12px;
   font-size: .7rem;
   display: flex;
+}
+
+.terminal-footer.mobile {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.terminal-footer .mobile-terminal-button {
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: Depature Mono, monospace;
+  font-size: .7rem;
+  text-decoration: underline;
 }
 
 .terminal-footer span {

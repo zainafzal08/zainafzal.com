@@ -3,6 +3,7 @@ import "./SoftwarePage.css";
 import { SoftwareIcon } from "../Icons/SoftwareIcon";
 import { useState } from "react";
 import { Project, projects } from "./Projects";
+import { useIsMobile } from "../helpers";
 
 type OutputCell = {text: string, color: 'muted' | 'main', type?: 'normal' | 'link' | 'long'} | {type: 'empty'};
 interface OutputLines {
@@ -99,13 +100,13 @@ function constructErrorOutput(message: string): OutputLines {
     };
 }
 
-function Terminal({setCurrentProject, setLastCommand}: {setCurrentProject: (project: Project| null) => void, setLastCommand: (command: string) => void}) {
+function Terminal({nextProject, prevProject, setCurrentProject, setLastCommand}: {nextProject: Project, prevProject: Project, setCurrentProject: (project: Project| null) => void, setLastCommand: (command: string) => void}) {
     // At some point it might be cute to let people actually navigate around the filesystem.
     // But for now, i ceebs so this will always be projects.
     const [location, setLocation] = useState("projects");
     const [query, setQuery] = useState("");
     const [output, setOutput] = useState(constructOutput(location, "ls", constructProjectListOutput()));
-    
+    const isMobile = useIsMobile();
     const processQuery = React.useMemo(() => (query: string) => {
         const [command, arg] = query.split(" ").map(word => word.trim().toLowerCase());
         setLastCommand(command);
@@ -135,18 +136,32 @@ function Terminal({setCurrentProject, setLastCommand}: {setCurrentProject: (proj
         }
     }, [query]);
 
+    React.useEffect(() => {
+        if (isMobile) {
+            processQuery("describe " + projects[0].name);
+        }
+    }, [isMobile]);
+
+    let footer;
+    if (!isMobile) {
+        footer = <div className="terminal-footer">
+            <span>~/{location}$</span>
+            <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={query} placeholder="Try the 'help' command" />
+        </div>;
+    } else {
+        footer = <div className="terminal-footer mobile">
+            <button className="mobile-terminal-button" onClick={() => processQuery("describe " + prevProject.name)}> Prev </button>
+            <button className="mobile-terminal-button" onClick={() => processQuery("describe " + nextProject.name)}> Next </button>
+        </div>;
+    }
     return <div className="terminal">
         <div className="terminal-header">
             <div className="window-buttons"><div></div><div></div><div></div></div>
-            <button className="terminal-header-button"> Simple View </button>
         </div>
         <div className="terminal-body">
             {output}
         </div>
-        <div className="terminal-footer">
-            <span>~/{location}$</span>
-            <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={query} placeholder="Try the 'help' command" />
-        </div>
+        {footer}
     </div>
 }
 
@@ -154,7 +169,6 @@ export function SoftwarePage() {
     const [currentProject, setCurrentProject] = useState<Project | null>(null);
     const [isHidden, setIsHidden] = useState(true);
     const [lastCommand, setLastCommand] = useState<string | null>(null);
-
     React.useEffect(() => {
         if (currentProject && lastCommand === "describe") {
             setIsHidden(false);
@@ -162,7 +176,10 @@ export function SoftwarePage() {
             setIsHidden(true);
         }
     }, [currentProject, lastCommand]);
-    return <div className="fill start">
+    const projectIndex = projects.findIndex(project => project.name === currentProject?.name);
+    const nextProject = projects[(projectIndex + 1) % projects.length];
+    const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+    return <div className="fill start" id="extra-padding">
         <div id="software-hero" className="hero">
             <SoftwareIcon />
             <h1 className="inter-bold"> Software </h1>
@@ -176,7 +193,7 @@ export function SoftwarePage() {
                     </div>
                    ))}
                 </div>
-                <Terminal setCurrentProject={setCurrentProject} setLastCommand={setLastCommand}/>
+                <Terminal nextProject={nextProject} prevProject={prevProject} setCurrentProject={setCurrentProject} setLastCommand={setLastCommand}/>
             </div>
         </div>
     </div>
