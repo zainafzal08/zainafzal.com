@@ -11,16 +11,18 @@ function CareerCard({e}: {e: Entry}) {
             <img src={e.image}></img>
         </div>
         <div className="card">
-            <div className="career-card-title">
-                <div className="title-image">
-                    <img src={e.image}></img>
+            <div className="main-content">
+                <div className="career-card-title">
+                    <div className="title-image">
+                        <img src={e.image}></img>
+                    </div>
+                    <div className="title-text">
+                        <h1>{e.title}</h1>
+                        <p className="subtitle">{e.subtitle}</p>
+                    </div>
                 </div>
-                <div className="title-text">
-                    <h1>{e.title}</h1>
-                    <p className="subtitle">{e.subtitle}</p>
-                </div>
+                <p>{e.description}</p>
             </div>
-            <p className="content">{e.description}</p>
             <div className="links">
                 {e.links.map((l,i) => <Link key={i} {...l}></Link>)}
             </div>

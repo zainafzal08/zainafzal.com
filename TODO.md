@@ -7,5 +7,5 @@
 - [ ] Stress test on actual mobile device / large desktop
 - [ ] Add more software projects
 - [ ] Add more visual design projects (aided / ali / hazel branding)
-- [ ] Check bg pulse on mobile (maybe kill it?)
+- [ ] Favicon
 - [ ] Launch

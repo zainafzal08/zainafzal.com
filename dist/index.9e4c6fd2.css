@@ -150,7 +150,13 @@ a:visited {
   --card-padding: 24px;
   box-sizing: border-box;
   padding: var(--card-padding);
-  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  display: flex;
+}
+
+.card.card:has(.links) {
+  padding-bottom: 20px;
 }
 
 .card h1 {
@@ -188,17 +194,16 @@ a:visited {
   padding: 0;
 }
 
+.card:has(.links) .main-content {
+  padding-bottom: 1rem;
+}
+
 .card .links {
   box-sizing: border-box;
-  width: 100%;
-  padding: var(--card-padding);
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
-  padding-top: 0;
+  width: 100%;
   display: flex;
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
 /*# sourceMappingURL=index.9e4c6fd2.css.map */

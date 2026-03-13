@@ -133,8 +133,15 @@ a:visited {
     --card-padding: 24px;
     box-sizing: border-box;
     padding: var(--card-padding);
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+.card.card:has(.links) {
+    padding-bottom: 20px;
+}
+
 .card h1 {
     font-family: "Inter", serif;
     font-optical-sizing: auto;
@@ -168,18 +175,14 @@ a:visited {
     background: radial-gradient(circle at 2px 2px, var(--color-text-light) 1px, transparent 0);
     background-size: calc(2 * 2px) calc(2 * 2px);
 }
-
+.card:has(.links) .main-content {
+    padding-bottom: 1rem;
+}
 .card .links {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 16px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     box-sizing: border-box;
-    padding: var(--card-padding); 
-    padding-top: 0;
 }
-

@@ -4429,7 +4429,7 @@ parcelHelpers.export(exports, "Background", ()=>Background);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _backgroundCss = require("./Background.css");
-var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$();
+var _s = $RefreshSig$(), _s1 = $RefreshSig$();
 function MouseShadow() {
     _s();
     const [{ x, y, width, height }, setShadow] = (0, _react.useState)({
@@ -4484,45 +4484,15 @@ function MouseShadow() {
 }
 _s(MouseShadow, "vE5EdvZv80VRVYFaT1WLuf4C3vo=");
 _c = MouseShadow;
-function PulsateShadow() {
-    _s1();
-    const [lastPulse, setLastPulse] = (0, _react.useState)(0);
-    const shadowRef = (0, _react.useRef)(null);
-    (0, _react.useEffect)(()=>{
-        const handler = ()=>{
-            if (Date.now() - lastPulse < 4000) return;
-            shadowRef.current.classList.remove("pulse");
-            window.requestAnimationFrame(()=>{
-                shadowRef.current.classList.add("pulse");
-            });
-            setLastPulse(Date.now());
-        };
-        document.addEventListener("click", handler);
-        return ()=>document.removeEventListener("click", handler);
-    }, [
-        lastPulse,
-        setLastPulse
-    ]);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        ref: shadowRef,
-        className: "big-shadow"
-    }, void 0, false, {
-        fileName: "src/Background/Background.tsx",
-        lineNumber: 57,
-        columnNumber: 12
-    }, this);
-}
-_s1(PulsateShadow, "kYwAYs6Goys/lqSv07GfZFw9lWc=");
-_c1 = PulsateShadow;
 function Background(props) {
-    _s2();
+    _s1();
     const [mode, setMode] = (0, _react.useState)("follow-mouse");
     (0, _react.useEffect)(()=>{
         const mql = window.matchMedia("(width <= 600px)");
         mql.addEventListener("change", (e)=>{
-            setMode(e.matches ? "pulsate" : "follow-mouse");
+            setMode(e.matches ? "nothing" : "follow-mouse");
         });
-        setMode(mql.matches ? "pulsate" : "follow-mouse");
+        setMode(mql.matches ? "nothing" : "follow-mouse");
     });
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "container",
@@ -4531,38 +4501,33 @@ function Background(props) {
                 className: "background",
                 children: mode === "follow-mouse" ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MouseShadow, {}, void 0, false, {
                     fileName: "src/Background/Background.tsx",
-                    lineNumber: 71,
+                    lineNumber: 50,
                     columnNumber: 40
-                }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(PulsateShadow, {}, void 0, false, {
-                    fileName: "src/Background/Background.tsx",
-                    lineNumber: 71,
-                    columnNumber: 57
-                }, this)
+                }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {}, void 0, false)
             }, void 0, false, {
                 fileName: "src/Background/Background.tsx",
-                lineNumber: 70,
+                lineNumber: 49,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
                 children: props.children
             }, void 0, false, {
                 fileName: "src/Background/Background.tsx",
-                lineNumber: 73,
+                lineNumber: 52,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/Background/Background.tsx",
-        lineNumber: 69,
+        lineNumber: 48,
         columnNumber: 12
     }, this);
 }
-_s2(Background, "106dZHgQ2MxFxk9xBTfY2cZL9jQ=");
-_c2 = Background;
-var _c, _c1, _c2;
+_s1(Background, "106dZHgQ2MxFxk9xBTfY2cZL9jQ=");
+_c1 = Background;
+var _c, _c1;
 $RefreshReg$(_c, "MouseShadow");
-$RefreshReg$(_c1, "PulsateShadow");
-$RefreshReg$(_c2, "Background");
+$RefreshReg$(_c1, "Background");
 
   $parcel$ReactRefreshHelpers$9701.postlude(module);
 } finally {
@@ -5328,44 +5293,60 @@ function CareerCard({ e }) {
                 className: "card",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "career-card-title",
+                        className: "main-content",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "title-image",
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                    src: e.image
-                                }, void 0, false, {
-                                    fileName: "src/CareerPage/CareerPage.tsx",
-                                    lineNumber: 16,
-                                    columnNumber: 21
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 15,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "title-text",
+                                className: "career-card-title",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                                        children: e.title
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "title-image",
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                            src: e.image
+                                        }, void 0, false, {
+                                            fileName: "src/CareerPage/CareerPage.tsx",
+                                            lineNumber: 17,
+                                            columnNumber: 25
+                                        }, this)
                                     }, void 0, false, {
                                         fileName: "src/CareerPage/CareerPage.tsx",
-                                        lineNumber: 19,
+                                        lineNumber: 16,
                                         columnNumber: 21
                                     }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "subtitle",
-                                        children: e.subtitle
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "title-text",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                                                children: e.title
+                                            }, void 0, false, {
+                                                fileName: "src/CareerPage/CareerPage.tsx",
+                                                lineNumber: 20,
+                                                columnNumber: 25
+                                            }, this),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "subtitle",
+                                                children: e.subtitle
+                                            }, void 0, false, {
+                                                fileName: "src/CareerPage/CareerPage.tsx",
+                                                lineNumber: 21,
+                                                columnNumber: 25
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/CareerPage/CareerPage.tsx",
-                                        lineNumber: 20,
+                                        lineNumber: 19,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 18,
+                                lineNumber: 15,
+                                columnNumber: 17
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                children: e.description
+                            }, void 0, false, {
+                                fileName: "src/CareerPage/CareerPage.tsx",
+                                lineNumber: 24,
                                 columnNumber: 17
                             }, this)
                         ]
@@ -5374,26 +5355,18 @@ function CareerCard({ e }) {
                         lineNumber: 14,
                         columnNumber: 13
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "content",
-                        children: e.description
-                    }, void 0, false, {
-                        fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 23,
-                        columnNumber: 13
-                    }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "links",
                         children: e.links.map((l, i)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _link.Link), {
                                 ...l
                             }, i, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 25,
+                                lineNumber: 27,
                                 columnNumber: 39
                             }, this))
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 24,
+                        lineNumber: 26,
                         columnNumber: 13
                     }, this)
                 ]
@@ -5421,7 +5394,7 @@ function CareerPage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _toolsIcon.ToolsIcon), {}, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 36,
+                        lineNumber: 38,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -5429,13 +5402,13 @@ function CareerPage() {
                         children: " Career "
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 37,
+                        lineNumber: 39,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 35,
+                lineNumber: 37,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -5445,25 +5418,25 @@ function CareerPage() {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mailIcon.MailIcon), {}, void 0, false, {
                             fileName: "src/CareerPage/CareerPage.tsx",
-                            lineNumber: 41,
+                            lineNumber: 43,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                             children: "Want a full Resum\xe8? Get in touch!"
                         }, void 0, false, {
                             fileName: "src/CareerPage/CareerPage.tsx",
-                            lineNumber: 42,
+                            lineNumber: 44,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/CareerPage/CareerPage.tsx",
-                    lineNumber: 40,
+                    lineNumber: 42,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 39,
+                lineNumber: 41,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5480,17 +5453,17 @@ function CareerPage() {
                                     src: j.image
                                 }, void 0, false, {
                                     fileName: "src/CareerPage/CareerPage.tsx",
-                                    lineNumber: 48,
+                                    lineNumber: 50,
                                     columnNumber: 21
                                 }, this)
                             }, i, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 47,
+                                lineNumber: 49,
                                 columnNumber: 36
                             }, this))
                     }, void 0, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 46,
+                        lineNumber: 48,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5500,26 +5473,26 @@ function CareerPage() {
                                 children: "2016"
                             }, void 0, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 52,
+                                lineNumber: 54,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                 children: "Today"
                             }, void 0, false, {
                                 fileName: "src/CareerPage/CareerPage.tsx",
-                                lineNumber: 53,
+                                lineNumber: 55,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 51,
+                        lineNumber: 53,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 45,
+                lineNumber: 47,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -5528,18 +5501,18 @@ function CareerPage() {
                         e: e
                     }, i, false, {
                         fileName: "src/CareerPage/CareerPage.tsx",
-                        lineNumber: 57,
+                        lineNumber: 59,
                         columnNumber: 47
                     }, this))
             }, void 0, false, {
                 fileName: "src/CareerPage/CareerPage.tsx",
-                lineNumber: 56,
+                lineNumber: 58,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/CareerPage/CareerPage.tsx",
-        lineNumber: 34,
+        lineNumber: 36,
         columnNumber: 12
     }, this);
 }
@@ -5953,37 +5926,43 @@ var _softwarePageCss = require("./SoftwarePage.css");
 var _softwareIcon = require("../Icons/SoftwareIcon");
 var _projects = require("./Projects");
 var _helpers = require("../helpers");
-var _s = $RefreshSig$(), _s1 = $RefreshSig$();
+var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$(), _s3 = $RefreshSig$();
 const HELP_OUTPUT = {
     lines: [
         [
             {
                 text: "ls",
-                color: 'muted'
+                color: 'muted',
+                type: 'normal'
             },
             {
                 text: "List projects",
-                color: 'main'
+                color: 'main',
+                type: 'normal'
             }
         ],
         [
             {
                 text: "describe [project]",
-                color: 'muted'
+                color: 'muted',
+                type: 'normal'
             },
             {
                 text: "Describe a project",
-                color: 'main'
+                color: 'main',
+                type: 'normal'
             }
         ],
         [
             {
                 text: "help",
-                color: 'muted'
+                color: 'muted',
+                type: 'normal'
             },
             {
                 text: "List commands",
-                color: 'main'
+                color: 'main',
+                type: 'normal'
             }
         ]
     ],
@@ -6005,17 +5984,22 @@ function constructProjectListOutput() {
         const col = Math.floor(i / maxHeight);
         output.lines[row][col] = {
             text: project,
-            color: 'main'
+            color: 'main',
+            type: "shortcut",
+            command: `describe ${project}`
         };
     }
     return output;
 }
-function constructProjectDescriptionOutput(project) {
+function constructProjectDescriptionOutput(projectName) {
+    if (!(0, _projects.projects).some((p)=>p.name === projectName)) return constructErrorOutput("Project not found, try 'ls' to see all projects");
+    const project = (0, _projects.projects).find((p)=>p.name === projectName);
     const lines = [
         [
             {
                 text: "Description",
-                color: 'main'
+                color: 'main',
+                type: 'normal'
             },
             {
                 text: project.description,
@@ -6045,13 +6029,28 @@ function constructProjectDescriptionOutput(project) {
         numCols: Math.max(...lines.map((line)=>line.length))
     };
 }
-function renderLine(line, numCols) {
+function constructErrorOutput(message) {
+    return {
+        lines: [
+            [
+                {
+                    text: message,
+                    color: 'main',
+                    type: 'normal'
+                }
+            ]
+        ],
+        numCols: 1
+    };
+}
+function TerminalLine(props) {
+    const { line, numCols, setCommand } = props;
     const markup = [];
     for(let i = 0; i < numCols; i++){
         const cell = line[i];
         if (cell.type === 'empty') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, i, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 61,
+            lineNumber: 99,
             columnNumber: 25
         }, this));
         else if (cell.type === 'link') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -6060,7 +6059,7 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 63,
+            lineNumber: 101,
             columnNumber: 25
         }, this));
         else if (cell.type === 'long') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
@@ -6068,7 +6067,16 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 65,
+            lineNumber: 103,
+            columnNumber: 25
+        }, this));
+        else if (cell.type === 'shortcut') markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
+            className: cell.color,
+            onClick: ()=>setCommand(cell.command),
+            children: cell.text
+        }, cell.text, false, {
+            fileName: "src/SoftwarePage/SoftwarePage.tsx",
+            lineNumber: 105,
             columnNumber: 25
         }, this));
         else markup.push(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
@@ -6076,24 +6084,39 @@ function renderLine(line, numCols) {
             children: cell.text
         }, cell.text, false, {
             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-            lineNumber: 67,
+            lineNumber: 107,
             columnNumber: 25
         }, this));
     }
     return markup;
 }
-function constructOutput(lastLocation, lastCommand, output) {
-    // Normalize.
-    for(let i = 0; i < output.lines.length; i++){
-        const line = output.lines[i].filter((cell)=>!!cell);
-        while(line.length < output.numCols)line.push({
+_c = TerminalLine;
+function parseCommand(command) {
+    const [program, arg] = command.split(" ").map((word)=>word.trim().toLowerCase());
+    switch(program){
+        case "ls":
+            return constructProjectListOutput();
+        case "describe":
+            return constructProjectDescriptionOutput(arg);
+        case "help":
+            return HELP_OUTPUT;
+        default:
+            return constructErrorOutput("Command not found");
+    }
+}
+function TerminalOutput(props) {
+    const { lastLocation, lastCommand, setCommand } = props;
+    const data = parseCommand(lastCommand);
+    for(let i = 0; i < data.lines.length; i++){
+        const line = data.lines[i].filter((cell)=>!!cell);
+        while(line.length < data.numCols)line.push({
             type: 'empty'
         });
-        output.lines[i] = line;
+        data.lines[i] = line;
     }
     let gridTemplateColumns;
-    if (output.numCols < 3) gridTemplateColumns = `min-content 1fr`;
-    else gridTemplateColumns = `repeat(${output.numCols}, 1fr)`;
+    if (data.numCols < 3) gridTemplateColumns = `min-content 1fr`;
+    else gridTemplateColumns = `repeat(${data.numCols}, 1fr)`;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("pre", {
@@ -6106,14 +6129,14 @@ function constructOutput(lastLocation, lastCommand, output) {
                         ]
                     }, void 0, true, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 89,
+                        lineNumber: 145,
                         columnNumber: 14
                     }, this),
                     lastCommand
                 ]
             }, void 0, true, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 89,
+                lineNumber: 145,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6121,71 +6144,46 @@ function constructOutput(lastLocation, lastCommand, output) {
                 style: {
                     gridTemplateColumns: gridTemplateColumns
                 },
-                children: output.lines.map((line)=>renderLine(line, output.numCols))
+                children: data.lines.map((line)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(TerminalLine, {
+                        line: line,
+                        numCols: data.numCols,
+                        setCommand: setCommand
+                    }, void 0, false, {
+                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                        lineNumber: 147,
+                        columnNumber: 33
+                    }, this))
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 90,
+                lineNumber: 146,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true);
 }
-function constructErrorOutput(message) {
-    return {
-        lines: [
-            [
-                {
-                    text: message,
-                    color: 'main'
-                }
-            ]
-        ],
-        numCols: 1
-    };
-}
-function Terminal({ nextProject, prevProject, setCurrentProject, setLastCommand }) {
+_c1 = TerminalOutput;
+function TerminalFooter(props) {
     _s();
-    // At some point it might be cute to let people actually navigate around the filesystem.
-    // But for now, i ceebs so this will always be projects.
-    const [location, setLocation] = (0, _react.useState)("projects");
     const [query, setQuery] = (0, _react.useState)("");
-    const [output, setOutput] = (0, _react.useState)(constructOutput(location, "ls", constructProjectListOutput()));
     const isMobile = (0, _helpers.useIsMobile)();
-    const processQuery = _react.useMemo(()=>(query)=>{
-            const [command, arg] = query.split(" ").map((word)=>word.trim().toLowerCase());
-            setLastCommand(command);
-            if (command === "ls") setOutput(constructOutput(location, query, constructProjectListOutput()));
-            else if (command === "describe") {
-                if ((0, _projects.projects).some((project)=>project.name === arg)) {
-                    const project = (0, _projects.projects).find((project)=>project.name === arg);
-                    setOutput(constructOutput(location, query, constructProjectDescriptionOutput(project)));
-                    setCurrentProject(project);
-                } else setOutput(constructOutput(location, query, constructErrorOutput("Project not found, try 'ls' to see all projects")));
-            } else if (command === "help") setOutput(constructOutput(location, query, HELP_OUTPUT));
-            else setOutput(constructOutput(location, query, constructErrorOutput("Command not found")));
-        }, [
-        setLocation
-    ]);
-    const handleChange = _react.useMemo(()=>(e)=>{
-            setQuery(e.currentTarget.value);
-        }, [
-        location
-    ]);
+    const { location, setCommand, prevProject, nextProject } = props;
+    const handleChange = (e)=>{
+        setQuery(e.target.value);
+    };
     const handleKeyDown = _react.useMemo(()=>(e)=>{
             if (e.key === "Enter") {
-                processQuery(query);
+                setCommand(query);
                 setQuery("");
             }
         }, [
         query
     ]);
     _react.useEffect(()=>{
-        if (isMobile) processQuery("describe " + (0, _projects.projects)[0].name);
+        if (isMobile) setCommand("describe " + (0, _projects.projects)[0].name);
     }, [
         isMobile
     ]);
-    let footer;
-    if (!isMobile) footer = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    if (!isMobile) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "terminal-footer",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -6196,7 +6194,7 @@ function Terminal({ nextProject, prevProject, setCurrentProject, setLastCommand 
                 ]
             }, void 0, true, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 148,
+                lineNumber: 175,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -6207,42 +6205,74 @@ function Terminal({ nextProject, prevProject, setCurrentProject, setLastCommand 
                 placeholder: "Try the 'help' command"
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 149,
+                lineNumber: 176,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 147,
-        columnNumber: 18
+        lineNumber: 174,
+        columnNumber: 16
     }, this);
-    else footer = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "terminal-footer mobile",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 className: "mobile-terminal-button",
-                onClick: ()=>processQuery("describe " + prevProject.name),
+                onClick: ()=>setCommand("describe " + prevProject.name),
                 children: " Prev "
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 153,
-                columnNumber: 13
+                lineNumber: 180,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 className: "mobile-terminal-button",
-                onClick: ()=>processQuery("describe " + nextProject.name),
+                onClick: ()=>setCommand("describe " + nextProject.name),
                 children: " Next "
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 154,
-                columnNumber: 13
+                lineNumber: 181,
+                columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 152,
-        columnNumber: 18
+        lineNumber: 179,
+        columnNumber: 12
     }, this);
+}
+_s(TerminalFooter, "x9ai2jTRgumIHftzsdLiWNYC88M=", false, function() {
+    return [
+        (0, _helpers.useIsMobile)
+    ];
+});
+_c2 = TerminalFooter;
+function Terminal({ currentProject, setCurrentProject }) {
+    _s1();
+    // At some point it might be cute to let people actually navigate around the filesystem.
+    // But for now, i ceebs so this will always be projects.
+    const [location, setLocation] = (0, _react.useState)("projects");
+    const [command, setCommand] = (0, _react.useState)("ls");
+    (0, _react.useEffect)(()=>{
+        const [program, arg] = command.split(" ").map((word)=>word.trim().toLowerCase());
+        if (program !== 'describe') {
+            setCurrentProject(null);
+            return;
+        }
+        const p = (0, _projects.projects).find((p)=>p.name === arg);
+        if (!p) {
+            setCurrentProject(null);
+            return;
+        }
+        setCurrentProject(p);
+    }, [
+        command,
+        setCurrentProject
+    ]);
+    const projectIndex = (0, _projects.projects).findIndex((project)=>project.name === currentProject?.name);
+    const nextProject = (0, _projects.projects)[(projectIndex + 1) % (0, _projects.projects).length];
+    const prevProject = (0, _projects.projects)[(projectIndex - 1 + (0, _projects.projects).length) % (0, _projects.projects).length];
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "terminal",
         children: [
@@ -6253,67 +6283,127 @@ function Terminal({ nextProject, prevProject, setCurrentProject, setLastCommand 
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 159,
-                            columnNumber: 45
+                            lineNumber: 211,
+                            columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 159,
-                            columnNumber: 56
+                            lineNumber: 212,
+                            columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 159,
-                            columnNumber: 67
+                            lineNumber: 213,
+                            columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 159,
+                    lineNumber: 210,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 158,
+                lineNumber: 209,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "terminal-body",
-                children: output
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(TerminalOutput, {
+                    lastLocation: location,
+                    lastCommand: command,
+                    setCommand: setCommand
+                }, void 0, false, {
+                    fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                    lineNumber: 217,
+                    columnNumber: 13
+                }, this)
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 161,
+                lineNumber: 216,
                 columnNumber: 9
             }, this),
-            footer
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(TerminalFooter, {
+                location: location,
+                setCommand: setCommand,
+                prevProject: prevProject,
+                nextProject: nextProject
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 224,
+                columnNumber: 9
+            }, this)
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 157,
+        lineNumber: 208,
         columnNumber: 12
     }, this);
 }
-_s(Terminal, "aTazUw7D445CPzLgx8fqyQSKN1Q=", false, function() {
-    return [
-        (0, _helpers.useIsMobile)
-    ];
-});
-_c = Terminal;
-function SoftwarePage() {
-    _s1();
-    const [currentProject, setCurrentProject] = (0, _react.useState)(null);
-    const [isHidden, setIsHidden] = (0, _react.useState)(true);
-    const [lastCommand, setLastCommand] = (0, _react.useState)(null);
-    _react.useEffect(()=>{
-        if (currentProject && lastCommand === "describe") setIsHidden(false);
-        else setIsHidden(true);
+_s1(Terminal, "KLNZKbcRQzwmV6z5s8ojEH9DZUs=");
+_c3 = Terminal;
+function BgImages({ currentProject }) {
+    _s2();
+    const [imagesHidden, setImagesHidden] = (0, _react.useState)(false);
+    const [images, setImages] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        if (currentProject === null) {
+            setImagesHidden(true);
+            setTimeout(()=>{
+                setImages([]);
+            }, 400);
+        } else if (images.length === 0) {
+            setImages(currentProject.images);
+            setTimeout(()=>{
+                setImagesHidden(false);
+            }, 10);
+        } else {
+            setImagesHidden(true);
+            setTimeout(()=>{
+                setImages(currentProject.images);
+            }, 400);
+            setTimeout(()=>{
+                setImagesHidden(false);
+            }, 410);
+        }
     }, [
-        currentProject,
-        lastCommand
+        currentProject
     ]);
-    const projectIndex = (0, _projects.projects).findIndex((project)=>project.name === currentProject?.name);
-    const nextProject = (0, _projects.projects)[(projectIndex + 1) % (0, _projects.projects).length];
-    const prevProject = (0, _projects.projects)[(projectIndex - 1 + (0, _projects.projects).length) % (0, _projects.projects).length];
+    const imageStyles = {
+        height: "200px",
+        width: "200px",
+        backgroundColor: "white",
+        borderRadius: "8px",
+        border: '1px solid var(--color-primary)'
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: `images ${imagesHidden ? "hidden" : ""}`,
+        "data-num-images": images.length ?? 0,
+        children: images.map((image)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                style: imageStyles,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: image
+                }, void 0, false, {
+                    fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                    lineNumber: 265,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "src/SoftwarePage/SoftwarePage.tsx",
+                lineNumber: 264,
+                columnNumber: 13
+            }, this))
+    }, void 0, false, {
+        fileName: "src/SoftwarePage/SoftwarePage.tsx",
+        lineNumber: 260,
+        columnNumber: 12
+    }, this);
+}
+_s2(BgImages, "dOQrKDLn7mmzFeg+X8UNUxRpB/4=");
+_c4 = BgImages;
+function SoftwarePage() {
+    _s3();
+    const [currentProject, setCurrentProject] = (0, _react.useState)(null);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "fill start",
         id: "extra-padding",
@@ -6324,7 +6414,7 @@ function SoftwarePage() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _softwareIcon.SoftwareIcon), {}, void 0, false, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 184,
+                        lineNumber: 275,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
@@ -6332,13 +6422,13 @@ function SoftwarePage() {
                         children: " Software "
                     }, void 0, false, {
                         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                        lineNumber: 185,
+                        lineNumber: 276,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 183,
+                lineNumber: 274,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -6346,74 +6436,55 @@ function SoftwarePage() {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "terminal-container",
                     children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: `images ${isHidden ? "hidden" : ""}`,
-                            "data-num-images": currentProject?.images.length ?? 0,
-                            children: currentProject?.images.map((image)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    style: {
-                                        height: "200px",
-                                        width: "200px",
-                                        backgroundColor: "white",
-                                        borderRadius: "8px",
-                                        border: '1px solid var(--color-primary)'
-                                    },
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                        src: image
-                                    }, void 0, false, {
-                                        fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                        lineNumber: 192,
-                                        columnNumber: 25
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                                    lineNumber: 191,
-                                    columnNumber: 21
-                                }, this))
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(BgImages, {
+                            currentProject: currentProject
                         }, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 189,
+                            lineNumber: 280,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Terminal, {
-                            nextProject: nextProject,
-                            prevProject: prevProject,
-                            setCurrentProject: setCurrentProject,
-                            setLastCommand: setLastCommand
+                            currentProject: currentProject,
+                            setCurrentProject: setCurrentProject
                         }, void 0, false, {
                             fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                            lineNumber: 196,
+                            lineNumber: 281,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                    lineNumber: 188,
+                    lineNumber: 279,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "src/SoftwarePage/SoftwarePage.tsx",
-                lineNumber: 187,
+                lineNumber: 278,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/SoftwarePage/SoftwarePage.tsx",
-        lineNumber: 182,
+        lineNumber: 273,
         columnNumber: 12
     }, this);
 }
-_s1(SoftwarePage, "ZP3IIL+5zMa60oy6ePWCfb6FZQ4=");
-_c1 = SoftwarePage;
-var _c, _c1;
-$RefreshReg$(_c, "Terminal");
-$RefreshReg$(_c1, "SoftwarePage");
+_s3(SoftwarePage, "GtzIuydMzs22w6spKk5Bnfu+GGE=");
+_c5 = SoftwarePage;
+var _c, _c1, _c2, _c3, _c4, _c5;
+$RefreshReg$(_c, "TerminalLine");
+$RefreshReg$(_c1, "TerminalOutput");
+$RefreshReg$(_c2, "TerminalFooter");
+$RefreshReg$(_c3, "Terminal");
+$RefreshReg$(_c4, "BgImages");
+$RefreshReg$(_c5, "SoftwarePage");
 
   $parcel$ReactRefreshHelpers$1901.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","./Projects":"kldFp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../helpers":"adjmJ"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./SoftwarePage.css":"6W1vg","../Icons/SoftwareIcon":"bTAp5","./Projects":"kldFp","../helpers":"adjmJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6W1vg":[function() {},{}],"bTAp5":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$b88f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
